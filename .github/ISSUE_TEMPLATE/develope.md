@@ -2,7 +2,7 @@
 name: develope
 about: 개발 이슈 공유
 title: "[Dev]"
-labels: ''
+labels: dev
 assignees: ''
 
 ---
