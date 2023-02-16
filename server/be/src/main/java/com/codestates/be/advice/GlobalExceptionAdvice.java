@@ -21,7 +21,7 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler
     public ResponseEntity handleConstraintViolationException(ConstraintViolationException e){
          ErrorResponse response = ErrorResponse.of(e.getConstraintViolations());
-        return null; //validation 의존성 필요
+        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
