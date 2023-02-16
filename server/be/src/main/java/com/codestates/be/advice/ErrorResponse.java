@@ -19,4 +19,11 @@ public class ErrorResponse {
     }
 
 
+    public static class FieldErs{
+
+
+
+    }
+
+
 }
