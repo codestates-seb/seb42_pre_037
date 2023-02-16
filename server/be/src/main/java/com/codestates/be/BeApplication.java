@@ -9,4 +9,5 @@ public class BeApplication {
 		SpringApplication.run(BeApplication.class, args);
 	}
 	//Hello Freind
+	//변경사항 만들기
 }
