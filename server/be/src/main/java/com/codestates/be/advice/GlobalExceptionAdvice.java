@@ -1,11 +1,12 @@
 package com.codestates.be.advice;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.validation.ConstraintViolationException;
 
 @RestControllerAdvice
 public class GlobalExceptionAdvice {
@@ -19,7 +20,7 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     public ResponseEntity handleConstraintViolationException(ConstraintViolationException e){
-
+         ErrorResponse response = ErrorResponse.of(e.getConstraintViolations());
         return null; //validation 의존성 필요
     }
 
