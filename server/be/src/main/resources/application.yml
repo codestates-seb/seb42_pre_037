@@ -25,3 +25,8 @@ server:
   servlet:
     encoding:
       force-response: true
+
+jwt:
+  key: sampleKeyPasswordForTest!##@!!$!sada113!#!#!!!242d1621351@#@#!
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 240

@@ -1,4 +1,4 @@
-package com.codestates.be.response;
+package com.codestates.be.responseDto;
 
 public class SingleResponseEntity <T>{
     private T data;

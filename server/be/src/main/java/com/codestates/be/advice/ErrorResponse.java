@@ -16,22 +16,16 @@ public class ErrorResponse {
     private int status;
     private String message;
     private List<FieldErs> fieldErs;
-
     private List<ConstraintViolationError> constraintViolationErrors;
-
-
 
     public ErrorResponse(ExceptionCode exceptionCode){
         this.status = exceptionCode.getHttpStatus();
         this.message = exceptionCode.getMessage();
     }
-
-
     public ErrorResponse(List<FieldErs> fieldErs, List<ConstraintViolationError> constraintViolationErrors) {
         this.fieldErs = fieldErs;
         this.constraintViolationErrors = constraintViolationErrors;
     }
-
     public ErrorResponse(HttpStatus httpStatus) {
         this.status = httpStatus.value();
         this.message = httpStatus.getReasonPhrase();
@@ -43,11 +37,9 @@ public class ErrorResponse {
     public static ErrorResponse of(BindingResult bindingResult){
         return new ErrorResponse(FieldErs.of(bindingResult), null);
     }
-
     public static ErrorResponse of(HttpStatus httpStatus){
         return new ErrorResponse(httpStatus);
     }
-
     public static ErrorResponse of(Set<ConstraintViolation<?>> exceptions){
         return new ErrorResponse(null, ConstraintViolationError.of(exceptions));
     }
@@ -58,11 +50,9 @@ public class ErrorResponse {
             this.field = field;
             this.message = message;
         }
-
         private Object rejectedValue;
         private String field;
         private String message;
-
         public static List<FieldErs> of(BindingResult bindingResult){
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
 
@@ -76,7 +66,6 @@ public class ErrorResponse {
                     }).collect(Collectors.toList());
         }
     }
-
     public static class ConstraintViolationError{
         private String propertyPath;
         private String message;
@@ -87,7 +76,6 @@ public class ErrorResponse {
             this.message = message;
             this.invalidValue = invalidValue;
         }
-
         public static List<ConstraintViolationError> of(Set<ConstraintViolation<?>> exceptions){
             return exceptions.stream()
                     .map( e -> new ConstraintViolationError(
