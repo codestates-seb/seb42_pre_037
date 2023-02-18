@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long memberId;
 
     @Column(nullable = false)

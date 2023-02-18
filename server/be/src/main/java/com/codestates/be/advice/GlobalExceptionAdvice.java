@@ -1,5 +1,6 @@
 package com.codestates.be.advice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.validation.ConstraintViolationException;
 
 @RestControllerAdvice
+@Slf4j
 public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     public ResponseEntity handleBuissnessLogicException(BuissnessLogicException e){
+        log.error("Occured BusinessLogicException");
+
         ErrorResponse response = ErrorResponse.of(e);
 
         return new ResponseEntity(response, HttpStatus.valueOf(response.getStatus()));
@@ -20,6 +24,7 @@ public class GlobalExceptionAdvice {
 
     @ExceptionHandler
     public ResponseEntity handleConstraintViolationException(ConstraintViolationException e){
+        log.error("Occured ConstraintViolationException");
          ErrorResponse response = ErrorResponse.of(e.getConstraintViolations());
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }
@@ -32,9 +37,8 @@ public class GlobalExceptionAdvice {
     }
 
     @ExceptionHandler
-    public ResponseEntity handleAnyException(Exception e){
-        ErrorResponse response = ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR);
-
-        return new ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity handleAnyException(Exception e) throws Exception{
+        log.error("Occured AnyUnhandledException");
+        throw e;
     }
 }

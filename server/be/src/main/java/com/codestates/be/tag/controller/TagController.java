@@ -4,6 +4,7 @@ package com.codestates.be.tag.controller;
 import com.codestates.be.responseDto.MultiResponseEntity;
 import com.codestates.be.responseDto.PageInfo;
 import com.codestates.be.responseDto.SingleResponseEntity;
+import com.codestates.be.tag.dto.TagDto;
 import com.codestates.be.tag.entity.Tag;
 import com.codestates.be.tag.mapper.TagMapper;
 import com.codestates.be.tag.service.TagService;
@@ -32,7 +33,8 @@ public class TagController {
     public ResponseEntity getTag(@PathVariable("tag-id") @Positive long tagId){
         Tag tag = tagService.getTag(tagId);
 
-        return new ResponseEntity(new SingleResponseEntity<>(tag), HttpStatus.OK);
+
+        return new ResponseEntity(new SingleResponseEntity<>(mapper.TagToTagResponseDto(tag)), HttpStatus.OK);
     }
 
     @GetMapping
@@ -40,8 +42,11 @@ public class TagController {
                                   @RequestParam @Positive int size){
         Page<Tag> tagPage = tagService.getTags(page, size);
         List<Tag> tags = tagPage.getContent();
-        PageInfo pageInfo = new PageInfo(tagPage.getNumber(), tagPage.getSize(),
+
+        List<TagDto.Response> tagResposes =mapper.TagsToTagResponseDtos(tags);
+        PageInfo pageInfo = new PageInfo(tagPage.getNumber()+1, tagPage.getSize(),
                                 tagPage.getTotalPages(), tagPage.getTotalElements());
-        return new ResponseEntity(new MultiResponseEntity<>(tags, pageInfo), HttpStatus.OK);
+
+        return new ResponseEntity(new MultiResponseEntity<>(tagResposes, pageInfo), HttpStatus.OK);
     }
 }

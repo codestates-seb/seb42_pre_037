@@ -1,5 +1,8 @@
 package com.codestates.be.responseDto;
 
+import lombok.Getter;
+
+@Getter
 public class MultiResponseEntity <T, G>{
     T data;
     G pageInfo;
