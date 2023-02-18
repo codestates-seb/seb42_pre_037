@@ -3,7 +3,6 @@ package com.codestates.be.member.controller;
 
 import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
-import com.codestates.be.member.entity.Member;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class MemberController {
 
 
     @GetMapping("/${member-id}/mypages")
-    public ResponseEntity getMyPages(){
+    public ResponseEntity getMyPages(@PathVariable("member-id") @Positive long memberId){
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
