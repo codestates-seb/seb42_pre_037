@@ -44,6 +44,10 @@ public class ErrorResponse {
         return new ErrorResponse(null, ConstraintViolationError.of(exceptions));
     }
 
+    public static ErrorResponse of(ExceptionCode exceptionCode){
+        return new ErrorResponse(exceptionCode);
+    }
+
     public static class FieldErs{
         public FieldErs(Object rejectedValue, String field, String message) {
             this.rejectedValue = rejectedValue;

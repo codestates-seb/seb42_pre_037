@@ -30,6 +30,5 @@ public class TagDto {
         private long tagId;
         private String tagName;
         private String tagInfo;
-
     }
 }
