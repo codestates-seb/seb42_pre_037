@@ -1,5 +1,5 @@
-import Button from './Components/UI/Button';
-import SearchBar from './Components/UI/SearchBar';
+import Button from './Components/Ui/Button';
+import SearchBar from './Components/Ui/SearchBar';
 import Login from './Pages/Login';
 
 function App() {

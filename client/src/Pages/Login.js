@@ -4,12 +4,12 @@ const Login = () => {
     const loginKey = 'a';
 
     return (
-    <div className='flex flex-col bg-gray-400'>
+    <div className='content justify-center items-center flex flex-col bg-gray-200'>
         <div className=''>
-            <img className='' src={iconStack} alt="icon_stack" />
+            <img className='object-scale-down w-14 h-16' src={iconStack} alt="icon_stack" />
         </div>
         <div>this is Login page {loginKey}</div>
-        <div className='formContainer bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4'>
+        <div className='formContainer bg-white shadow-md rounded p-6 mb-6 mx-auto'>
             <form className='login-form'>
                 <div className='email-set mb-4'>
                     <label className='email-label block text-left text-gray-700 text-sm font-bold mb-2' htmlFor='emailInput'>Email</label>
