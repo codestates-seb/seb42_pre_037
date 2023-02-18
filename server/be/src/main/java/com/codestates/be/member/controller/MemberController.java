@@ -18,13 +18,13 @@ public class MemberController {
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
-    @PatchMapping("/${member-id}")
+    @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId){
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
 
-    @GetMapping("/${member-id}/mypages")
+    @GetMapping("/{member-id}/mypages")
     public ResponseEntity getMyPages(@PathVariable("member-id") @Positive long memberId){
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
@@ -35,7 +35,7 @@ public class MemberController {
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
-    @DeleteMapping("/${member-id}")
+    @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@PathVariable @Positive long memberId){
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
