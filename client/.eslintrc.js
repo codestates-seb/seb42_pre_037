@@ -31,6 +31,21 @@ module.exports = {
     ],
     'react/jsx-props-no-spreading': 'off',
     'react/no-array-index-key': 'off',
+    // 함수형 컴포넌트 정의방식 선언
+    "react/function-component-definition":[
+      2, 
+      { "namedComponents": [
+        "arrow-function", 
+        "function-declaration"
+      ] }
+    ],
+    // label 에러 해결
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": ["htmlFor"]
+      }
+    ]
   },
   settings: {
     // 'import/core-m'
