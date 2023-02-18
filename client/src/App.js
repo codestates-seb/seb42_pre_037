@@ -1,11 +1,11 @@
-import './App.css';
+import Button from './Components/UI/Button';
 
 function App() {
   return (
-    <div className="App">
-      <h1 size="md" className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div>
+      <Button color="gray" size="large" type="button">
+        버튼입니다!
+      </Button>
     </div>
   );
 }
