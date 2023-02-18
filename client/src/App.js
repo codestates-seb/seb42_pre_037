@@ -1,13 +1,13 @@
-import './App.css';
+import Button from './Components/UI/Button';
 import Login from './Pages/Login';
 
 function App() {
   return (
-    <div className="App">
-      <h1 size="md" className="text-3xl font-bold underline">
-        Hello world!
-      </h1>
+    <div>
       <Login />
+      <Button color="gray" size="large" type="button">
+        버튼입니다!
+      </Button>
     </div>
   );
 }
