@@ -1,5 +1,6 @@
 package com.codestates.be.question.entity;
 
+import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.member.entity.Member;
 
 import javax.persistence.*;
@@ -18,4 +19,8 @@ public class Question {
 
     @OneToMany(mappedBy = "question")
     private List<QuestionTag> questionTags = new ArrayList<>();
+
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
+
 }

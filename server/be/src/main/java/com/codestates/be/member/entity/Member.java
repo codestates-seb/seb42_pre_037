@@ -35,6 +35,9 @@ public class Member {
     @Column
     private Date modifiedAt;
 
+    @Column
+    private String userIntro;
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
 

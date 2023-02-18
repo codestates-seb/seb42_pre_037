@@ -8,6 +8,7 @@ public enum ExceptionCode {
 
     MEMBER_NOT_FOUND(404, "회원을 찾을 수 없습니다."),
     MEMBER_ALREADY_EXISTS(406, "이미 가입한 회원입니다."),
+    TAG_NOT_EXISTS(406, "존재하지 않는 태그를 조회했습니다."),
     SERVICE_NOT_READY(404, "아직 구현되지 않았습니다.");
     private int httpStatus;
     private String message;
