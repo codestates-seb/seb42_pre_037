@@ -1,15 +1,18 @@
+import { AiOutlineSearch } from 'react-icons/ai';
+
 function SearchBar({ placeholder, ...rest }) {
   // 크기에 따른 클래스 이름 결정
 
-  const className = `inline-flex items-center justify-center font-semibold border-2 focus:outline-none bg-white focus:ring-2 focus:ring-opacity-50 disabled:opacity-50 disabled:pointer-events-none text-sm px-4 py-2 rounded `;
-
   return (
-    <input
-      type="text"
-      className={className}
-      placeholder={placeholder}
-      {...rest}
-    />
+    <div className="flex items-center border-2 px-2 py-2 text-gray-400 group focus-within:border-blue-300 focus-within:shadow-lg rounded">
+      <AiOutlineSearch className="mr-2 text-3xl" />
+      <input
+        type="text"
+        className="items-center justify-center focus:outline-none bg-white disabled:opacity-50 text-lg placeholder-gray-300"
+        placeholder={placeholder}
+        {...rest}
+      />
+    </div>
   );
 }
 
