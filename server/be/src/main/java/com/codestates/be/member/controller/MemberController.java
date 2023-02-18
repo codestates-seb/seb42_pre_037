@@ -30,7 +30,6 @@ public class MemberController {
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
-
     @GetMapping
     public ResponseEntity getUsers(@RequestParam @Positive int page,
                                     @RequestParam @Positive int size){
@@ -41,5 +40,4 @@ public class MemberController {
     public ResponseEntity deleteMember(@PathVariable @Positive long memberId){
         throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
-
 }
