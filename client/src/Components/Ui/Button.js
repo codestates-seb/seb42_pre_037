@@ -9,9 +9,14 @@ function Button({ children, color = 'blue', size = 'medium', ...rest }) {
 
   // 색상에 따른 클래스 이름 결정
   switch (color) {
+    case 'clear-blue':
+      backgroundColorClass =
+        'bg-[#E1ECF4] hover:bg-[#B3D3EA] focus:bg-[#B3D3EA] border-2 border-blue-900';
+      textColorClass = 'border-blue-500';
+      break;
     case 'gray':
       backgroundColorClass =
-        'bg-gray-500 hover:bg-gray-600 focus:ring-gray-400';
+        'bg-gray-500 hover:bg-[#0074CC] focus:ring-gray-400';
       textColorClass = 'text-white';
       break;
     case 'red':
