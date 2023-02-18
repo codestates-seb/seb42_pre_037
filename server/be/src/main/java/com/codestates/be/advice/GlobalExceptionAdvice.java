@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.yaml.snakeyaml.parser.ParserException;
 
 import javax.validation.ConstraintViolationException;
 
@@ -36,6 +37,12 @@ public class GlobalExceptionAdvice {
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler
+    public ResponseEntity handleParserException(ParserException e){
+        ErrorResponse response = ErrorResponse.of(ExceptionCode.WRONG_FORMAT_OF_DATE);
+
+        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+    }
     @ExceptionHandler
     public ResponseEntity handleAnyException(Exception e) throws Exception{
         log.error("Occured AnyUnhandledException");
