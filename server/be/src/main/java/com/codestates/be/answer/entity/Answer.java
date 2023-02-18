@@ -1,14 +1,17 @@
 package com.codestates.be.answer.entity;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.codestates.be.member.entity.Member;
+
+import javax.persistence.*;
 
 @Entity
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long answerId;
+
+    @ManyToOne
+    @JoinColumn(name = "MEMBER_ID")
+    private Member member;
 }
