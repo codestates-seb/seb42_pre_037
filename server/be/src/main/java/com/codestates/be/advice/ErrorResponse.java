@@ -47,7 +47,7 @@ public class ErrorResponse {
     public static ErrorResponse of(ExceptionCode exceptionCode){
         return new ErrorResponse(exceptionCode);
     }
-
+    @Getter
     public static class FieldErs{
         public FieldErs(Object rejectedValue, String field, String message) {
             this.rejectedValue = rejectedValue;
@@ -64,12 +64,15 @@ public class ErrorResponse {
                     .map( fe->{
                         return new FieldErs(
                                 fe.getRejectedValue(),
-                                fe.getField(),
+                                fe.getRejectedValue() == null ?
+                                        "" : fe.getRejectedValue().toString(),
                                 fe.getDefaultMessage()
                         );
                     }).collect(Collectors.toList());
         }
     }
+
+    @Getter
     public static class ConstraintViolationError{
         private String propertyPath;
         private String message;

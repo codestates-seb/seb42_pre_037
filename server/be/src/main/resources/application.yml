@@ -12,9 +12,10 @@ spring:
     properties:
       hibernate:
         format_sql: true  # (3) SQL pretty print
+    defer-datasource-initialization: true
   sql:
     init:
-      data-locations: classpath*:db/h2/data.sql
+      data-locations: classpath:data.sql
 logging:
   level:
     org:

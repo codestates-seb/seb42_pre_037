@@ -39,7 +39,7 @@ public interface MemberMapper {
         return member;
     }
 
-    default Member MemberPatchDtoToMember(MemberDto.Patch patchMember) throws ParseException {
+    default Member MemberPatchDtoToMember(MemberDto.Patch patchMember) throws Exception {
         Member member = Member.builder()
                 .displayName(patchMember.getDisplayName())
                 .password(patchMember.getPassword())

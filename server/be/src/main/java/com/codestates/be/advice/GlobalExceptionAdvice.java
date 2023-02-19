@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.yaml.snakeyaml.parser.ParserException;
 
 import javax.validation.ConstraintViolationException;
+import java.text.ParseException;
 
 @RestControllerAdvice
 @Slf4j
@@ -38,7 +39,7 @@ public class GlobalExceptionAdvice {
     }
 
     @ExceptionHandler
-    public ResponseEntity handleParserException(ParserException e){
+    public ResponseEntity handleParserException(ParseException e){
         ErrorResponse response = ErrorResponse.of(ExceptionCode.WRONG_FORMAT_OF_DATE);
 
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
