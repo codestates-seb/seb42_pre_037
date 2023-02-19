@@ -56,7 +56,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 1,
+      questionId: 6,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -67,7 +67,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 2,
+      questionId: 7,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -78,7 +78,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 3,
+      questionId: 8,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -89,7 +89,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 4,
+      questionId: 9,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -100,7 +100,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 5,
+      questionId: 10,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -111,7 +111,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 1,
+      questionId: 11,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -122,7 +122,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 2,
+      questionId: 12,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -133,7 +133,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 3,
+      questionId: 13,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -144,7 +144,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 4,
+      questionId: 14,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -155,7 +155,7 @@ const questions = {
       tags: ['javascript', 'react'],
     },
     {
-      questionId: 5,
+      questionId: 15,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
