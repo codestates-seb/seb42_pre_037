@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class QuestionTag {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long questionTag;
+    private long questionTagId;
 
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
