@@ -10,11 +10,11 @@ import dummyData from '../dummyData';
 function Questions() {
   const [questions, setQuestions] = useState(dummyData.data);
   const [totalQuestion, setTotalElements] = useState(dummyData.pageInfo);
-  // currentPage 초기값은 0으로 설정
+  // 1. currentPage 초기값은 0으로 설정
   const [currentPage, setCurrentPage] = useState(0);
 
   const PER_PAGE = 10;
-  // page 갯수 계산
+  // 2. page 갯수 계산
   const pageCount = Math.ceil(totalQuestion.totalElements / PER_PAGE);
 
   useEffect(() => {
@@ -31,8 +31,9 @@ function Questions() {
     };
     fetchQuestions();
   }, [currentPage]);
-  // currentPage가 변경될 때 마다 API호출을 한다.
+  // 5. currentPage가 변경될 때 마다 API호출을 한다.
 
+  // 4. 밑의 함수가 호출되면 setCurrentPage에 의해 CurrentPage 값을 변경
   const handlerPageClick = ({ selected }) => {
     setCurrentPage(selected);
   };
@@ -74,7 +75,9 @@ function Questions() {
           pageCount={pageCount}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
+          // 3. pager가 바뀔 때 마다 handlerPageClick 함수 호출
           onPageChange={handlerPageClick}
+          // 밑 props는 style을 위한 className 지정 해주는 역할
           containerClassName="bg-blue-400"
           activeClassName="bg-blue-400"
         />
