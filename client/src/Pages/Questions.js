@@ -1,16 +1,20 @@
+import { useState } from 'react';
 import { BiFilter } from 'react-icons/bi';
 
 import Button from '../Components/UI/Button';
+import dummyData from '../dummyData';
 
 function Questions() {
+  const [questions] = useState(dummyData);
   return (
     <>
-      <div>
-        <h1>All Questions</h1>
-        <Button>Ask Question</Button>
+      <div className="flex items-end justify-between p-5">
+        <h1 className="text-4xl">All Questions</h1>
+        <Button size="large">Ask Question</Button>
       </div>
-      <div>
-        <h3>Questions</h3>
+
+      <div className="flex items-end justify-between p-5">
+        <h3 className="text-2xl">Questions</h3>
         <Button
           color="clear-blue"
           icon={<BiFilter />}
@@ -19,6 +23,29 @@ function Questions() {
         >
           Filter
         </Button>
+      </div>
+
+      {/* Question list */}
+      <div>
+        <ul>
+          {questions.map(question => (
+            <li id={question.questionId}>
+              <div>{question.count_answer} answer</div>
+              <div>
+                <h3 className="text-xl">{question.title}</h3>
+                <p>{question.content}</p>
+              </div>
+              <div>
+                <ul>
+                  {question.tags.map(tag => (
+                    <li>{tag}</li>
+                  ))}
+                </ul>
+                <div>{question.displayName}</div>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
