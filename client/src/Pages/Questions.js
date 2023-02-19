@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { BiFilter } from 'react-icons/bi';
+import QuestionsItem from '../Components/QuestionsItem';
 
 import Button from '../Components/UI/Button';
 import dummyData from '../dummyData';
-import QuestionList from '../Components/QuestionList';
 
 function Questions() {
   const [questions] = useState(dummyData.data);
@@ -28,7 +28,13 @@ function Questions() {
       </div>
 
       {/* Question list */}
-      <QuestionList questions={questions} />
+      <div>
+        <ul>
+          {questions.map(question => (
+            <QuestionsItem question={question} />
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
