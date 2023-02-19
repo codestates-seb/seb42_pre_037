@@ -6,6 +6,7 @@ import com.codestates.be.question.entity.Question;
 import org.springframework.jmx.export.annotation.ManagedNotification;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Answer {
@@ -20,4 +21,16 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+    @Column(nullable = false)
+    private long questionId;
+
+    @Column(nullable = false)
+    private String content;
+
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @Column
+    private Date modifiedAt;
 }
