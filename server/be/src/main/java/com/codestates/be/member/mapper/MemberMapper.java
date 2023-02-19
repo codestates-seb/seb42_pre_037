@@ -39,12 +39,16 @@ public interface MemberMapper {
         return member;
     }
 
-    default Member MemberPatchDtoToMember(MemberDto.Patch patchMember) throws ParseException {
+    default Member MemberPatchDtoToMember(MemberDto.Patch patchMember) throws Exception {
         Member member = Member.builder()
                 .displayName(patchMember.getDisplayName())
                 .password(patchMember.getPassword())
                 .modifiedAt(StringToDate.getDateFrom(patchMember.getModifiedAt()))
                 .build();
+
+        if(patchMember.getTags() == null){
+            return member;
+        }
 
         List<MemberTag> memberTags = patchMember.getTags()
                 .stream().map(tagPost -> {

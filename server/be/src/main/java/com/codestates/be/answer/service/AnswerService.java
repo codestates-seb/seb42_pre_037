@@ -4,7 +4,6 @@ package com.codestates.be.answer.service;
 import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.answer.entity.Answer;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,6 +1,8 @@
 package com.codestates.be.advice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.JDBCException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.yaml.snakeyaml.parser.ParserException;
 
 import javax.validation.ConstraintViolationException;
+import java.text.ParseException;
 
 @RestControllerAdvice
 @Slf4j
@@ -38,14 +41,24 @@ public class GlobalExceptionAdvice {
     }
 
     @ExceptionHandler
-    public ResponseEntity handleParserException(ParserException e){
+    public ResponseEntity handleParseException(ParseException e){
         ErrorResponse response = ErrorResponse.of(ExceptionCode.WRONG_FORMAT_OF_DATE);
 
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity handleJdbcSQLIntegrityConstraintViolationException(DataIntegrityViolationException e){
+        log.error("데이터 무결성 확인 오류. : {}", e.getMessage());
+
+        ErrorResponse response = new ErrorResponse(ExceptionCode.INCORRECT_DATA_REQUESTED);
+
+        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler
     public ResponseEntity handleAnyException(Exception e) throws Exception{
-        log.error("Occured AnyUnhandledException");
+        log.error("Occured AnyUnhandledException {}" , e.getClass());
         throw e;
     }
 }

@@ -19,11 +19,11 @@ public class Tag {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long tagId;
 
+    @Column(nullable = false, length = 1000)
+    private String tagInfo;
+
     @Column(nullable = false, unique = true)
     private String tagName;
-
-    @Column(nullable = false)
-    private String tagInfo;
 
     @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
     List<MemberTag> memberTags = new ArrayList<>();

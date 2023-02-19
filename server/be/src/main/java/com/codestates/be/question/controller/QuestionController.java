@@ -3,6 +3,7 @@ package com.codestates.be.question.controller;
 import com.codestates.be.question.dto.QuestionDto;
 import com.codestates.be.question.entity.Question;
 import com.codestates.be.question.service.QuestionService;
+import com.codestates.be.responseDto.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -60,6 +61,9 @@ public class QuestionController {
 
         Page<Question> pageQuestions = questionService.findQuestions(page - 1,size );
         List<Question> questionList = pageQuestions.getContent();
+
+        PageInfo pageInfo = new PageInfo(pageQuestions.getNumber(), pageQuestions.getSize(),
+                pageQuestions.getTotalPages(), pageQuestions.getTotalElements());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

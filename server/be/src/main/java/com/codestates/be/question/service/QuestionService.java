@@ -2,17 +2,14 @@ package com.codestates.be.question.service;
 
 import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
-import com.codestates.be.question.dto.QuestionDto;
 import com.codestates.be.question.entity.Question;
 import com.codestates.be.question.repository.QuestionRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -33,7 +30,7 @@ public class QuestionService {
 
     public Question updateQuestion(Question question) {
         // 질문 존재하는지 확인
-        Question existQuestion = findExistQuestion(question.getQuestionId());
+        Question existQuestion = findVerifiedExistQuestion(question.getQuestionId());
         // 제목수정
         Optional.ofNullable(question.getTitle())
                 .ifPresent(title -> existQuestion.setTitle(title));
@@ -47,23 +44,23 @@ public class QuestionService {
     }
 
     public Question findQuestion(long questionId) {
-        Question response = findExistQuestion(questionId);
+        Question response = findVerifiedExistQuestion(questionId);
         return response;
     }
 
     public Page<Question> findQuestions(int page, int size) {
-        return questionRepository.findAll(PageRequest.of(page, size));
+        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("questionId").descending()));
     }
 
     public void deleteQuestion(long questionId) {
-        Question existQuestion = findExistQuestion(questionId);
+        Question existQuestion = findVerifiedExistQuestion(questionId);
         questionRepository.delete(existQuestion);
     }
 
-    private Question findExistQuestion(long questionId) {
+    private Question findVerifiedExistQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question existQuestion = optionalQuestion.orElseThrow(
-                () -> new BuissnessLogicException(ExceptionCode.MEMBER_NOT_FOUND)   // 에러 코드 추가 후 수정하기
+                () -> new BuissnessLogicException(ExceptionCode.QUESTION_NOT_FOUND)   // 에러 코드 추가 후 수정하기
         );
         return existQuestion;
     }

@@ -11,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -29,10 +30,10 @@ public class Question {
     private String content;
 
     @Column(nullable = false)
-    private LocalDateTime createdAt;
+    private Date createdAt;
 
     @Column(name = "LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt;
+    private Date modifiedAt;
 
     @Column(nullable = false)
     private long viewCounts;

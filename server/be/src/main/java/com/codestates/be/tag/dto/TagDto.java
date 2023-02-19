@@ -9,10 +9,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
-@Valid
-public class TagDto {
 
-    @Valid
+public class TagDto {
     @Getter
     @Setter
     @NoArgsConstructor

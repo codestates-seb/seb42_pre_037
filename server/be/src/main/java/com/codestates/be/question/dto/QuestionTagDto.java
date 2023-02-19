@@ -8,6 +8,7 @@ public class QuestionTagDto {
     @Getter
     public static class Post {
         private long tagId;
+        private String tagName;
     }
 
     @Getter
@@ -15,6 +16,6 @@ public class QuestionTagDto {
     public static class Response{
         private long tagId;
         private String tagName;
-//        private String tagInfo;
+        private String tagInfo;
     }
 }
