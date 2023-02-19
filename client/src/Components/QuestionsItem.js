@@ -1,6 +1,6 @@
 function QuestionsItem({ question }) {
   return (
-    <li className="border-b-2 p-5" id={question.questionId}>
+    <li className="border-b-2 p-5">
       <div>{question.count_answer} answer</div>
 
       <div className="mb-1">
@@ -10,8 +10,10 @@ function QuestionsItem({ question }) {
 
       <div className="flex items-end justify-between">
         <ul className="flex space-x-3">
-          {question.tags.map(tag => (
-            <li className="tag">{tag}</li>
+          {question.tags.map((tag, idx) => (
+            <li key={idx} className="tag">
+              {tag}
+            </li>
           ))}
         </ul>
 
