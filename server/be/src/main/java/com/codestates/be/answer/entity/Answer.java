@@ -14,6 +14,14 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long answerId;
 
+    @Column(nullable = false)
+    private String content;
+
+    @Column(nullable = false)
+    private Date createdAt;
+
+    @Column(name = "LAST_MODIFIED_AT")
+    private Date modifiedAt;
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -21,16 +29,4 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
-
-    @Column(nullable = false)
-    private long questionId;
-
-    @Column(nullable = false)
-    private String content;
-
-    @Column(nullable = false)
-    private Date createdAt;
-
-    @Column
-    private Date modifiedAt;
 }

@@ -23,7 +23,7 @@ public class AnswerController {
                                      @Valid @RequestBody AnswerPostDto answerPostDto){
         answerPostDto.setQuestionId(questionId);
 
-        return new ResponseEntity<AnswerPostDto>(answerPostDto, HttpStatus.CREATED);
+        return new ResponseEntity<>(answerPostDto, HttpStatus.CREATED);
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
@@ -33,7 +33,7 @@ public class AnswerController {
                                       @Valid @RequestBody AnswerPatchDto answerPatchDto){
         answerPatchDto.setAnswerId(answerId);
 
-        return new ResponseEntity<AnswerPatchDto>(answerPatchDto, HttpStatus.OK);
+        return new ResponseEntity<>(answerPatchDto, HttpStatus.OK);
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 

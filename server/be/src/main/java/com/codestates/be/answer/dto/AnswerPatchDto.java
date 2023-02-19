@@ -1,10 +1,16 @@
 package com.codestates.be.answer.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+
+@Getter
+@Setter
 public class AnswerPatchDto {
     private long answerId;
 
@@ -14,27 +20,27 @@ public class AnswerPatchDto {
     @NotNull
     private Date modifiedAt;
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Date getModifiedAt() {
-        return modifiedAt;
-    }
-
-    public void setModifiedAt(Date modifiedAt) {
-        this.modifiedAt = modifiedAt;
-    }
-
-    public long getAnswerId() {
-        return answerId;
-    }
-
-    public void setAnswerId(long answerId) {
-        this.answerId = answerId;
-    }
+//    public String getContent() {
+//        return content;
+//    }
+//
+//    public void setContent(String content) {
+//        this.content = content;
+//    }
+//
+//    public Date getModifiedAt() {
+//        return modifiedAt;
+//    }
+//
+//    public void setModifiedAt(Date modifiedAt) {
+//        this.modifiedAt = modifiedAt;
+//    }
+//
+//    public long getAnswerId() {
+//        return answerId;
+//    }
+//
+//    public void setAnswerId(long answerId) {
+//        this.answerId = answerId;
+//    }
 }
