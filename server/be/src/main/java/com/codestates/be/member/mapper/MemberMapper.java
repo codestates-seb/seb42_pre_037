@@ -47,7 +47,6 @@ public interface MemberMapper {
                 .build();
 
         if(patchMember.getTags() == null){
-            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
             return member;
         }
 

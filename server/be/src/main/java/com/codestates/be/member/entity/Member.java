@@ -34,7 +34,7 @@ public class Member {
     @Column(nullable = false)
     private Date createdAt;
 
-    @Column
+    @Column(name = "LAST_MODIFIED_AT")
     private Date modifiedAt;
 
     @Column

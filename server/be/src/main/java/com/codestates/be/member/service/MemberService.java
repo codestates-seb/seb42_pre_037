@@ -46,6 +46,8 @@ public class MemberService {
         return findMember;
     }
 
+
+
     public void verifyMemberExists(String email){
         Optional<Member> findMember = memberRepository.findByEmail(email);
         if(findMember.isPresent()){

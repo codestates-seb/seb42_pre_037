@@ -14,7 +14,7 @@ public class QuestionDto {
         private String title;
         private String content;
         private String email;
-        private LocalDateTime createdAt;
+        private String createdAt;
         private List<QuestionTagDto.Post> questionTags;
     }
 
@@ -22,9 +22,8 @@ public class QuestionDto {
     @Setter
     public static class Patch {
         private long questionId;
-        private String title;
         private String content;
-        private LocalDateTime modifiedAt;
+        private String modifiedAt;
         // 태그 수정 가능해야 하나?
     }
 

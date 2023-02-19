@@ -36,10 +36,9 @@ public class MemberController {
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
         memberService.createdMember(member);
+
         return new ResponseEntity(new SingleResponseEntity<>(member), HttpStatus.ACCEPTED); //TODO 이 에러 확인해보기..
     }
-
-
 
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
