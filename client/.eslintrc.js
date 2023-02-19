@@ -45,7 +45,18 @@ module.exports = {
       {
         "labelAttributes": ["htmlFor"]
       }
-    ]
+    ],
+    // import 에러 해결
+    "import/prefer-default-export": "off",
+    "no-console": "off",
+        "no-restricted-syntax": [
+            "error",
+            {
+                "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+                "message": "Unexpected property on console object was called"
+            }
+        ],
+
   },
   settings: {
     // 'import/core-m'
@@ -53,6 +64,8 @@ module.exports = {
       'styled-components',
       'react-router-dom',
       'chart.js/auto',
+      'zustand',
+      'axios',
     ], // import 오류나는 패키지를 여기에 추가해줘야함
   },
 };
