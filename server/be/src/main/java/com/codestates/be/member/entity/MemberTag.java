@@ -4,11 +4,13 @@ package com.codestates.be.member.entity;
 import com.codestates.be.tag.entity.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class MemberTag {
     @Id

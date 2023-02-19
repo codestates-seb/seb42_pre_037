@@ -1,5 +1,9 @@
 package com.codestates.be.responseDto;
 
+
+import lombok.Getter;
+
+@Getter
 public class SingleResponseEntity <T>{
     private T data;
 
