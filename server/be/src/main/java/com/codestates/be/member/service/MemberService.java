@@ -23,6 +23,9 @@ public class MemberService {
     public void createdMember(Member member){
         verifyMemberExists(member.getEmail());
         member.setPassword(passwordEncoder.encode(member.getPassword()));
+
+
+
         memberRepository.save(member);
     }
 
@@ -30,7 +33,7 @@ public class MemberService {
         Member findMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getDisplayName())
-                        .ifPresent(name -> findMember.setDisplayName(name));
+                .ifPresent(name -> findMember.setDisplayName(name));
         Optional.ofNullable(member.getPassword())
                 .ifPresent(password -> findMember.setPassword(passwordEncoder.encode(password)));
         Optional.ofNullable(member.getUserIntro())

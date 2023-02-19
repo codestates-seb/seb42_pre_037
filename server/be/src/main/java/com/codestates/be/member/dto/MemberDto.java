@@ -5,7 +5,9 @@ import com.codestates.be.tag.dto.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -27,6 +29,7 @@ public class MemberDto {
         private String displayName;
         private String password;
         private String userIntro;
+        @NotBlank
         private String modifiedAt;
         private List<TagDto.Request> tags;
     }

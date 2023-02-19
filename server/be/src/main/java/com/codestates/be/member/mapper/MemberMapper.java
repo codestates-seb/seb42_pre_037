@@ -46,6 +46,11 @@ public interface MemberMapper {
                 .modifiedAt(StringToDate.getDateFrom(patchMember.getModifiedAt()))
                 .build();
 
+        if(patchMember.getTags() == null){
+            System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
+            return member;
+        }
+
         List<MemberTag> memberTags = patchMember.getTags()
                 .stream().map(tagPost -> {
                     MemberTag memberTag = new MemberTag();

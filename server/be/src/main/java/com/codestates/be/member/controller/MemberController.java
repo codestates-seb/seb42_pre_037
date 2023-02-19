@@ -9,6 +9,7 @@ import com.codestates.be.member.mapper.MemberMapper;
 import com.codestates.be.member.service.MemberService;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -21,6 +22,7 @@ import java.text.ParseException;
 @RestController
 @RequestMapping("/members")
 @Validated
+@Slf4j
 public class MemberController {
     private final MemberMapper mapper;
     private final MemberService memberService;
@@ -34,7 +36,7 @@ public class MemberController {
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
         memberService.createdMember(member);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity(member, HttpStatus.ACCEPTED); //TODO 이 에러 확인해보기..
     }
 
 
@@ -42,6 +44,7 @@ public class MemberController {
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @RequestBody @Valid MemberDto.Patch patchMember) throws Exception {
+
         Member member = mapper.MemberPatchDtoToMember(patchMember);
         member.setMemberId(memberId);
 
