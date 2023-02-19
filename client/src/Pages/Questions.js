@@ -31,16 +31,19 @@ function Questions() {
           {questions.map(question => (
             <li id={question.questionId}>
               <div>{question.count_answer} answer</div>
+
               <div>
-                <h3 className="text-xl">{question.title}</h3>
+                <h3 className="h3-blue">{question.title}</h3>
                 <p>{question.content}</p>
               </div>
+
               <div>
                 <ul>
                   {question.tags.map(tag => (
                     <li>{tag}</li>
                   ))}
                 </ul>
+
                 <div>{question.displayName}</div>
               </div>
             </li>

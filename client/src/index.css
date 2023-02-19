@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .h3-blue {
+    @apply text-xl text-[#177BCF] hover:text-[#289BFE];
+  }
+}
