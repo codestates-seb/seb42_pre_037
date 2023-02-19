@@ -1,6 +1,11 @@
-import React from 'react';
-
-function Button({ children, color = 'blue', size = 'medium', ...rest }) {
+function Button({
+  children,
+  color = 'blue',
+  size = 'medium',
+  icon,
+  iconClassName,
+  ...rest
+}) {
   let backgroundColorClass;
   let textColorClass;
   let fontSizeClass;
@@ -11,8 +16,8 @@ function Button({ children, color = 'blue', size = 'medium', ...rest }) {
   switch (color) {
     case 'clear-blue':
       backgroundColorClass =
-        'bg-[#E1ECF4] hover:bg-[#B3D3EA] focus:bg-[#B3D3EA] border-2 border-blue-900';
-      textColorClass = 'border-blue-500';
+        'bg-[#E1ECF4] hover:bg-[#B3D3EA] focus:bg-[#B3D3EA] border-2 border-[#79A7C7]';
+      textColorClass = 'text-[#39739C]';
       break;
     case 'gray':
       backgroundColorClass =
@@ -61,6 +66,7 @@ function Button({ children, color = 'blue', size = 'medium', ...rest }) {
 
   return (
     <button className={className} {...rest}>
+      {icon && <span className={`mr-1 ${iconClassName}`}>{icon}</span>}
       {children}
     </button>
   );
