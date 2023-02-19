@@ -36,7 +36,7 @@ public class MemberController {
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
         memberService.createdMember(member);
-        return new ResponseEntity(member, HttpStatus.ACCEPTED); //TODO 이 에러 확인해보기..
+        return new ResponseEntity(new SingleResponseEntity<>(member), HttpStatus.ACCEPTED); //TODO 이 에러 확인해보기..
     }
 
 
