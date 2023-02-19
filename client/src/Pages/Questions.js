@@ -3,9 +3,11 @@ import { BiFilter } from 'react-icons/bi';
 
 import Button from '../Components/UI/Button';
 import dummyData from '../dummyData';
+import QuestionList from '../Components/QuestionList';
 
 function Questions() {
-  const [questions] = useState(dummyData);
+  const [questions] = useState(dummyData.data);
+  const [totalQuestion] = useState(dummyData.pageInfo);
   return (
     <>
       <div className="flex items-end justify-between p-5">
@@ -13,8 +15,8 @@ function Questions() {
         <Button size="large">Ask Question</Button>
       </div>
 
-      <div className="flex items-end justify-between p-5">
-        <h3 className="text-2xl">Questions</h3>
+      <div className="flex items-end justify-between p-5 border-b-2">
+        <h3 className="text-2xl">{totalQuestion.totalElements} questions</h3>
         <Button
           color="clear-blue"
           icon={<BiFilter />}
@@ -26,30 +28,7 @@ function Questions() {
       </div>
 
       {/* Question list */}
-      <div>
-        <ul>
-          {questions.map(question => (
-            <li id={question.questionId}>
-              <div>{question.count_answer} answer</div>
-
-              <div>
-                <h3 className="h3-blue">{question.title}</h3>
-                <p>{question.content}</p>
-              </div>
-
-              <div>
-                <ul>
-                  {question.tags.map(tag => (
-                    <li>{tag}</li>
-                  ))}
-                </ul>
-
-                <div>{question.displayName}</div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <QuestionList questions={questions} />
     </>
   );
 }

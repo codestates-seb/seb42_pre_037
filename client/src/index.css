@@ -6,4 +6,7 @@
   .h3-blue {
     @apply text-xl text-[#177BCF] hover:text-[#289BFE];
   }
+  .tag {
+    @apply bg-[#E1ECF4] text-[#39739C] px-2 py-1 rounded;
+  }
 }
