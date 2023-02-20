@@ -22,9 +22,7 @@ public class QuestionService {
     }
 
     public Question createQuestion(Question question) {
-
         Question response = questionRepository.save(question);
-
         return response;
     }
 
@@ -37,6 +35,9 @@ public class QuestionService {
         // 내용수정
         Optional.ofNullable(question.getContent())
                 .ifPresent(content -> existQuestion.setContent(content));
+        // 수정 시간 등록
+        Optional.ofNullable(question.getModifiedAt())
+                .ifPresent(modifiedAt -> existQuestion.setModifiedAt(modifiedAt));
 
         Question response = questionRepository.save(existQuestion);
 

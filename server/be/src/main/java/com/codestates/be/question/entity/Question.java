@@ -21,7 +21,7 @@ import java.util.List;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long questionId;
+    private long questionId;
 
     @Column(nullable = false)
     private String title;

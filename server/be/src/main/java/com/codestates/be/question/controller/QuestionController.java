@@ -4,7 +4,9 @@ import com.codestates.be.question.dto.QuestionDto;
 import com.codestates.be.question.entity.Question;
 import com.codestates.be.question.mapper.QuestionMapper;
 import com.codestates.be.question.service.QuestionService;
+import com.codestates.be.responseDto.MultiResponseEntity;
 import com.codestates.be.responseDto.PageInfo;
+import com.codestates.be.responseDto.SingleResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -35,7 +37,7 @@ public class QuestionController {
         Question createdQuestion =  questionService.createQuestion(mapper.questionPostDtoToQuestion(postDto));
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(createdQuestion);
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.CREATED);
     }
 
     @PatchMapping("/{question-id}")    //질문 수정
@@ -46,7 +48,7 @@ public class QuestionController {
         Question updatedQuestion = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(patchDto));
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(updatedQuestion);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
 
     @GetMapping("/{question-id}")    //질문 조회
@@ -55,20 +57,24 @@ public class QuestionController {
         Question foundQuestion = questionService.findQuestion(questionId);
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(foundQuestion);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        //질문자 이메일, 이름 조회
+//        response.setEmail(foundQuestion.getMember().getEmail());
+//        response.setDisplayName(foundQuestion.getMember().getDisplayName());
+
+        return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
 
     @GetMapping     //질문 전체 조회
-    public ResponseEntity getQuestions (@Positive @RequestParam int page,
+    public ResponseEntity getQuestions (@RequestParam int page,
                                         @Positive @RequestParam int size) {
 
-        Page<Question> pageQuestions = questionService.findQuestions(page - 1,size );
+        Page<Question> pageQuestions = questionService.findQuestions(page, size);
         List<Question> questionList = pageQuestions.getContent();
 
         PageInfo pageInfo = new PageInfo(pageQuestions.getNumber(), pageQuestions.getSize(),
                 pageQuestions.getTotalPages(), pageQuestions.getTotalElements());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseEntity<>(mapper.questionsToQuestionsResponseDto(questionList),pageInfo),HttpStatus.OK);
     }
 
     @DeleteMapping("/{question-id}")    //질문 삭제
