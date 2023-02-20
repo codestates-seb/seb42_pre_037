@@ -27,6 +27,7 @@ public class QuestionDto {
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
     public static class Response {
         private long questionId;

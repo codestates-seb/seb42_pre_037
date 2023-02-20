@@ -2,6 +2,7 @@ package com.codestates.be.question.service;
 
 import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
+import com.codestates.be.member.service.MemberService;
 import com.codestates.be.question.entity.Question;
 import com.codestates.be.question.repository.QuestionRepository;
 import org.springframework.data.domain.Page;
@@ -16,15 +17,15 @@ import java.util.Optional;
 @RequestMapping("/questions")
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final MemberService memberService;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, MemberService memberService) {
         this.questionRepository = questionRepository;
+        this.memberService = memberService;
     }
 
     public Question createQuestion(Question question) {
-
         Question response = questionRepository.save(question);
-
         return response;
     }
 
@@ -37,6 +38,9 @@ public class QuestionService {
         // 내용수정
         Optional.ofNullable(question.getContent())
                 .ifPresent(content -> existQuestion.setContent(content));
+        // 수정 시간 등록
+        Optional.ofNullable(question.getModifiedAt())
+                .ifPresent(modifiedAt -> existQuestion.setModifiedAt(modifiedAt));
 
         Question response = questionRepository.save(existQuestion);
 
