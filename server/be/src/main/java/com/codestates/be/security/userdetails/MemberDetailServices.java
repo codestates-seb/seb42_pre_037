@@ -9,10 +9,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Optional;
-
+@Component
 public class MemberDetailServices implements UserDetailsService {
     private final MemberRepository memberRepository;
     private final CustomAuthorityUtil authorityUtil;
@@ -29,7 +30,6 @@ public class MemberDetailServices implements UserDetailsService {
 
         return new MemberDetail(findMember.get());
     }
-
 
     public class MemberDetail extends Member implements UserDetails {
         public MemberDetail(Member member) {

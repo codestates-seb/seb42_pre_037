@@ -28,6 +28,6 @@ server:
       force-response: true
 
 jwt:
-  key: sampleKeyPasswordForTest!##@!!$!sada113!#!#!!!242d1621351@#@#!
+  key: ${JWT_SECRET_KEY}
   access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 240
+  refresh-token-expiration-minutes: 420

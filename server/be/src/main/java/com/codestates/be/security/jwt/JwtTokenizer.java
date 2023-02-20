@@ -77,6 +77,7 @@ public class JwtTokenizer {
 
     public Key getKeyFromBase64EncodedSecretKey(String base64EncodedKey){
         byte[] decodedKey = Decoders.BASE64.decode(base64EncodedKey);
-        return Keys.hmacShaKeyFor(decodedKey);
+        Key key = Keys.hmacShaKeyFor(decodedKey);
+        return key;
     }
 }

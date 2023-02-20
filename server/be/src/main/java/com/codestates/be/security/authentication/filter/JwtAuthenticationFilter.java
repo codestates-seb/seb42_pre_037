@@ -38,7 +38,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         LoginDto loginDto = mapper.readValue(request.getInputStream(), LoginDto.class);
 
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+        UsernamePasswordAuthenticationToken token =
+                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
         return authenticationManager.authenticate(token);
     }
@@ -48,7 +49,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        Member member = (Member) request.getUserPrincipal();
+        Member member = (Member) authResult.getPrincipal();
 
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
@@ -62,7 +63,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private String delegateAccessToken(Member member){
         Map<String , Object> claims = new HashMap<>();
         claims.put("username", member.getEmail());
-        claims.put("Id", member.getMemberId());
+//        claims.put("Id", member.getMemberId());
         claims.put("roles", member.getRoles());
 
         String subject = member.getEmail();

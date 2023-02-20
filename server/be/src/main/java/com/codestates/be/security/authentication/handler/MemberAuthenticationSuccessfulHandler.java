@@ -17,7 +17,7 @@ public class MemberAuthenticationSuccessfulHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        Member member = (Member) request.getUserPrincipal();
+        Member member = (Member) authentication.getPrincipal();
         log.info("# 로그인 인증 성공 : {}", member.getEmail());
     }
 }

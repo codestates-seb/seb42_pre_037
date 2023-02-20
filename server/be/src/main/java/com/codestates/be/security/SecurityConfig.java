@@ -1,10 +1,21 @@
 package com.codestates.be.security;
 
 
+import com.codestates.be.security.authentication.filter.JwtAuthenticationFilter;
+import com.codestates.be.security.authentication.handler.MemberAuthenticationFailureHandler;
+import com.codestates.be.security.authentication.handler.MemberAuthenticationSuccessfulHandler;
+import com.codestates.be.security.jwt.JwtTokenizer;
+import com.codestates.be.security.util.CustomAuthorityUtil;
+import com.codestates.be.security.verification.filter.JwtVerificationFilter;
+import com.codestates.be.security.verification.handler.MemberAccessDeniedHandler;
+import com.codestates.be.security.verification.handler.MemberAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,8 +31,17 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+    private final JwtTokenizer jwtTokenizer;
+    private final CustomAuthorityUtil authorityUtil;
+
+    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtil authorityUtil) {
+        this.jwtTokenizer = jwtTokenizer;
+        this.authorityUtil = authorityUtil;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+
         http
                 .csrf().disable()
                 .headers().frameOptions().disable()
@@ -31,6 +51,13 @@ public class SecurityConfig {
                 .and()
                 .formLogin().disable()
                 .httpBasic().disable()
+                .apply(new CustomFilterConfigurer())
+                .and()
+                .exceptionHandling(exp->{
+                    exp
+                            .authenticationEntryPoint(new MemberAuthenticationEntryPoint())
+                            .accessDeniedHandler(new MemberAccessDeniedHandler());
+                })
                 .authorizeHttpRequests(auth->{
                     auth.anyRequest().permitAll();
                 });
@@ -56,6 +83,24 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
 
         return source;
+    }
+
+    public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
+        @Override
+        public void configure(HttpSecurity builder) throws Exception {
+            AuthenticationManager authenticationManager =
+                    builder.getSharedObject(AuthenticationManager.class);
+
+            JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtTokenizer, authenticationManager);
+            customFilter.setFilterProcessesUrl("/auth/login");
+            customFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessfulHandler());
+            customFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
+
+            JwtVerificationFilter verificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtil);
+
+            builder.addFilter(customFilter)
+                    .addFilterAfter(verificationFilter, JwtAuthenticationFilter.class);
+        }
     }
 
 }
