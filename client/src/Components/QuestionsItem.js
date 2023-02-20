@@ -8,14 +8,14 @@ function QuestionsItem({ question }) {
         <p>{question.content}</p>
       </div>
 
-      <div className="flex items-end justify-between">
-        <ul className="flex space-x-3">
+      <div className="flex items-end justify-end">
+        {/* <ul className="flex space-x-3">
           {question.tags.map((tag, idx) => (
             <li key={idx} className="tag">
               {tag}
             </li>
           ))}
-        </ul>
+        </ul> */}
 
         <div>{question.displayName}</div>
       </div>

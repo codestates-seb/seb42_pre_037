@@ -9,7 +9,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 2,
@@ -20,7 +19,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 3,
@@ -31,7 +29,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 4,
@@ -42,7 +39,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 5,
@@ -53,7 +49,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 6,
@@ -64,7 +59,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 7,
@@ -75,7 +69,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 8,
@@ -86,7 +79,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 9,
@@ -97,7 +89,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 10,
@@ -108,7 +99,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 11,
@@ -119,7 +109,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 12,
@@ -130,7 +119,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 13,
@@ -141,7 +129,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 14,
@@ -152,7 +139,6 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
     {
       questionId: 15,
@@ -163,13 +149,12 @@ const questions = {
       count_answer: 1,
       createdAt: '2023 02 19 17 38',
       displayName: '사용자 닉네임',
-      tags: ['javascript', 'react'],
     },
   ],
   pageInfo: {
     page: 1,
     size: 10,
-    totalElements: 5,
+    totalElements: 15,
     totalPages: 1,
   },
 };
