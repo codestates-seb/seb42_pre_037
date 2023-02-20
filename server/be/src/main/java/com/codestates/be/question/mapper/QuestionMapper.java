@@ -20,7 +20,20 @@ public interface QuestionMapper {
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatch);
 
     // entity -> responseDto
-    QuestionDto.Response questionToQuestionResponseDto(Question question);
+    default QuestionDto.Response questionToQuestionResponseDto(Question question){
+        QuestionDto.Response responseQuestion = new QuestionDto.Response();
+
+        responseQuestion.setQuestionId(question.getQuestionId());
+        responseQuestion.setEmail(question.getMember().getEmail());
+        responseQuestion.setContent(question.getContent());
+        responseQuestion.setTitle(question.getTitle());
+        responseQuestion.setCountAnswer(question.getAnswers().size());
+        responseQuestion.setCreatedAt(question.getCreatedAt());
+        responseQuestion.setModifiedAt(question.getModifiedAt());
+        responseQuestion.setDisplayName(question.getMember().getDisplayName());
+
+        return responseQuestion;
+    };
 
     List<QuestionDto.Response> questionsToQuestionsResponseDto(List<Question> response);
 }
