@@ -5,6 +5,9 @@ import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +29,8 @@ public class MemberService {
         verifyMemberExists(member.getEmail());
         member.setPassword(passwordEncoder.encode(member.getPassword()));
 
+        //TODO : 시큐리티 적용 시 권한 부여하는 과정도 추가되어야함.
+
 
         return memberRepository.save(member);
     }
@@ -37,15 +42,22 @@ public class MemberService {
                 .ifPresent(name -> findMember.setDisplayName(name));
         Optional.ofNullable(member.getPassword())
                 .ifPresent(password -> findMember.setPassword(passwordEncoder.encode(password)));
-        Optional.ofNullable(member.getUserIntro())
-                .ifPresent(intro -> findMember.setUserIntro(intro));
         Optional.ofNullable(member.getModifiedAt())
                 .ifPresent(modified -> findMember.setModifiedAt(modified));
 
         return findMember;
     }
 
+    public Page<Member> getMembers(int page, int size){
+        return memberRepository.findAll(PageRequest.of(
+            page,size, Sort.by("memberId").descending()
+        ));
+    }
 
+    public void deleteMember(long memberId){
+        findVerifiedMember(memberId);
+        memberRepository.deleteById(memberId);
+    }
 
     public void verifyMemberExists(String email){
         Optional<Member> findMember = memberRepository.findByEmail(email);

@@ -7,9 +7,12 @@ import com.codestates.be.member.dto.MemberDto;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.mapper.MemberMapper;
 import com.codestates.be.member.service.MemberService;
+import com.codestates.be.responseDto.MultiResponseEntity;
+import com.codestates.be.responseDto.PageInfo;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/members")
@@ -36,30 +40,41 @@ public class MemberController {
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
 
+        Member result = memberService.createdMember(member);
+
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @RequestBody @Valid MemberDto.Patch patchMember) throws Exception {
-      throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
-    }
+        Member member = mapper.MemberPatchDtoToMember(patchMember);
+        member.setMemberId(memberId);
 
+        Member result = memberService.updateMember(member);
 
-    @GetMapping("/{member-id}/mypages")
-    public ResponseEntity getMyPages(@PathVariable("member-id") @Positive long memberId){
-        Member member = memberService.findVerifiedMember(memberId);
-        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        return ResponseEntity.accepted().build();
     }
 
     @GetMapping
     public ResponseEntity getUsers(@RequestParam @Positive int page,
                                     @RequestParam @Positive int size){
-        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        Page<Member> memberPage = memberService.getMembers(page-1, size);
+
+        List<Member> members = memberPage.getContent();
+
+        List<MemberDto.User> users = mapper.MembersToUsers(members);
+
+        PageInfo pageInfo = new PageInfo(memberPage.getNumber(), memberPage.getNumber(),
+                memberPage.getTotalPages(), memberPage.getTotalPages());
+
+        return new ResponseEntity(new MultiResponseEntity<>(users, pageInfo), HttpStatus.OK);
     }
 
     @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@PathVariable @Positive long memberId){
-        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        memberService.deleteMember(memberId);
+
+        return ResponseEntity.noContent().build();
     }
 }

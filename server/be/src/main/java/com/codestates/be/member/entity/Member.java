@@ -33,8 +33,7 @@ public class Member {
     @Column(name = "LAST_MODIFIED_AT")
     private String modifiedAt;
 
-    @Column
-    private String userIntro;
+    //TODO: 시큐리티 적용 시 권한 List 추가 되어야함.
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();

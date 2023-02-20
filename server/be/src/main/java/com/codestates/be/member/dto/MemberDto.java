@@ -24,7 +24,6 @@ public class MemberDto {
     public static class Patch{
         private String displayName;
         private String password;
-        private String userIntro;
         @NotBlank
         private String modifiedAt;
     }
