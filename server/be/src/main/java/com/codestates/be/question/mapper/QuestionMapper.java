@@ -1,5 +1,6 @@
 package com.codestates.be.question.mapper;
 
+import com.codestates.be.member.entity.Member;
 import com.codestates.be.question.dto.QuestionDto;
 import com.codestates.be.question.entity.Question;
 import org.mapstruct.Mapper;
@@ -14,7 +15,20 @@ public interface QuestionMapper {
     QuestionMapper INSTANCE = Mappers.getMapper(QuestionMapper.class);
 
     // postDto -> entity
-    Question questionPostDtoToQuestion(QuestionDto.Post questionPost);
+    default Question questionPostDtoToQuestion(QuestionDto.Post questionPost){
+        Question question = new Question();
+
+        Member member = new Member();
+        member.setMemberId(questionPost.getMemberId());
+
+        question.setTitle(questionPost.getTitle());
+        question.setContent(questionPost.getContent());
+        question.setCreatedAt(questionPost.getCreatedAt());
+
+        question.setMember(member);
+
+        return question;
+    };
 
     // patchDto -> entity
     Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatch);
