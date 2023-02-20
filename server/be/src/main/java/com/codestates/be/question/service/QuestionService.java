@@ -60,7 +60,7 @@ public class QuestionService {
     private Question findVerifiedExistQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question existQuestion = optionalQuestion.orElseThrow(
-                () -> new BuissnessLogicException(ExceptionCode.QUESTION_NOT_FOUND)   // 에러 코드 추가 후 수정하기
+                () -> new BuissnessLogicException(ExceptionCode.QUESTION_NOT_FOUND)
         );
         return existQuestion;
     }
