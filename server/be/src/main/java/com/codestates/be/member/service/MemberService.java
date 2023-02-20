@@ -8,25 +8,26 @@ import com.codestates.be.member.repository.MemberRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 @Service
+@Transactional
 public class MemberService {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
+
     public MemberService(PasswordEncoder passwordEncoder, MemberRepository memberRepository) {
         this.passwordEncoder = passwordEncoder;
         this.memberRepository = memberRepository;
     }
 
-    public void createdMember(Member member){
+    public Member createdMember(Member member){
         verifyMemberExists(member.getEmail());
         member.setPassword(passwordEncoder.encode(member.getPassword()));
 
 
-
-        memberRepository.save(member);
+        return memberRepository.save(member);
     }
 
     public Member updateMember(Member member){
@@ -40,8 +41,6 @@ public class MemberService {
                 .ifPresent(intro -> findMember.setUserIntro(intro));
         Optional.ofNullable(member.getModifiedAt())
                 .ifPresent(modified -> findMember.setModifiedAt(modified));
-        Optional.ofNullable(member.getMemberTags())
-                .ifPresent(memberTags -> findMember.setMemberTags(memberTags));
 
         return findMember;
     }

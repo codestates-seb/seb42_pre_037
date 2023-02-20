@@ -37,7 +37,13 @@ public class MemberController {
         Member member = mapper.MemberPostDtoToMember(postMember);
         memberService.createdMember(member);
 
-        return new ResponseEntity(new SingleResponseEntity<>(member), HttpStatus.ACCEPTED); //TODO 이 에러 확인해보기..
+        Member result = memberService.findVerifiedMember(1);
+
+        return new ResponseEntity(mapper.memberToMyPage(result), HttpStatus.OK);
+
+        //TODO: 에러 원인 찾았습니다.
+        //TODO: Member의 Question -> Question의 Answer -> Answer의 Member-> ... 재귀적인 구조 때문에 STACK OVER FLOW 에러 발생.
+        //TODO: 따라서 RESPONSE DTO 작업은 필수.
     }
 
     @PatchMapping("/{member-id}")
@@ -48,14 +54,18 @@ public class MemberController {
         member.setMemberId(memberId);
 
         Member result = memberService.updateMember(member);
-
-       return new ResponseEntity(new SingleResponseEntity<>(result), HttpStatus.ACCEPTED);
+        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+//       return new ResponseEntity(new SingleResponseEntity<>(), HttpStatus.ACCEPTED);
     }
 
 
     @GetMapping("/{member-id}/mypages")
     public ResponseEntity getMyPages(@PathVariable("member-id") @Positive long memberId){
-        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        Member member = memberService.findVerifiedMember(memberId);
+
+
+
+        return new ResponseEntity(mapper.memberToMyPage(member), HttpStatus.ACCEPTED);
     }
 
     @GetMapping

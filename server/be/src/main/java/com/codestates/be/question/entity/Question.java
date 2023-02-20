@@ -43,9 +43,5 @@ public class Question {
     private Member member;
 
     @OneToMany(mappedBy = "question")
-    private List<QuestionTag> questionTags = new ArrayList<>();
-
-    @OneToMany(mappedBy = "question")
     private List<Answer> answers = new ArrayList<>();
-
 }

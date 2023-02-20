@@ -15,7 +15,6 @@ public class QuestionDto {
         private String content;
         private String email;
         private String createdAt;
-        private List<QuestionTagDto.Post> questionTags;
     }
 
     @Getter
@@ -38,7 +37,6 @@ public class QuestionDto {
         private LocalDateTime createdAt;
         private LocalDateTime modifiedAt;
         private String displayName;
-        private List<QuestionTagDto.Response> tags; // 질문에 붙은 태그
 //        private long viewCounts;    -> viewCount 추가?
     }
 }

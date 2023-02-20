@@ -3,10 +3,8 @@ package com.codestates.be.member.entity;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.question.entity.Question;
 import lombok.*;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
-import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +44,4 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<MemberTag> memberTags = new ArrayList<>();
 }
