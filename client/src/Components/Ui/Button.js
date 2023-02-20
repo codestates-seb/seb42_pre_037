@@ -1,6 +1,11 @@
-import React from 'react';
-
-function Button({ children, color = 'blue', size = 'medium', ...rest }) {
+function Button({
+  children,
+  color = 'blue',
+  size = 'medium',
+  icon,
+  iconClassName,
+  ...rest
+}) {
   let backgroundColorClass;
   let textColorClass;
   let fontSizeClass;
@@ -9,9 +14,14 @@ function Button({ children, color = 'blue', size = 'medium', ...rest }) {
 
   // 색상에 따른 클래스 이름 결정
   switch (color) {
+    case 'clear-blue':
+      backgroundColorClass =
+        'bg-[#E1ECF4] hover:bg-[#B3D3EA] focus:bg-[#B3D3EA] border-2 border-[#79A7C7]';
+      textColorClass = 'text-[#39739C]';
+      break;
     case 'gray':
       backgroundColorClass =
-        'bg-gray-500 hover:bg-gray-600 focus:ring-gray-400';
+        'bg-gray-500 hover:bg-[#0074CC] focus:ring-gray-400';
       textColorClass = 'text-white';
       break;
     case 'red':
@@ -56,6 +66,7 @@ function Button({ children, color = 'blue', size = 'medium', ...rest }) {
 
   return (
     <button className={className} {...rest}>
+      {icon && <span className={`mr-1 ${iconClassName}`}>{icon}</span>}
       {children}
     </button>
   );

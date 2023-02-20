@@ -1,25 +1,30 @@
-import {useEffect} from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
 import axios from 'axios';
 
-import Button from './Components/Ui/Button';
-import SearchBar from './Components/Ui/SearchBar';
+import Questions from './Pages/Questions';
+import Question from './Pages/Question';
+import QuestionForm from './Pages/QuestionForm';
+
 import Login from './Pages/Login';
+import SignUp from './Pages/SignUp';
+import Test from './Pages/Test';
 
 import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
 
 function App() {
-  const {isLogin, setIsLogin} = useIsLoginStore((state)=>state);
-  const {userInfo, setUserInfo} = useUserInfoStore((state)=>state);
+  const { isLogin, setIsLogin } = useIsLoginStore(state => state);
+  const { userInfo, setUserInfo } = useUserInfoStore(state => state);
 
   console.log(isLogin);
 
   const initInfo = {
-    email: "abc111@naver.com",
-    name: "홍길동",
-  }
-  
-  if(Object.keys(userInfo).length === 0){
+    email: 'abc111@naver.com',
+    name: '홍길동',
+  };
+
+  if (Object.keys(userInfo).length === 0) {
     setUserInfo(initInfo);
   }
 
@@ -28,11 +33,11 @@ function App() {
   const authHandler = () => {
     axios
       .get('https://localhost:4000/userinfo')
-      .then((res) => {
+      .then(res => {
         setIsLogin(true);
         setUserInfo(res.data);
       })
-      .catch((err) => {
+      .catch(err => {
         if (err.response.status === 401) {
           console.log(err.response.data);
         }
@@ -44,24 +49,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <Login />
-      <div className="m-5 space-x-2">
-        <Button color="gray" size="large" type="button">
-          버튼입니다!
-        </Button>
-        <Button color="blue" size="medium" type="button">
-          버튼입니다!
-        </Button>
-        <Button color="green" size="small" type="button">
-          버튼입니다!
-        </Button>
-      </div>
-      <div className="m-5 flex flex-col mt-2 space-y-2 w-96">
-        <SearchBar placeholder="Filter by tag name..." />
-        <SearchBar placeholder="Search..." />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Questions />} />
+        <Route path="question" element={<Question />} />
+        <Route path="questionForm" element={<QuestionForm />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<SignUp />} />
+        <Route path="test" element={<Test />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
