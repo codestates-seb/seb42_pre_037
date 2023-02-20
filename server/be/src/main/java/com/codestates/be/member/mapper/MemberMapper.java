@@ -9,25 +9,7 @@ import java.text.ParseException;
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {
-    default Member MemberPostDtoToMember(MemberDto.Post postMember) throws ParseException {
-        Member member = new Member();
-        member.setDisplayName(postMember.getDisplayName());
-        member.setEmail(postMember.getEmail());
-        member.setPassword(postMember.getPassword());
-        member.setCreatedAt(postMember.getCreatedAt());
-        return member;
-    }
-
-    default Member MemberPatchDtoToMember(MemberDto.Patch patchMember) throws Exception {
-        Member member = Member.builder()
-                .displayName(patchMember.getDisplayName())
-                .password(patchMember.getPassword())
-                .modifiedAt(patchMember.getModifiedAt())
-                .build();
-
-        return member;
-    }
-
+    Member MemberPostDtoToMember(MemberDto.Post postMember);
+    Member MemberPatchDtoToMember(MemberDto.Patch patchMember);
     MemberDto.User MemberToUser(Member member);
-
 }
