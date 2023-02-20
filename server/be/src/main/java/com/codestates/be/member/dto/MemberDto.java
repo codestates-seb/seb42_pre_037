@@ -1,15 +1,12 @@
 package com.codestates.be.member.dto;
 
 
-import com.codestates.be.tag.dto.TagDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 public class MemberDto {
     @Getter
@@ -22,7 +19,6 @@ public class MemberDto {
         private String password;
         @NotNull
         private String createdAt;
-        private List<TagDto.Request> tags;
     }
     @Getter
     public static class Patch{
@@ -31,7 +27,6 @@ public class MemberDto {
         private String userIntro;
         @NotBlank
         private String modifiedAt;
-        private List<TagDto.Request> tags;
     }
     @Getter
     @AllArgsConstructor
