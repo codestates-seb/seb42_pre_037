@@ -1,7 +1,7 @@
-import Button from '../Components/UI/Button';
-import SearchBar from '../Components/UI/SearchBar';
-import Card from '../Components/UI/Card';
-import Input from '../Components/UI/Input';
+import Button from '../Components/Ui/Button';
+import SearchBar from '../Components/Ui/SearchBar';
+import Card from '../Components/Ui/Card';
+import Input from '../Components/Ui/Input';
 
 function Test() {
   return (
