@@ -59,7 +59,11 @@ public class SecurityConfig {
                             .accessDeniedHandler(new MemberAccessDeniedHandler());
                 })
                 .authorizeHttpRequests(auth->{
-                    auth.anyRequest().permitAll();
+                    auth
+                            .antMatchers(HttpMethod.POST, "/members").permitAll()
+                            .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
+                            .antMatchers(HttpMethod.GET, "/members/**").hasRole("USER")
+                            .anyRequest().permitAll();
                 });
 
         return http.build();
