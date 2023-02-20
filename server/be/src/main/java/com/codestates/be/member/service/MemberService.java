@@ -5,6 +5,9 @@ import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.repository.MemberRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +48,16 @@ public class MemberService {
         return findMember;
     }
 
+    public Page<Member> getMembers(int page, int size){
+        return memberRepository.findAll(PageRequest.of(
+            page,size, Sort.by("memberId").descending()
+        ));
+    }
 
+    public void deleteMember(long memberId){
+        findVerifiedMember(memberId);
+        memberRepository.deleteById(memberId);
+    }
 
     public void verifyMemberExists(String email){
         Optional<Member> findMember = memberRepository.findByEmail(email);
