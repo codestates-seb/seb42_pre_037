@@ -30,10 +30,10 @@ public class Question {
     private String content;
 
     @Column(nullable = false)
-    private Date createdAt;
+    private String createdAt;
 
     @Column(name = "LAST_MODIFIED_AT")
-    private Date modifiedAt;
+    private String modifiedAt;
 
     @Column(nullable = false)
     private long viewCounts;
