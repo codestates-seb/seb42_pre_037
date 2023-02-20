@@ -78,8 +78,11 @@ function Questions() {
           // 3. pager가 바뀔 때 마다 handlerPageClick 함수 호출
           onPageChange={handlerPageClick}
           // 밑 props는 style을 위한 className 지정 해주는 역할
-          containerClassName="bg-blue-400"
-          activeClassName="bg-blue-400"
+          containerClassName="flex space-x-2 p-2 m-4"
+          activeClassName="orange"
+          pageClassName="paginate-btn"
+          previousClassName="paginate-btn"
+          nextClassName="paginate-btn"
         />
       </div>
     </>

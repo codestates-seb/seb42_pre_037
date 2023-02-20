@@ -9,4 +9,10 @@
   .tag {
     @apply bg-[#E1ECF4] text-[#39739C] px-2 py-1 rounded;
   }
+  .orange {
+    @apply bg-[#F48224];
+  }
+  .paginate-btn {
+    @apply p-2 border rounded;
+  }
 }
