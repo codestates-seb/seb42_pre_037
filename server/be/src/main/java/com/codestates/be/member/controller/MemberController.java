@@ -36,13 +36,20 @@ public class MemberController {
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
 
+        Member result = memberService.createdMember(member);
+
         return ResponseEntity.ok().build();
     }
 
     @PatchMapping("/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @RequestBody @Valid MemberDto.Patch patchMember) throws Exception {
-      throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        Member member = mapper.MemberPatchDtoToMember(patchMember);
+        member.setMemberId(memberId);
+
+        Member result = memberService.updateMember(member);
+
+        return ResponseEntity.accepted().build();
     }
 
 

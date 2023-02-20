@@ -26,6 +26,8 @@ public class MemberService {
         verifyMemberExists(member.getEmail());
         member.setPassword(passwordEncoder.encode(member.getPassword()));
 
+        //TODO : 시큐리티 적용 시 권한 부여하는 과정도 추가되어야함.
+
 
         return memberRepository.save(member);
     }
@@ -37,8 +39,6 @@ public class MemberService {
                 .ifPresent(name -> findMember.setDisplayName(name));
         Optional.ofNullable(member.getPassword())
                 .ifPresent(password -> findMember.setPassword(passwordEncoder.encode(password)));
-        Optional.ofNullable(member.getUserIntro())
-                .ifPresent(intro -> findMember.setUserIntro(intro));
         Optional.ofNullable(member.getModifiedAt())
                 .ifPresent(modified -> findMember.setModifiedAt(modified));
 
