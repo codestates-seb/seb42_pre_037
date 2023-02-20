@@ -33,9 +33,6 @@ public class Member {
     @Column(name = "LAST_MODIFIED_AT")
     private String modifiedAt;
 
-    @Column
-    private String userIntro;
-
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();
 
