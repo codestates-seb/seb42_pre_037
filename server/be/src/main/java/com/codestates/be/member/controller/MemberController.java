@@ -36,7 +36,7 @@ public class MemberController {
         this.memberService = memberService;
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/signup") //all
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
 
@@ -45,7 +45,7 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{member-id}")
+    @PatchMapping("/{member-id}") //user(본인)
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @RequestBody @Valid MemberDto.Patch patchMember) throws Exception {
         Member member = mapper.MemberPatchDtoToMember(patchMember);
@@ -56,7 +56,7 @@ public class MemberController {
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping
+    @GetMapping//admin
     public ResponseEntity getUsers(@RequestParam @Positive int page,
                                     @RequestParam @Positive int size){
         Page<Member> memberPage = memberService.getMembers(page-1, size);
@@ -71,7 +71,7 @@ public class MemberController {
         return new ResponseEntity(new MultiResponseEntity<>(users, pageInfo), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{member-id}")
+    @DeleteMapping("/{member-id}") //admin, user(본인)
     public ResponseEntity deleteMember(@PathVariable @Positive long memberId){
         memberService.deleteMember(memberId);
 
