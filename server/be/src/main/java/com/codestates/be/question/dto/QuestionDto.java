@@ -34,8 +34,8 @@ public class QuestionDto {
         private String content;
         private String email;
         private long countAnswer;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
+        private String createdAt;
+        private String modifiedAt;
         private String displayName;
 //        private long viewCounts;    -> viewCount 추가?
     }

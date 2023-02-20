@@ -30,10 +30,10 @@ public class Member {
     private String password;
 
     @Column(nullable = false)
-    private Date createdAt;
+    private String createdAt;
 
     @Column(name = "LAST_MODIFIED_AT")
-    private Date modifiedAt;
+    private String modifiedAt;
 
     @Column
     private String userIntro;
@@ -43,5 +43,4 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
-
 }
