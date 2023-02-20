@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class QuestionDto {
 
@@ -13,7 +11,7 @@ public class QuestionDto {
     public static class Post {
         private String title;
         private String content;
-        private String email;
+        private long memberId;
         private String createdAt;
     }
 
@@ -33,10 +31,10 @@ public class QuestionDto {
         private String title;
         private String content;
         private String email;
-        private long countAnswer;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
         private String displayName;
+        private long countAnswer;
+        private String createdAt;
+        private String modifiedAt;
 //        private long viewCounts;    -> viewCount 추가?
     }
 }
