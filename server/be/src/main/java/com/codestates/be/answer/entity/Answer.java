@@ -22,6 +22,7 @@ public class Answer {
 
     @Column(name = "LAST_MODIFIED_AT")
     private Date modifiedAt;
+    
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
