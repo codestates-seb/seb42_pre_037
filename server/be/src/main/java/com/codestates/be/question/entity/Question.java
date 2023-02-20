@@ -44,4 +44,14 @@ public class Question {
 
     @OneToMany(mappedBy = "question")
     private List<Answer> answers = new ArrayList<>();
+
+    public void setMember(Member member){
+        this.member = member;
+
+        //근데, 등록된 member의 questionList가 "현재 지금 이" question을 담고 있지 않다면,
+        //"현재 지금 이"(a.k.a this) question객체를 들어온 member의 questionList에 추가해준다.
+        if(!member.getQuestions().contains(this)){
+            member.getQuestions().add(this);
+        }
+    }
 }
