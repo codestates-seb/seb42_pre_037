@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useIsLoginStore, useLoginInfoStore } from '../Stores/loginStore';
 import { useUserInfoStore } from '../Stores/userInfoStore';
 
 import iconStack from '../icons/icon_stack.png';
+import Card from '../Components/Ui/Card';
+import Input from '../Components/Ui/Input';
+import Button from '../Components/Ui/Button';
 
 const Login = () => {
+  const navigate = useNavigate();
   const { loginInfo, setLoginInfo } = useLoginInfoStore(state => state);
   const { setIsLogin } = useIsLoginStore(state => state);
   const { setUserInfo } = useUserInfoStore(state => state);
-  const [checkedKeepLogin, setCheckedKeepLogin] = useState(false);
+  const [setCheckedKeepLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Input 정보 처리
   const handleInputValue = key => e => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
+
+  // 로그인 요청 처리
   const loginRequestHandler = () => {
     const { email, password } = loginInfo;
     if (!email || !password) {
@@ -24,16 +33,29 @@ const Login = () => {
     setErrorMessage('');
 
     axios
-      .post('https://localhost:4000/login', { loginInfo, checkedKeepLogin })
+      .post('https://localhost:4000/login', { loginInfo })
       .then(res => {
         setIsLogin(true);
         setUserInfo(res.data);
+        // data 확인
+        console.log(res.data);
+        // local storage에 token 저장
+        localStorage.setItem('token', res.data.jwt);
+        // 로그인 성공시 홈페이지 이동
+        navigate('/');
       })
       .catch(err => {
         if (err.response.status === 401) {
           setErrorMessage('로그인에 실패했습니다.');
         }
       });
+
+    // 중복 로그인 해결
+    useEffect(() => {
+      if (localStorage.getItem('token')) {
+        navigate('/');
+      }
+    }, []);
 
     // 오류 해결 코드
     setCheckedKeepLogin(false);
@@ -52,25 +74,13 @@ const Login = () => {
         />
       </div>
       <div>this is Login page</div>
-      <div className="formContainer bg-white shadow-md rounded p-6 mb-6 mx-auto">
-        <form className="login-form">
-          <div className="email-set mb-4">
-            <label
-              className="email-label block text-left text-gray-700 text-sm font-bold mb-2"
-              htmlFor="emailInput"
-            >
-              Email
-            </label>
-            <div>
-              <input
-                className="email-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="emailInput"
-                type="text"
-                onChange={handleInputValue('email')}
-                required
-              />
-            </div>
-          </div>
+      <Card className="formContainer bg-white shadow-md rounded p-6 mb-6 mx-auto">
+        <form className="loginForm">
+          <Input
+            label="Email"
+            id="emailInput"
+            onChange={handleInputValue('email')}
+          />
           <div className="password-set mb-6">
             <div className="password-label-set flex flex-row justify-between">
               <label
@@ -79,12 +89,12 @@ const Login = () => {
               >
                 Password
               </label>
-              <a
+              <Link
                 className="inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
-                href="https://www.naver.com"
+                to="https://www.naver.com"
               >
                 Forgot Password?
-              </a>
+              </Link>
             </div>
             <div>
               <input
@@ -97,7 +107,7 @@ const Login = () => {
             </div>
           </div>
           <div className="flex items-center justify-between">
-            <button
+            <Button
               className="login-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="button"
               onClick={() => {
@@ -106,10 +116,10 @@ const Login = () => {
               }}
             >
               Log in
-            </button>
+            </Button>
           </div>
         </form>
-      </div>
+      </Card>
     </div>
   );
 };

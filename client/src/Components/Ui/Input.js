@@ -1,10 +1,19 @@
-function Input({ id, type = 'text', label, placeholder, disabled, className }) {
+function Input({
+  id,
+  type = 'text',
+  label,
+  placeholder,
+  disabled,
+  className,
+  ...rest
+}) {
   return (
     <div className={`flex flex-col w-full ${className}`}>
       <label htmlFor={id} className="mb-2 font-medium text-gray-700">
         {label}
       </label>
       <input
+        {...rest}
         id={id}
         type={type}
         placeholder={placeholder}
