@@ -2,13 +2,13 @@ package com.codestates.be.question.controller;
 
 import com.codestates.be.question.dto.QuestionDto;
 import com.codestates.be.question.entity.Question;
+import com.codestates.be.question.mapper.QuestionMapper;
 import com.codestates.be.question.service.QuestionService;
 import com.codestates.be.responseDto.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Positive;
@@ -22,15 +22,18 @@ import java.util.List;
 public class QuestionController {
 
     private final QuestionService questionService;
-    public QuestionController(QuestionService questionService) {
+    private final QuestionMapper mapper;
+    public QuestionController(QuestionService questionService,
+                              QuestionMapper mapper) {
         this.questionService = questionService;
+        this.mapper = mapper;
     }
 
     @PostMapping    // 질문 등록
     public ResponseEntity postQuestion(@RequestBody QuestionDto.Post postDto) {
 
-//        Question createdQuestion =  questionService.createQuestion(mapper.questionPostDtoToQuestion(postDto));
-//        QuestionDto.Response response = mapper.questionToQuestionResponseDto(createdQuestion);
+        Question createdQuestion =  questionService.createQuestion(mapper.questionPostDtoToQuestion(postDto));
+        QuestionDto.Response response = mapper.questionToQuestionResponseDto(createdQuestion);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -40,8 +43,8 @@ public class QuestionController {
                                         @PathVariable("question-id") Long questionId) {
 
         patchDto.setQuestionId(questionId);
-//        Question updatedQuestion = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(questionPatchDto));
-//        QuestionDto.Response response = mapper.questionToQuestionResponseDto(updatedQuestion);
+        Question updatedQuestion = questionService.updateQuestion(mapper.questionPatchDtoToQuestion(patchDto));
+        QuestionDto.Response response = mapper.questionToQuestionResponseDto(updatedQuestion);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
@@ -49,8 +52,8 @@ public class QuestionController {
     @GetMapping("/{question-id}")    //질문 조회
     public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId) {
 
-//        Question foundQuestion = questionService.findQuestion(questionId);
-//        QuestionDto.Response response = mapper.questionToQuestionResponseDto(foundQuestion);
+        Question foundQuestion = questionService.findQuestion(questionId);
+        QuestionDto.Response response = mapper.questionToQuestionResponseDto(foundQuestion);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

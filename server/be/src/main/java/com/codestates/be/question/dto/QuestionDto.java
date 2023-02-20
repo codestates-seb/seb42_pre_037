@@ -13,7 +13,7 @@ public class QuestionDto {
     public static class Post {
         private String title;
         private String content;
-        private String email;
+        private long memberId;
         private String createdAt;
     }
 
@@ -33,10 +33,10 @@ public class QuestionDto {
         private String title;
         private String content;
         private String email;
+        private String displayName;
         private long countAnswer;
         private String createdAt;
         private String modifiedAt;
-        private String displayName;
 //        private long viewCounts;    -> viewCount 추가?
     }
 }
