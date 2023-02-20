@@ -5,11 +5,10 @@ import ReactPaginate from 'react-paginate';
 
 import QuestionsItem from '../Components/QuestionsItem';
 import Button from '../Components/Ui/Button';
-import dummyData from '../dummyData';
 
 function Questions() {
-  const [questions, setQuestions] = useState(dummyData.data);
-  const [totalQuestion, setTotalElements] = useState(dummyData.pageInfo);
+  const [questions, setQuestions] = useState([]);
+  const [totalQuestion, setTotalElements] = useState([]);
   // 1. currentPage 초기값은 0으로 설정
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -21,8 +20,11 @@ function Questions() {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `http://test:8080/questions?page=${currentPage}&size=${PER_PAGE}`,
+          `https://8e4c-14-6-64-237.jp.ngrok.io/questions?page=${
+            currentPage + 1
+          }&size=${PER_PAGE}`,
         );
+        console.log(1, response);
         setQuestions(response.data);
         setTotalElements(response.pageInfo);
       } catch (error) {
