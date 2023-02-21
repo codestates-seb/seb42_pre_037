@@ -10,16 +10,29 @@ function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const register = () => {
-    console.log({ username, email, password });
+    //
+    if (!username || !email || !password) {
+      setErrorMessage('아이디와 비밀번호를 입력하세요');
+      console.log(errorMessage);
+      return;
+    }
+
+    const date = new Date();
+    const createdAt = `${date.getFullYear()} ${
+      date.getMonth() + 1
+    } ${date.getDate()} ${date.getHours()} ${date.getMinutes()}`;
+    console.log(createdAt);
+
     axios
       .post('https://73f1-14-6-64-237.jp.ngrok.io/members/signup', {
         displayName: username,
         email,
         password,
-        createdAt: '2023 02 20 01 53',
+        createdAt,
       })
       .then(res => {
         // Handle success.

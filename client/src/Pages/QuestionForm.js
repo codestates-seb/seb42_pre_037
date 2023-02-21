@@ -1,4 +1,4 @@
-import AnswersImg from '../icons/AnswersImg.png';
+import AnswersImg from '../Components/icons/AnswersImg.png';
 import TextEditor from '../Components/Ui/TextEditor';
 
 function QuestionForm() {

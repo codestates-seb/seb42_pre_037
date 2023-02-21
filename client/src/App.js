@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import { useEffect } from 'react';
-// import axios from 'axios';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 import Questions from './Pages/Questions';
 import Question from './Pages/Question';
@@ -12,34 +12,37 @@ import Test from './Pages/Test';
 
 import Mainlayout from './Components/layouts/Mainlayout';
 
-// import { useIsLoginStore } from './Stores/loginStore';
-// import { useUserInfoStore } from './Stores/userInfoStore';
+import { useIsLoginStore } from './Stores/loginStore';
+import { useUserInfoStore } from './Stores/userInfoStore';
 
 function App() {
-  // const { isLogin, setIsLogin } = useIsLoginStore(state => state);
-  // const { userInfo, setUserInfo } = useUserInfoStore(state => state);
+  const { setIsLogin } = useIsLoginStore(state => state);
+  const { userInfo, setUserInfo } = useUserInfoStore(state => state);
 
-  // console.log(isLogin);
-  // console.log(userInfo);
+  const authHandler = () => {
+    console.log(localStorage.getItem('token'));
+    axios
+      .get('https://73f1-14-6-64-237.jp.ngrok.io/members/userInfo', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then(res => {
+        setIsLogin(true);
+        setUserInfo(res.data);
+        console.log('success: ', res.data);
+        console.log(userInfo);
+      })
+      .catch(err => {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      });
+  };
 
-  // const authHandler = () => {
-  //   axios
-  //     .get('https://localhost:4000/userinfo')
-  //     .then(res => {
-  //       setIsLogin(true);
-  //       setUserInfo(res.data);
-  //       console.log('success: ', res.data);
-  //     })
-  //     .catch(err => {
-  //       if (err.response.status === 401) {
-  //         console.log(err.response.data);
-  //       }
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   authHandler();
-  // }, []);
+  useEffect(() => {
+    authHandler();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -51,7 +54,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="test" element={<Test />} />
-        <Route path="questions/ask" element={<QuestionForm />} />
+        <Route path="question/ask" element={<QuestionForm />} />
       </Routes>
     </BrowserRouter>
   );
