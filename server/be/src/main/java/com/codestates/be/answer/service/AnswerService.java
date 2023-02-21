@@ -6,6 +6,8 @@ import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.answer.entity.Answer;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AnswerService {
 
@@ -30,7 +32,7 @@ public class AnswerService {
     }
 
     // 답변 전체 조회
-    public Answer findAnswers() {
+    public List<Answer> findAnswers() {
 
         return null;
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
@@ -39,7 +41,6 @@ public class AnswerService {
     // 답변 삭제
     public void deleteAnswer(long answerId) {
 
-        return null;
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 }
