@@ -5,13 +5,17 @@ function Input({
   placeholder,
   disabled,
   className,
+  children,
   ...rest
 }) {
   return (
     <div className={`flex flex-col w-full ${className}`}>
-      <label htmlFor={id} className="mb-2 font-medium text-gray-700">
-        {label}
-      </label>
+      <div className="flex flex-row justify-between">
+        <label htmlFor={id} className="mb-2 font-medium text-gray-700">
+          {label}
+        </label>
+        {children}
+      </div>
       <input
         {...rest}
         id={id}

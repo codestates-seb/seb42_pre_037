@@ -15,16 +15,16 @@ function SignUp() {
   const register = () => {
     console.log({ username, email, password });
     axios
-      .post('http://localhost:1337/api/auth/local/register', {
-        username,
+      .post('https://73f1-14-6-64-237.jp.ngrok.io/members/signup', {
+        displayName: username,
         email,
         password,
+        createdAt: '2023 02 20 01 53',
       })
       .then(res => {
         // Handle success.
         console.log('Well done!');
         console.log('User profile', res.data);
-        console.log('User token', res.data.jwt);
         navigate('/login');
       })
       .catch(err => {
@@ -35,9 +35,13 @@ function SignUp() {
 
   return (
     <div className="content">
+      <div>
+        <h1>Join the Stack Overflow community</h1>
+      </div>
       <Card className="formContainer">
         <form className="signupForm">
           <Input
+            className="usernameInput"
             label="Display name"
             id="nameInput"
             onChange={e => setUsername(e.target.value)}
