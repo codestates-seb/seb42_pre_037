@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
+
 function QuestionsItem({ question }) {
   return (
     <li className="border-b-2 p-5">
       <div>{question.count_answer} answer</div>
 
       <div className="mb-1">
-        <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
+        <Link to="/question" state={{ question }}>
+          <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
+        </Link>
         <p>{question.content}</p>
       </div>
 

@@ -2,7 +2,8 @@ export const dummyQuestions = {
   data: [
     {
       questionId: 1,
-      title: 'How can I resolve the segmentation fault?',
+      title:
+        'How can I resolve the segmentation fault?How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
       email: 'username',
