@@ -1,8 +1,6 @@
 package com.codestates.be.answer.mapper;
 
-import com.codestates.be.answer.dto.AnswerPatchDto;
-import com.codestates.be.answer.dto.AnswerPostDto;
-import com.codestates.be.answer.dto.AnswerResponseDto;
+import com.codestates.be.answer.dto.AnswerDto;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.question.entity.Question;
@@ -12,7 +10,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
-    default Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto){
+    default Answer answerPostDtoToAnswer(AnswerDto.Post answerPostDto){
         Answer answer = new Answer();
 
         Member member = new Member();
@@ -29,10 +27,10 @@ public interface AnswerMapper {
         return answer;
     };
     // DTO -> Entity
-    Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
+    Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
     // Entity -> DTO
-    default AnswerResponseDto answerToAnswerResponseDto(Answer answer){
-        AnswerResponseDto answerResponseDto = new AnswerResponseDto(
+    default AnswerDto.Response answerToAnswerResponseDto(Answer answer){
+        AnswerDto.Response answerResponseDto = new AnswerDto.Response(
                 answer.getContent(),
                 answer.getMember().getDisplayName(),//displayName;
                 answer.getAnswerId(),
@@ -42,5 +40,5 @@ public interface AnswerMapper {
         return answerResponseDto;
     };
 
-    List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers);
+    List<AnswerDto.Response> answersToAnswerResponseDtos(List<Answer> answers);
 }

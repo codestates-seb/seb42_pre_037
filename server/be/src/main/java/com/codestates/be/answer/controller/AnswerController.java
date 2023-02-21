@@ -1,9 +1,7 @@
 package com.codestates.be.answer.controller;
 
 
-import com.codestates.be.answer.dto.AnswerPatchDto;
-import com.codestates.be.answer.dto.AnswerPostDto;
-import com.codestates.be.answer.dto.AnswerResponseDto;
+import com.codestates.be.answer.dto.AnswerDto;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
@@ -33,8 +31,9 @@ public class AnswerController {
     // 답변 등록
     @PostMapping("/{question-id}")
     public ResponseEntity postAnswer(@PathVariable("question-id") @Positive long questionId,
-                                     @Valid @RequestBody AnswerPostDto answerDto){
+                                     @Valid @RequestBody AnswerDto.Post answerDto){
         answerDto.setQuestionId(questionId);
+
 
         Answer answer = mapper.answerPostDtoToAnswer(answerDto);
         Answer response = answerService.createAnswer(answer);
@@ -46,7 +45,7 @@ public class AnswerController {
     // 답변 수정
     @PatchMapping("/{answer-id}")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") @Positive long answerId,
-                                      @Valid @RequestBody AnswerPatchDto answerDto){
+                                      @Valid @RequestBody AnswerDto.Patch answerDto){
         answerDto.setAnswerId(answerId);
 
         Answer answer = mapper.answerPatchDtoToAnswer(answerDto);
@@ -63,7 +62,7 @@ public class AnswerController {
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
         List<Answer> answers = answerService.findAnswers();
 
-        List<AnswerResponseDto> response =
+        List<AnswerDto.Response> response =
                 answers.stream()
                         .map(answer -> mapper.answerToAnswerResponseDto(answer))
                         .collect(Collectors.toList());

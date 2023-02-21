@@ -36,6 +36,8 @@ public class QuestionController {
 
         Question createdQuestion =  questionService.createQuestion(mapper.questionPostDtoToQuestion(postDto));
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(createdQuestion);
+        //question member 아이디만 설정된 상태. -> JPA 트랜잭션 -> 불러오기 member. -> 저장 ->  (entitymanager 닫힘(flush) -> 불러올 때)
+        //
 
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.CREATED);
     }
@@ -58,8 +60,8 @@ public class QuestionController {
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(foundQuestion);
 
         //질문자 이메일, 이름 조회
-//        response.setEmail(foundQuestion.getMember().getEmail());
-//        response.setDisplayName(foundQuestion.getMember().getDisplayName());
+        //  response.setEmail(foundQuestion.getMember().getEmail());
+        //        response.setDisplayName(foundQuestion.getMember().getDisplayName());
 
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
