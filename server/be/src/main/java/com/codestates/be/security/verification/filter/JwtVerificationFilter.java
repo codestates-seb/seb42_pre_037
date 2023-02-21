@@ -44,9 +44,10 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
 
 
-
-
             setSecurityContext(claims);
+
+
+
         }catch (SignatureException se){
             request.setAttribute("exception", se);
         }catch (ExpiredJwtException ee){

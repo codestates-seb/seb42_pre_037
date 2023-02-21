@@ -1,6 +1,7 @@
 package com.codestates.be.security;
 
 
+import com.codestates.be.member.mapper.MemberMapper;
 import com.codestates.be.security.authentication.filter.JwtAuthenticationFilter;
 import com.codestates.be.security.authentication.handler.MemberAuthenticationFailureHandler;
 import com.codestates.be.security.authentication.handler.MemberAuthenticationSuccessfulHandler;
@@ -33,10 +34,12 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfig {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtil authorityUtil;
+    private final MemberMapper mapper;
 
-    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtil authorityUtil) {
+    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtil authorityUtil, MemberMapper mapper) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtil = authorityUtil;
+        this.mapper = mapper;
     }
 
     @Bean
@@ -95,7 +98,7 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager =
                     builder.getSharedObject(AuthenticationManager.class);
 
-            JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtTokenizer, authenticationManager);
+            JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtTokenizer, authenticationManager, mapper);
             customFilter.setFilterProcessesUrl("/auth/login");
             customFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessfulHandler());
             customFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());

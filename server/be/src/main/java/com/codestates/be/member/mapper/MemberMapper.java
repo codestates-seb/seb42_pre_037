@@ -3,8 +3,11 @@ package com.codestates.be.member.mapper;
 import com.codestates.be.member.dto.MemberDto;
 import com.codestates.be.member.entity.Member;
 import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
 import java.util.List;
+
 
 @Mapper(componentModel = "spring")
 public interface MemberMapper {

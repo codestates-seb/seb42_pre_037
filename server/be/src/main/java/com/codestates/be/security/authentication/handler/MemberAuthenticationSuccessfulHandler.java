@@ -18,6 +18,8 @@ public class MemberAuthenticationSuccessfulHandler implements AuthenticationSucc
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
         Member member = (Member) authentication.getPrincipal();
+
+
         log.info("# 로그인 인증 성공 : {}", member.getEmail());
     }
 }

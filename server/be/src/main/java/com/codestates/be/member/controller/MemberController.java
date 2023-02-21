@@ -55,6 +55,7 @@ public class MemberController {
 
         return ResponseEntity.accepted().build();
     }
+
     @GetMapping("/{member-id}")//TODO: 자신만의 정보를 열람할 수 있도록 수정
     public ResponseEntity getUser(@PathVariable("member-id") @Positive int memberId){
         Member member = memberService.findVerifiedMember(memberId);
