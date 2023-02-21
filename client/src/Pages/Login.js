@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useIsLoginStore, useLoginInfoStore } from '../Stores/loginStore';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
-import iconStack from '../icons/icon_stack.png';
+import iconStack from '../Components/icons/icon_stack.png';
 import Card from '../Components/Ui/Card';
 import Input from '../Components/Ui/Input';
 import Button from '../Components/Ui/Button';
