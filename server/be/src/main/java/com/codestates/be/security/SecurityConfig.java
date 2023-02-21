@@ -63,9 +63,6 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-                            .antMatchers(HttpMethod.POST, "/members").permitAll()
-                            .antMatchers(HttpMethod.GET, "/members").hasRole("ADMIN")
-                            .antMatchers(HttpMethod.GET, "/members/**").hasRole("USER")
                             .anyRequest().permitAll();
                 });
 
@@ -109,5 +106,4 @@ public class SecurityConfig {
                     .addFilterAfter(verificationFilter, JwtAuthenticationFilter.class);
         }
     }
-
 }

@@ -1,5 +1,6 @@
 package com.codestates.be.security.verification.filter;
 
+import com.codestates.be.member.entity.Member;
 import com.codestates.be.security.jwt.JwtTokenizer;
 import com.codestates.be.security.util.CustomAuthorityUtil;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -37,11 +38,7 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         try{
             Map<String, Object> claims = verifyJws(request);
 
-            log.info("HTTP Request Path : {}", request.getRequestURI());
-            if(request.getRequestURI().startsWith("/members")){
-                log.info("PATH 캐칭");
-            }
-
+            verifyPath(request, claims); //권한 없는 곳에 접근하는지.
 
 
             setSecurityContext(claims);
@@ -72,7 +69,11 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         return claims;
     }
 
-//    public
+    public void verifyPath(HttpServletRequest request, Map<String, Object> claims){
+        if(request.getRequestURI().startsWith("/members")){
+            log.info("PATH 캐칭");
+        }
+    }
 
     public void setSecurityContext(Map<String , Object> claims){
         String username = (String) claims.get("username");
