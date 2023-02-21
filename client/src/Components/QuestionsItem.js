@@ -4,7 +4,7 @@ function QuestionsItem({ question }) {
       <div>{question.count_answer} answer</div>
 
       <div className="mb-1">
-        <h3 className="h3-blue">{question.title}</h3>
+        <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
         <p>{question.content}</p>
       </div>
 

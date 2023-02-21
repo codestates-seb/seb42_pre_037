@@ -1,7 +1,5 @@
-import Answers from "../Components/Answers";
-
 function Question() {
-  return <Answers/>;
+  return <div />;
 }
 
 export default Question;

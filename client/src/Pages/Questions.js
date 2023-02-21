@@ -22,7 +22,7 @@ function Questions() {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `https://13b0-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
+          `https://6854-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
         );
         setQuestions(response.data.data);
         setTotalElements(response.data.pageInfo.totalElements);
