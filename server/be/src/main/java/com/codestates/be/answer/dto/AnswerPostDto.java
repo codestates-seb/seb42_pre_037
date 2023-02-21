@@ -16,7 +16,7 @@ public class AnswerPostDto {
     //어떤 질문에 달리는지에 대한 단서
 
     @NotNull
-    private long memberId;
+    private long memberId; //작성자의 아이디
 
     @NotEmpty(message = "본문은 공백이 아니어야 합니다.")
     private String content;

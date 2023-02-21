@@ -36,4 +36,27 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
+
+
+
+
+
+    public void setMember(Member member){
+        this.member = member;
+        //Member를 Answer에 추가했음.
+
+        //들어온 member의 answerlist에 이 answer 객체가 포함되어있지 않다면!
+        if(!member.getAnswers().contains(this)){
+            //이 로직을 수행
+            member.getAnswers().add(this);
+        }
+    }
+
+    public void setQuestion(Question question){
+        this.question = question;
+        if(!question.getAnswers().contains(this)){
+            question.getAnswers().add(this);
+        }
+    }
+
 }

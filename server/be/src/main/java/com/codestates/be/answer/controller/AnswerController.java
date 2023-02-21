@@ -5,7 +5,7 @@ import com.codestates.be.answer.dto.AnswerPatchDto;
 import com.codestates.be.answer.dto.AnswerPostDto;
 import com.codestates.be.answer.dto.AnswerResponseDto;
 import com.codestates.be.answer.entity.Answer;
-import com.codestates.be.answer.mapper.AnswerMappers;
+import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
-    private final AnswerMappers mapper;
+    private final AnswerMapper mapper;
 
     // mapper DI
-    public AnswerController(AnswerService answerService, AnswerMappers mapper) {
+    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
         this.answerService = answerService;
         this.mapper = mapper;
     }
