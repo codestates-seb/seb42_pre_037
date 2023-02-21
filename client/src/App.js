@@ -6,10 +6,15 @@ import QuestionForm from './Pages/QuestionForm';
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Test from './Pages/Test';
+import Mainlayout from './Components/layouts/Mainlayout';
+
 
 function App() {
   return (
-    <BrowserRouter>
+   
+    
+   <BrowserRouter>  
+    <Mainlayout/>
       <Routes>
         <Route path="/" element={<Questions />} />
         <Route path="question" element={<Question />} />
@@ -19,6 +24,7 @@ function App() {
         <Route path="test" element={<Test />} />
       </Routes>
     </BrowserRouter>
+   
   );
 }
 

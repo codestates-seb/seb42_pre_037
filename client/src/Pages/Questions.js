@@ -4,7 +4,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 
 import QuestionsItem from '../Components/QuestionsItem';
-import Button from '../Components/UI/Button';
+import Button from '../Components/Ui/Button';
 import dummyData from '../dummyData';
 
 function Questions() {
