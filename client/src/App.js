@@ -10,6 +10,8 @@ import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Test from './Pages/Test';
 
+import Mainlayout from './Components/layouts/Mainlayout';
+
 // import { useIsLoginStore } from './Stores/loginStore';
 // import { useUserInfoStore } from './Stores/userInfoStore';
 
@@ -41,6 +43,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Mainlayout />
       <Routes>
         <Route path="/" element={<Questions />} />
         <Route path="question" element={<Question />} />
@@ -48,7 +51,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="test" element={<Test />} />
-        <Route path='questions/ask' element={<QuestionForm/>} />
+        <Route path="questions/ask" element={<QuestionForm />} />
       </Routes>
     </BrowserRouter>
   );
