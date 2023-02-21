@@ -4,22 +4,17 @@ import com.codestates.be.answer.dto.AnswerPatchDto;
 import com.codestates.be.answer.dto.AnswerPostDto;
 import com.codestates.be.answer.dto.AnswerResponseDto;
 import com.codestates.be.answer.entity.Answer;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class AnswerMapper {
+import java.util.List;
 
+@Mapper(componentModel = "spring")
+public interface AnswerMapper {
+    Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto);
     // DTO -> Entity
-    public Answer answerPostDtoToAnswer(AnswerPostDto answerPostDto){
-        return null;
-    }
-
-    // DTO -> Entity
-    public Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto){
-        return null;
-    }
+    Answer answerPatchDtoToAnswer(AnswerPatchDto answerPatchDto);
     // Entity -> DTO
-    public AnswerResponseDto answerToAnswerResponseDto(Answer answer) {
-        return null;
-    }
+    AnswerResponseDto answerToAnswerResponseDto(Answer answer);
+
+    List<AnswerResponseDto> answersToAnswerResponseDtos(List<Answer> answers);
 }

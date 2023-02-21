@@ -1,13 +1,11 @@
 package com.codestates.be.answer.controller;
 
 
-import com.codestates.be.advice.BuissnessLogicException;
-import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.answer.dto.AnswerPatchDto;
 import com.codestates.be.answer.dto.AnswerPostDto;
 import com.codestates.be.answer.dto.AnswerResponseDto;
 import com.codestates.be.answer.entity.Answer;
-import com.codestates.be.answer.mapper.AnswerMapper;
+import com.codestates.be.answer.mapper.AnswerMappers;
 import com.codestates.be.answer.service.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +22,10 @@ import java.util.stream.Collectors;
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
-    private final AnswerMapper mapper;
+    private final AnswerMappers mapper;
 
     // mapper DI
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+    public AnswerController(AnswerService answerService, AnswerMappers mapper) {
         this.answerService = answerService;
         this.mapper = mapper;
     }
@@ -60,7 +58,7 @@ public class AnswerController {
 
     // 답변 전체 조회
 
-    /* 에러 나서 임시 주석 처리
+//     에러 나서 임시 주석 처리
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
         List<Answer> answers = answerService.findAnswers();
@@ -74,7 +72,6 @@ public class AnswerController {
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
-     */
 
     // 답변 삭제
     @DeleteMapping("/{answer-id}")
