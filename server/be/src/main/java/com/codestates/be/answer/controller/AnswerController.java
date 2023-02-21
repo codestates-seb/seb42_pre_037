@@ -35,12 +35,10 @@ public class AnswerController {
                                      @Valid @RequestBody AnswerDto.Post answerDto){
         answerDto.setQuestionId(questionId);
 
-
         Answer answer = mapper.answerPostDtoToAnswer(answerDto);
         Answer response = answerService.createAnswer(answer);
 
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.CREATED);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
     // 답변 수정
@@ -54,12 +52,9 @@ public class AnswerController {
         AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
 
         return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.OK);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
     // 답변 전체 조회
-
-//     에러 나서 임시 주석 처리
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
         List<Answer> answers = answerService.findAnswers(questionId);
@@ -67,7 +62,6 @@ public class AnswerController {
         List<AnswerDto.Response> response = mapper.answersToAnswerResponseDtos(answers);
 
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
 
@@ -78,6 +72,5 @@ public class AnswerController {
         answerService.deleteAnswer(answerId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 }

@@ -19,19 +19,12 @@ public class AnswerService {
     }
     // 답변 등록
     public Answer createAnswer(Answer answer) {
-
-        //Answer createdAnswer = answer;
-        //return createdAnswer;
-
         Answer response = answerRepository.save(answer);
         return response;
     }
 
     // 답변 수정
     public Answer updateAnswer(Answer answer) {
-
-        //Answer updatedAnswer = answer;
-        //return updatedAnswer;
 
         // 답변 있는지 확인
         Answer existAnswer = findVerifiedExistAnswer(answer.getAnswerId());
@@ -55,7 +48,6 @@ public class AnswerService {
 
     // 답변 삭제
     public void deleteAnswer(long answerId) {
-
         Answer existAnswer = findVerifiedExistAnswer(answerId);
         answerRepository.delete(existAnswer);
     }
