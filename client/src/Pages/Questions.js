@@ -1,8 +1,8 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { BiFilter } from 'react-icons/bi';
 import axios from 'axios';
 import ReactPaginate from 'react-paginate';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import QuestionsItem from '../Components/QuestionsItem';
 import Button from '../Components/Ui/Button';
@@ -15,20 +15,17 @@ function Questions() {
 
   const PER_PAGE = 10;
   // 2. page 갯수 계산
-  const pageCount = Math.ceil(totalQuestion.totalElements / PER_PAGE);
+  const pageCount = Math.ceil(totalQuestion / PER_PAGE);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `https://8e4c-14-6-64-237.jp.ngrok.io/questions?page=${
-            currentPage + 1
-          }&size=${PER_PAGE}`,
+          `https://13b0-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
         );
-        console.log(1, response);
-        setQuestions(response.data);
-        setTotalElements(response.pageInfo);
+        setQuestions(response.data.data);
+        setTotalElements(response.data.pageInfo.totalElements);
       } catch (error) {
         console.error(error);
       }
@@ -42,15 +39,16 @@ function Questions() {
     setCurrentPage(selected);
   };
 
-  const handlerChangeQuestion = ()=> {
-    navigate('/question');
-
-}
+  const handlerChangeQuestion = () => {
+    navigate('/question/ask');
+  };
   return (
     <>
       <div className="flex items-end justify-between p-5">
         <h1 className="text-4xl">All Questions</h1>
-        <Button onClick={handlerChangeQuestion} size="large">Ask Question</Button>
+        <Button onClick={handlerChangeQuestion} size="large">
+          Ask Question
+        </Button>
       </div>
 
       <div className="flex items-end justify-between p-5 border-b-2">
