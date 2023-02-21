@@ -59,6 +59,8 @@ public class AnswerController {
     }
 
     // 답변 전체 조회
+
+    /* 에러 나서 임시 주석 처리
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
         List<Answer> answers = answerService.findAnswers();
@@ -71,6 +73,8 @@ public class AnswerController {
         return new ResponseEntity<>(response, HttpStatus.OK);
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
+
+     */
 
     // 답변 삭제
     @DeleteMapping("/{answer-id}")
