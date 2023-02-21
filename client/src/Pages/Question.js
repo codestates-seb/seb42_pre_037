@@ -13,7 +13,7 @@ function Question() {
     <div className="flex items-start justify-between p-5">
       <h1 className="text-3xl w-4/5">{question.state.question.title}</h1>
 
-      <Button onClick={handlerChangeQuestion} size="medium">
+      <Button onClick={handlerChangeQuestion} size="large">
         Ask Question
       </Button>
     </div>
