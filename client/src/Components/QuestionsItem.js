@@ -1,11 +1,16 @@
+import { Link } from 'react-router-dom';
+import { getTimeDiffString } from '../utils';
+
 function QuestionsItem({ question }) {
   return (
-    <li className="border-b-2 p-5">
+    <li className=" border-b-2 p-5">
       <div>{question.count_answer} answer</div>
 
       <div className="mb-1">
-        <h3 className="h3-blue">{question.title}</h3>
-        <p>{question.content}</p>
+        <Link to="/question" state={{ question }}>
+          <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
+        </Link>
+        <p className=" line-clamp-2">{question.content}</p>
       </div>
 
       <div className="flex items-end justify-end">
@@ -17,7 +22,10 @@ function QuestionsItem({ question }) {
           ))}
         </ul> */}
 
-        <div>{question.displayName}</div>
+        <p className="h-blue text-sm mr-1">{question.displayName}</p>
+        <p className="text-sm text-gray-400">
+          {getTimeDiffString(question.createAt)}
+        </p>
       </div>
     </li>
   );

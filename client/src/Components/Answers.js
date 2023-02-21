@@ -1,7 +1,5 @@
-
-
 function Answers() {
-  return ( <div/>)
+  return <div />;
 }
 
 export default Answers;
