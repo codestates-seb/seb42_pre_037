@@ -40,10 +40,11 @@ function Question() {
           Ask Question
         </Button>
       </div>
-      <div className="flex space-x-3">
-        <p>Asked {getTimeDiffString(question.createAt)}</p>
-        <p>Modified {}</p>
+      <div className="flex space-x-2 py-3 border-b">
+        <p className="text-gray-400 ">Asked</p>
+        <p>{getTimeDiffString(question.createAt)}</p>
       </div>
+      <div>{question.content}</div>
     </div>
   );
 }
