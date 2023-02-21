@@ -5,6 +5,7 @@ import com.codestates.be.answer.dto.AnswerDto;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
+import com.codestates.be.responseDto.SingleResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -50,8 +51,9 @@ public class AnswerController {
 
         Answer answer = mapper.answerPatchDtoToAnswer(answerDto);
         Answer response = answerService.updateAnswer(answer);
+        AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.OK);
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 
@@ -60,14 +62,11 @@ public class AnswerController {
 //     에러 나서 임시 주석 처리
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
-        List<Answer> answers = answerService.findAnswers();
+        List<Answer> answers = answerService.findAnswers(questionId);
 
-        List<AnswerDto.Response> response =
-                answers.stream()
-                        .map(answer -> mapper.answerToAnswerResponseDto(answer))
-                        .collect(Collectors.toList());
+        List<AnswerDto.Response> response = mapper.answersToAnswerResponseDtos(answers);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
 //        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 

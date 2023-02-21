@@ -8,6 +8,7 @@ import com.codestates.be.answer.repository.AnswerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AnswerService {
@@ -41,8 +42,14 @@ public class AnswerService {
 
     // 답변 전체 조회
     public List<Answer> findAnswers(long questionId) {
+        //모든 답변을 조회한다.
+        List<Answer> answerList  = answerRepository.findAll();
 
-        List<Answer> response = findVerifiedExistAnswer(questionId);
+        //스트림 객체의 filter() 메서드를 사용하여 요소를 걸러냄.
+        List<Answer> response = answerList.stream()
+                .filter(answer -> answer.getQuestion().getQuestionId() == questionId)
+                .collect(Collectors.toList());
+
         return response;
     }
 
