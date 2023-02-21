@@ -57,6 +57,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="test" element={<Test />} />
+        <Route path='questions/ask' element={<QuestionForm/>} />
       </Routes>
     </BrowserRouter>
   );
