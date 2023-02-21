@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../Ui/Button';
+import HeaderLogo from '../icons/HeaderLogo.png';
 
 function Header() {
   return (
@@ -9,7 +10,7 @@ function Header() {
           <div className="flex items-center justify-between h-9 ">
             <div className=" flex items-center">
               <a className="flex-shrink-0" href="/">
-                <img className="w-8 h-8" alt="Workflow" />
+                <img className="w-8 h-8" alt="Workflow" src={HeaderLogo}/>
               </a>
               <div className="hidden md:block">
                 <div className="flex items-baseline ml-2 space-x-4">

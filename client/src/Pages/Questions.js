@@ -40,7 +40,7 @@ function Questions() {
   };
 
   const handlerChangeQuestion = () => {
-    navigate('/question');
+    navigate('/question/ask');
   };
   return (
     <>
