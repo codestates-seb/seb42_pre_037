@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import QuestionsItem from '../Components/QuestionsItem';
 import Button from '../Components/Ui/Button';
+import { dummyQuestions } from '../dummyData';
 
 function Questions() {
   const [questions, setQuestions] = useState([]);
@@ -28,6 +29,8 @@ function Questions() {
         setTotalElements(response.data.pageInfo.totalElements);
       } catch (error) {
         console.error(error);
+        setQuestions(dummyQuestions.data);
+        setTotalElements(10);
       }
     };
     fetchQuestions();

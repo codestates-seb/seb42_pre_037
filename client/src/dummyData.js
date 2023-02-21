@@ -1,4 +1,4 @@
-const questions = {
+export const dummyQuestions = {
   data: [
     {
       questionId: 1,
@@ -152,11 +152,9 @@ const questions = {
     },
   ],
   pageInfo: {
-    page: 1,
+    page: 0,
     size: 10,
     totalElements: 15,
     totalPages: 1,
   },
 };
-
-export default questions;
