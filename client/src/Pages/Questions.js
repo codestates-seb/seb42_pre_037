@@ -15,18 +15,15 @@ function Questions() {
 
   const PER_PAGE = 10;
   // 2. page 갯수 계산
-  const pageCount = Math.ceil(totalQuestion.totalElements / PER_PAGE);
+  const pageCount = Math.ceil(totalQuestion / PER_PAGE);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `https://13b0-121-177-26-57.jp.ngrok.io/questions?page=${
-            currentPage + 1
-          }&size=${PER_PAGE}`,
+          `https://13b0-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
         );
-        console.log(1, response.data.pageInfo);
         setQuestions(response.data.data);
         setTotalElements(response.data.pageInfo.totalElements);
       } catch (error) {
