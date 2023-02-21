@@ -2,10 +2,9 @@ package com.codestates.be.security.verification.filter;
 
 import com.codestates.be.security.jwt.JwtTokenizer;
 import com.codestates.be.security.util.CustomAuthorityUtil;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +19,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+
+@Slf4j
 public class JwtVerificationFilter extends OncePerRequestFilter {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtil authorityUtil;
@@ -35,6 +36,16 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         try{
             Map<String, Object> claims = verifyJws(request);
+
+            log.info("HTTP Request Path : {}", request.getRequestURI());
+            if(request.getRequestURI().startsWith("/members")){
+                log.info("PATH 캐칭");
+            }
+
+
+
+
+
             setSecurityContext(claims);
         }catch (SignatureException se){
             request.setAttribute("exception", se);
@@ -59,6 +70,8 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
         return claims;
     }
+
+//    public
 
     public void setSecurityContext(Map<String , Object> claims){
         String username = (String) claims.get("username");
