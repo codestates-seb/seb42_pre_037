@@ -18,29 +18,5 @@ public class AnswerPatchDto {
     private String content;
 
     @NotNull
-    private Date modifiedAt;
-
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
-//
-//    public Date getModifiedAt() {
-//        return modifiedAt;
-//    }
-//
-//    public void setModifiedAt(Date modifiedAt) {
-//        this.modifiedAt = modifiedAt;
-//    }
-//
-//    public long getAnswerId() {
-//        return answerId;
-//    }
-//
-//    public void setAnswerId(long answerId) {
-//        this.answerId = answerId;
-//    }
+    private String modifiedAt;
 }

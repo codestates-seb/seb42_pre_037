@@ -9,7 +9,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class AnswerService {
 
-    public Answer createAnswer(){
-        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+    // 답변 등록
+    public Answer createAnswer(Answer answer) {
+
+        //Answer createdAnswer = answer;
+        //return createdAnswer;
+
+        return null;
+//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+    }
+
+    // 답변 수정
+    public Answer updateAnswer(Answer answer) {
+
+        //Answer updatedAnswer = answer;
+        //return updatedAnswer;
+
+        return null;
+//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+    }
+
+    // 답변 전체 조회
+    public Answer findAnswers() {
+
+        return null;
+//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+    }
+
+    // 답변 삭제
+    public void deleteAnswer(long answerId) {
+
+        return null;
+//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 }
