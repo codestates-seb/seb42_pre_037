@@ -1,15 +1,14 @@
 package com.codestates.be.security.authentication.filter;
 
-import com.codestates.be.advice.ErrorResponse;
-import com.codestates.be.member.dto.MemberDto;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.mapper.MemberMapper;
+import com.codestates.be.member.repository.MemberRepository;
+import com.codestates.be.security.dto.JwtSerilizer;
 import com.codestates.be.security.dto.LoginDto;
 import com.codestates.be.security.jwt.JwtTokenizer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import lombok.SneakyThrows;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,12 +29,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private final JwtTokenizer jwtTokenizer;
     private final AuthenticationManager authenticationManager;
-    private final MemberMapper mapper;
+    private final MemberRepository repository;
 
-    public JwtAuthenticationFilter(JwtTokenizer jwtTokenizer, AuthenticationManager authenticationManager, MemberMapper mapper) {
+    public JwtAuthenticationFilter(JwtTokenizer jwtTokenizer, AuthenticationManager authenticationManager, MemberRepository repository) {
         this.jwtTokenizer = jwtTokenizer;
         this.authenticationManager = authenticationManager;
-        this.mapper = mapper;
+        this.repository = repository;
     }
 
     @SneakyThrows
@@ -47,7 +46,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         LoginDto loginDto = mapper.readValue(request.getInputStream(), LoginDto.class);
 
         UsernamePasswordAuthenticationToken token =
-                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
         return authenticationManager.authenticate(token);
     }
@@ -57,23 +56,21 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        Member member = (Member) authResult.getPrincipal();
+        Member authMember = (Member) authResult.getPrincipal();
 
-        String accessToken = delegateAccessToken(member);
-        String refreshToken = delegateRefreshToken(member);
+        Member findMember = repository.findByEmail(authMember.getEmail()).get();
+        String accessToken = delegateAccessToken(findMember);
 
-        response.setHeader("Authorization", "Bearer " + accessToken);
-        response.setHeader("Refresh" , refreshToken);
-
-        sendUserDetail(response, member);
+        sendJwtToken(response, accessToken);
 
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
     }
 
     private String delegateAccessToken(Member member){
         Map<String , Object> claims = new HashMap<>();
-        claims.put("username", member.getEmail());
-        claims.put("Id", member.getMemberId());
+        claims.put("email", member.getEmail());
+        claims.put("displayName", member.getDisplayName());
+        claims.put("memberId", member.getMemberId());
         claims.put("roles", member.getRoles());
 
         String subject = member.getEmail();
@@ -85,17 +82,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     private String delegateRefreshToken(Member member){
         String subject = member.getEmail();
-
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
-
         return jwtTokenizer.generateRefreshToken(subject, expiration, jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey()));
     }
 
-    private void sendUserDetail(HttpServletResponse response, Member member) throws IOException{
+    private void sendJwtToken(HttpServletResponse response, String jwt) throws IOException {
         Gson gson = new Gson();
-        MemberDto.User user = mapper.MemberToUser(member);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getWriter().write(gson.toJson(user, MemberDto.User.class));
+        response.getWriter().write(gson.toJson(new JwtSerilizer(jwt), JwtSerilizer.class));
     }
 }

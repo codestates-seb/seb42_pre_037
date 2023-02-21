@@ -2,6 +2,7 @@ package com.codestates.be.security;
 
 
 import com.codestates.be.member.mapper.MemberMapper;
+import com.codestates.be.member.repository.MemberRepository;
 import com.codestates.be.security.authentication.filter.JwtAuthenticationFilter;
 import com.codestates.be.security.authentication.handler.MemberAuthenticationFailureHandler;
 import com.codestates.be.security.authentication.handler.MemberAuthenticationSuccessfulHandler;
@@ -12,7 +13,6 @@ import com.codestates.be.security.verification.handler.MemberAccessDeniedHandler
 import com.codestates.be.security.verification.handler.MemberAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,11 +35,13 @@ public class SecurityConfig {
     private final JwtTokenizer jwtTokenizer;
     private final CustomAuthorityUtil authorityUtil;
     private final MemberMapper mapper;
+    private final MemberRepository repository;
 
-    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtil authorityUtil, MemberMapper mapper) {
+    public SecurityConfig(JwtTokenizer jwtTokenizer, CustomAuthorityUtil authorityUtil, MemberMapper mapper, MemberRepository repository) {
         this.jwtTokenizer = jwtTokenizer;
         this.authorityUtil = authorityUtil;
         this.mapper = mapper;
+        this.repository = repository;
     }
 
     @Bean
@@ -63,7 +65,7 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-                            .anyRequest().permitAll();
+                            .antMatchers("/", "/**").permitAll();
                 });
 
         return http.build();
@@ -78,8 +80,8 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE","OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
 
@@ -95,7 +97,7 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager =
                     builder.getSharedObject(AuthenticationManager.class);
 
-            JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtTokenizer, authenticationManager, mapper);
+            JwtAuthenticationFilter customFilter = new JwtAuthenticationFilter(jwtTokenizer, authenticationManager, repository);
             customFilter.setFilterProcessesUrl("/auth/login");
             customFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessfulHandler());
             customFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());

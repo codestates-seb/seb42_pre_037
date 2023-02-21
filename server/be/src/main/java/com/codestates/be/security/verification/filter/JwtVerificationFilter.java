@@ -38,12 +38,11 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         try{
             Map<String, Object> claims = verifyJws(request);
 
-            verifyPath(request, claims); //권한 없는 곳에 접근하는지.
-
+//            if(request.getRequestURI().matches("/members/*")) {
+//                verifyPath(request, claims); //권한 없는 곳에 접근하는지 확인
+//            }
 
             setSecurityContext(claims);
-
-
 
         }catch (SignatureException se){
             request.setAttribute("exception", se);
@@ -69,11 +68,6 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
         return claims;
     }
 
-    public void verifyPath(HttpServletRequest request, Map<String, Object> claims){
-        if(request.getRequestURI().startsWith("/members")){
-            log.info("PATH 캐칭");
-        }
-    }
 
     public void setSecurityContext(Map<String , Object> claims){
         String username = (String) claims.get("username");
@@ -84,5 +78,4 @@ public class JwtVerificationFilter extends OncePerRequestFilter {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
-
 }
