@@ -10,13 +10,9 @@ import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Test from './Pages/Test';
 
-
-
-
 // import Mainlayout from './Components/layouts/Mainlayout';
 import Header from './Components/layouts/Header';
 // import Navbar from './Components/layouts/Navbar';
-
 
 import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
@@ -59,7 +55,6 @@ function App() {
 
   return (
     <BrowserRouter>
-
       {/* <Mainlayout /> */}
       <Header />
 
