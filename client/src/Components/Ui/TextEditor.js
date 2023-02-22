@@ -1,7 +1,5 @@
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useState } from 'react';
-
 
 const modules = {
   toolbar: [
@@ -17,17 +15,19 @@ const modules = {
   },
 };
 
-function TextEditor() {
- 
-  const [text, setTest] = useState("")
+function TextEditor({ body, setBody }) {
+  const handleChange = value => {
+    setBody(value);
+  };
 
-  const handleChange = (value)=> {
-    setTest(value.replace(/<(\/)?[Pp](\/)?>/g,""));
-    console.log(text)
-
-  }
-
-  return <ReactQuill onChange={handleChange} value={text} theme="snow" modules={modules} />;
+  return (
+    <ReactQuill
+      onChange={handleChange}
+      value={body}
+      theme="snow"
+      modules={modules}
+    />
+  );
 }
 
 export default TextEditor;
