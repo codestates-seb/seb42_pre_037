@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import QuestionsItem from '../Components/QuestionsItem';
 import Button from '../Components/Ui/Button';
+import Nav from '../Components/layouts/Navbar';
 import { dummyQuestions } from '../dummyData';
 
 function Questions() {
@@ -47,6 +48,7 @@ function Questions() {
   };
   return (
     <>
+      <Nav />
       <div className="flex items-end justify-between p-5">
         <h1 className="text-4xl">All Questions</h1>
         <Button onClick={handlerChangeQuestion} size="large">
