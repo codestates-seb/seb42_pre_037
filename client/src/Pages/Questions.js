@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 import QuestionsItem from '../Components/QuestionsItem';
 import Button from '../Components/Ui/Button';
-import Nav from '../Components/layouts/Navbar';
 import { dummyQuestions } from '../dummyData';
 
 function Questions() {
@@ -24,7 +23,7 @@ function Questions() {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `https://b7cb-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
+          `https://6854-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
         );
         setQuestions(response.data.data);
         setTotalElements(response.data.pageInfo.totalElements);
@@ -48,7 +47,6 @@ function Questions() {
   };
   return (
     <>
-      <Nav />
       <div className="flex items-end justify-between p-5">
         <h1 className="text-4xl">All Questions</h1>
         <Button onClick={handlerChangeQuestion} size="large">

@@ -13,6 +13,26 @@ function SignUp() {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
+  // 유효성 검사 함수
+  // const isValidPassword = str => {
+  //   const regex = '^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$';
+
+  //   if (!regex.test(str)) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
+  // const isValidEmail = str => {
+  //   const regex =
+  //     '/([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/';
+
+  //   if (!regex.test(str)) {
+  //     return false;
+  //   }
+  //   return true;
+  // };
+
   const register = () => {
     //
     if (!username || !email || !password) {
@@ -20,20 +40,33 @@ function SignUp() {
       console.log(errorMessage);
       return;
     }
+    // if (!isValidPassword(password)) {
+    //   setErrorMessage(
+    //     '최소 8글자, 문자 1개, 숫자 1개, 특수문자가 들어간 비밀번호를 입력해주세요',
+    //   );
+    //   console.log(errorMessage);
+    //   return;
+    // }
+    // if (!isValidEmail(email)) {
+    //   setErrorMessage('Email 형식에 맞게 입력해주세요');
+    //   console.log(errorMessage);
+    //   return;
+    // }
 
     const date = new Date();
-    const createdAt = `${date.getFullYear()} ${
-      date.getMonth() + 1
-    } ${date.getDate()} ${date.getHours()} ${date.getMinutes()}`;
+    const createdAt = date;
     console.log(createdAt);
 
     axios
-      .post('https://73f1-14-6-64-237.jp.ngrok.io/members/signup', {
-        displayName: username,
-        email,
-        password,
-        createdAt,
-      })
+      .post(
+        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/signup',
+        {
+          displayName: username,
+          email,
+          password,
+          createdAt,
+        },
+      )
       .then(res => {
         // Handle success.
         console.log('Well done!');

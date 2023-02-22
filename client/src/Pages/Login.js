@@ -12,7 +12,7 @@ import Button from '../Components/Ui/Button';
 const Login = () => {
   const navigate = useNavigate();
   const { loginInfo, setLoginInfo } = useLoginInfoStore(state => state);
-  const { isLogin, setIsLogin } = useIsLoginStore(state => state);
+  const { setIsLogin } = useIsLoginStore(state => state);
   // const { setUserInfo } = useUserInfoStore(state => state);
   // const [setCheckedKeepLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -34,18 +34,22 @@ const Login = () => {
     setErrorMessage('');
 
     axios
-      .post('https://73f1-14-6-64-237.jp.ngrok.io/auth/login', loginInfo, {
-        withCredentials: true,
-      })
+      .post(
+        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/auth/login',
+        loginInfo,
+        {
+          withCredentials: true,
+        },
+      )
       .then(res => {
         setIsLogin(true);
         // setUserInfo(res.data);
         // data 확인
         console.log(res);
         // local storage에 token 저장
-        // localStorage.setItem('token', res.data.jwt);
+        localStorage.setItem('token', res.data.jwt);
         // 로그인 성공시 홈페이지 이동
-        console.log(isLogin);
+        axios.defaults.headers.common.Authorization = `Bearer ${res.data.jwt}`;
         navigate('/');
       })
       .catch(err => {
@@ -114,6 +118,15 @@ const Login = () => {
           </div>
         </form>
       </Card>
+      <div>
+        Don’t have an account?
+        <Link
+          className="inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
+          to="/signup"
+        >
+          Sign up
+        </Link>
+      </div>
     </div>
   );
 };
