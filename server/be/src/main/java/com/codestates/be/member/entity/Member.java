@@ -34,6 +34,8 @@ public class Member {
     private String modifiedAt;
 
     //TODO: 시큐리티 적용 시 권한 List 추가 되어야함.
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<Question> questions = new ArrayList<>();

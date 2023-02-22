@@ -13,11 +13,11 @@ public class MemberDto {
     public static class Post{
         @Email
         private String email;
-        @NotNull
+        @NotBlank
         private String displayName;
-        @NotNull
+        @NotBlank
         private String password;
-        @NotNull
+        @NotBlank
         private String createdAt;
     }
     @Getter

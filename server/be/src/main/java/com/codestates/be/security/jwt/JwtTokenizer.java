@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.util.Date;
 import java.util.Map;
 
 @Component
+@Getter
 public class JwtTokenizer {
     @Value("${jwt.key}")
     private String secretKey;
@@ -75,6 +77,7 @@ public class JwtTokenizer {
 
     public Key getKeyFromBase64EncodedSecretKey(String base64EncodedKey){
         byte[] decodedKey = Decoders.BASE64.decode(base64EncodedKey);
-        return Keys.hmacShaKeyFor(decodedKey);
+        Key key = Keys.hmacShaKeyFor(decodedKey);
+        return key;
     }
 }
