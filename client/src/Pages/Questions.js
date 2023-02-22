@@ -48,56 +48,62 @@ function Questions() {
     navigate('/question/ask');
   };
   return (
-    <>
-      <Nav />
-      <div className="flex items-end justify-between p-5">
-        <h1 className="text-4xl">All Questions</h1>
-        <Button onClick={handlerChangeQuestion} size="large">
-          Ask Question
-        </Button>
-      </div>
+    <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
+      <div className="flex mx-auto my-0 w-10/12">
+        <Nav />
+        <div className="flex flex-col mt-16 mr-[40rem]">
+          <div className="flex items-end justify-between p-5">
+            <h1 className="text-4xl">All Questions</h1>
+            <Button onClick={handlerChangeQuestion} size="large">
+              Ask Question
+            </Button>
+          </div>
 
-      <div className="flex items-end justify-between p-5 border-b-2">
-        <h3 className="text-2xl">{totalQuestion.totalElements} questions</h3>
-        <Button
-          color="clear-blue"
-          icon={<BiFilter />}
-          iconClassName="text-2xl"
-          size="small"
-        >
-          Filter
-        </Button>
-      </div>
+          <div className="flex items-end justify-between p-5 border-b-2">
+            <h3 className="text-2xl">
+              {totalQuestion.totalElements} questions
+            </h3>
+            <Button
+              color="clear-blue"
+              icon={<BiFilter />}
+              iconClassName="text-2xl"
+              size="small"
+            >
+              Filter
+            </Button>
+          </div>
 
-      {/* Question list */}
-      <div>
-        <ul>
-          {questions.map(question => (
-            <QuestionsItem key={question.questionId} question={question} />
-          ))}
-        </ul>
-      </div>
+          {/* Question list */}
+          <div>
+            <ul>
+              {questions.map(question => (
+                <QuestionsItem key={question.questionId} question={question} />
+              ))}
+            </ul>
+          </div>
 
-      {/* Pagination */}
-      <div className="flex justify-center pt-5">
-        <ReactPaginate
-          previousLabel="prev"
-          nextLabel="next"
-          breakLabel="..."
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          // 3. pager가 바뀔 때 마다 handlerPageClick 함수 호출
-          onPageChange={handlerPageClick}
-          // 밑 props는 style을 위한 className 지정 해주는 역할
-          containerClassName="flex space-x-2 p-2 m-4"
-          activeClassName="orange"
-          pageClassName="paginate-btn"
-          previousClassName="paginate-btn"
-          nextClassName="paginate-btn"
-        />
+          {/* Pagination */}
+          <div className="flex justify-center pt-5">
+            <ReactPaginate
+              previousLabel="prev"
+              nextLabel="next"
+              breakLabel="..."
+              pageCount={pageCount}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              // 3. pager가 바뀔 때 마다 handlerPageClick 함수 호출
+              onPageChange={handlerPageClick}
+              // 밑 props는 style을 위한 className 지정 해주는 역할
+              containerClassName="flex space-x-2 p-2 m-4"
+              activeClassName="orange"
+              pageClassName="paginate-btn"
+              previousClassName="paginate-btn"
+              nextClassName="paginate-btn"
+            />
+          </div>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 

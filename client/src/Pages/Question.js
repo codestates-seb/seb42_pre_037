@@ -16,10 +16,10 @@ function Question() {
   };
 
   return (
-    <>
+    <div className="flex ">
       <Nav />
       <div className="p-5">
-        <div className="flex items-start justify-between">
+        <div className="flex items-start justify-between ">
           <h1 className="text-3xl w-4/5">{question.title}</h1>
           <Button onClick={handlerChangeQuestion} size="large">
             Ask Question
@@ -57,7 +57,7 @@ function Question() {
         </div>
         {/* ... */}
       </div>
-    </>
+    </div>
   );
 }
 export default Question;
