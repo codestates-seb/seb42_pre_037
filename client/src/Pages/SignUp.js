@@ -2,6 +2,13 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// import react-icons
+import { HiChevronUpDown } from 'react-icons/hi2';
+import { RiQuestionnaireLine } from 'react-icons/ri';
+import { IoPricetagsSharp } from 'react-icons/io5';
+import { GiTrophy } from 'react-icons/gi';
+
+// import Ui
 import Card from '../Components/Ui/Card';
 import Input from '../Components/Ui/Input';
 import Button from '../Components/Ui/Button';
@@ -80,50 +87,68 @@ function SignUp() {
   };
 
   return (
-    <div className="content">
+    <div className="content flex flex-row">
       <div>
-        <h1>Join the Stack Overflow community</h1>
+        <h1 className="text-lg">Join the Stack Overflow community</h1>
+        <div className="flex flex-row">
+          <RiQuestionnaireLine />
+          <div>Get unstuck — ask a question</div>
+        </div>
+        <div className="flex flex-row">
+          <HiChevronUpDown />
+          <div>Unlock new privileges like voting and commenting</div>
+        </div>
+        <div className="flex flex-row">
+          <IoPricetagsSharp />
+          <div>Save your favorite tags, filters, and jobs</div>
+        </div>
+        <div className="flex flex-row">
+          <GiTrophy />
+          <div>Earn reputation and badges</div>
+        </div>
       </div>
-      <Card className="formContainer">
-        <form className="signupForm">
-          <Input
-            className="usernameInput"
-            label="Display name"
-            id="nameInput"
-            onChange={e => setUsername(e.target.value)}
-          />
-          <Input
-            label="Email"
-            id="emailInput"
-            onChange={e => setEmail(e.target.value)}
-          />
-          <Input
-            label="Password"
-            id="passwordInput"
-            onChange={e => setPassword(e.target.value)}
-          />
-          <p>
-            Passwords must contain at least eight characters, including at least
-            1 letter and 1 number.
-          </p>
-          <Button
-            color="blue"
-            size="medium"
-            type="button"
-            onClick={() => register()}
+      <div className="flex flex-col">
+        <Card className="formContainer">
+          <form className="signupForm">
+            <Input
+              className="usernameInput"
+              label="Display name"
+              id="nameInput"
+              onChange={e => setUsername(e.target.value)}
+            />
+            <Input
+              label="Email"
+              id="emailInput"
+              onChange={e => setEmail(e.target.value)}
+            />
+            <Input
+              label="Password"
+              id="passwordInput"
+              onChange={e => setPassword(e.target.value)}
+            />
+            <p>
+              Passwords must contain at least eight characters, including at
+              least 1 letter and 1 number.
+            </p>
+            <Button
+              color="blue"
+              size="medium"
+              type="button"
+              onClick={() => register()}
+            >
+              Sign up
+            </Button>
+          </form>
+        </Card>
+        <div className="linkPage">
+          Already have an account?
+          <Link
+            className="loginLink inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
+            to="/login"
           >
-            Sign up
-          </Button>
-        </form>
-      </Card>
-      <div className="linkPage">
-        Already have an account?
-        <Link
-          className="loginLink inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
-          to="/login"
-        >
-          Log in
-        </Link>
+            Log in
+          </Link>
+        </div>
       </div>
     </div>
   );
