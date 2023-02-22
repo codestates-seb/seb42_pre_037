@@ -80,11 +80,14 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE"));
-        configuration.setExposedHeaders(Arrays.asList("*"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); //어디서 오는 요청을 허용할 것인지.
+
+        configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE")); //어떤 HTTP 메서드를 허용할 것인지.
+        configuration.setExposedHeaders(Arrays.asList("*")); // 어떤 헤더값을 우리가 응답에 넣어서 보내줄지.
+        configuration.setAllowedHeaders(Arrays.asList("*")); // 어떤 헤더값을 받아들이는데 성공할지.
         configuration.setAllowCredentials(true);
+        //만일 AllowCredentials -> 클라이언트가 true인 요청을 주면 이것도 true
+        //만일 Credential이 true라면 Allow-Origin은 와일드 카드를 쓰면 안된다.
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
