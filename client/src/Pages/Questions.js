@@ -49,7 +49,7 @@ function Questions() {
   };
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
-      <div className="flex mx-auto my-0 w-10/12">
+      <div className="flex mx-auto">
         <Nav />
         <div className="flex flex-col mt-16 mr-[40rem]">
           <div className="flex items-end justify-between p-5">
