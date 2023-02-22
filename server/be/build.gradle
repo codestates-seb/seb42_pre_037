@@ -39,6 +39,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
+	implementation 'com.google.code.gson:gson:2.9.0'
 
 	//시큐리티 관련 dependency
 	implementation 'org.springframework.boot:spring-boot-starter-security'
