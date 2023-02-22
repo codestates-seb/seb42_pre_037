@@ -10,8 +10,7 @@ function Question() {
   const navigate = useNavigate();
   const location = useLocation();
   const { question } = location.state;
-  const timeDiff = getTimeDiffString(question.createAt);
-
+  const timeDiff = getTimeDiffString(question.createdAt);
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
