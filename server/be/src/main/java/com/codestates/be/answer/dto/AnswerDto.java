@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -19,6 +20,9 @@ public class AnswerDto {
 
         @NotEmpty(message = "본문은 공백이 아니어야 합니다.")
         private String content;
+
+        @NotBlank
+        private String createdAt;
     }
 
     @Getter
@@ -34,6 +38,7 @@ public class AnswerDto {
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
     public static class Response {
         private String content;

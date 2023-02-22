@@ -24,6 +24,8 @@ public interface AnswerMapper {
         answer.setMember(member);
         answer.setQuestion(question);
 
+        answer.setCreatedAt(answerPostDto.getCreatedAt());
+
         return answer;
     };
     // DTO -> Entity

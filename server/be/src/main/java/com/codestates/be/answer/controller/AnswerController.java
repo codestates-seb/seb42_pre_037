@@ -5,6 +5,8 @@ import com.codestates.be.answer.dto.AnswerDto;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
+import com.codestates.be.member.entity.Member;
+import com.codestates.be.member.service.MemberService;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,16 +19,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/answer")
+@RequestMapping("/answers")
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
+    private final MemberService memberService;
 
     // mapper DI
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+
+    public AnswerController(AnswerService answerService, AnswerMapper mapper, MemberService memberService) {
         this.answerService = answerService;
         this.mapper = mapper;
+        this.memberService = memberService;
     }
 
     // 답변 등록
@@ -38,7 +43,12 @@ public class AnswerController {
         Answer answer = mapper.answerPostDtoToAnswer(answerDto);
         Answer response = answerService.createAnswer(answer);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.CREATED);
+        AnswerDto.Response result =  mapper.answerToAnswerResponseDto(response);
+        Member member = memberService.findVerifiedMember(response.getMember().getMemberId());
+
+        result.setDisplayName(member.getDisplayName());
+
+        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.CREATED);
     }
 
     // 답변 수정
@@ -48,7 +58,9 @@ public class AnswerController {
         answerDto.setAnswerId(answerId);
 
         Answer answer = mapper.answerPatchDtoToAnswer(answerDto);
+        
         Answer response = answerService.updateAnswer(answer);
+
         AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
 
         return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.OK);

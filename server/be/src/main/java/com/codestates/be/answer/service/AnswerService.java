@@ -24,10 +24,15 @@ public class AnswerService {
     }
 
     // 답변 수정
-    public Answer updateAnswer(Answer answer) {
+    public Answer updateAnswer(Answer answer) { //수정 사항 답변
 
         // 답변 있는지 확인
         Answer existAnswer = findVerifiedExistAnswer(answer.getAnswerId());
+
+        Optional.ofNullable(answer.getContent()).orElseThrow(() -> new BuissnessLogicException(ExceptionCode.ANSWER_NOT_CHANGE));
+
+        existAnswer.setContent(answer.getContent());
+        existAnswer.setModifiedAt(answer.getModifiedAt());
 
         Answer response = answerRepository.save(existAnswer);
         return response;
