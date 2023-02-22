@@ -14,24 +14,31 @@ import Test from './Pages/Test';
 
 import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
+import Logout from './Pages/Logout';
 
 function App() {
   const { setIsLogin } = useIsLoginStore(state => state);
   const { userInfo, setUserInfo } = useUserInfoStore(state => state);
 
+  console.log(userInfo);
   const authHandler = () => {
     console.log(localStorage.getItem('token'));
+
     axios
-      .get('https://73f1-14-6-64-237.jp.ngrok.io/members/userInfo', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+      .post(
+        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/userInfo',
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            withCredentials: true,
+          },
         },
-      })
+      )
       .then(res => {
         setIsLogin(true);
         setUserInfo(res.data);
         console.log('success: ', res.data);
-        console.log(userInfo);
       })
       .catch(err => {
         if (err.response) {
@@ -53,6 +60,7 @@ function App() {
         <Route path="questionForm" element={<QuestionForm />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="logout" element={<Logout />} />
         <Route path="test" element={<Test />} />
         <Route path="question/ask" element={<QuestionForm />} />
       </Routes>
