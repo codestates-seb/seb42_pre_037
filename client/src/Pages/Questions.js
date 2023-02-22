@@ -8,6 +8,8 @@ import QuestionsItem from '../Components/QuestionsItem';
 import Button from '../Components/Ui/Button';
 import { dummyQuestions } from '../dummyData';
 
+import Nav from '../Components/layouts/Navbar';
+
 function Questions() {
   const [questions, setQuestions] = useState([]);
   const [totalQuestion, setTotalElements] = useState([]);
@@ -47,6 +49,7 @@ function Questions() {
   };
   return (
     <>
+      <Nav />
       <div className="flex items-end justify-between p-5">
         <h1 className="text-4xl">All Questions</h1>
         <Button onClick={handlerChangeQuestion} size="large">
