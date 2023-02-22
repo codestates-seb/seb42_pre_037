@@ -7,8 +7,8 @@ function Navbar() {
   const path = location.pathname.split('/')[1];
 
   return (
-    <div className="h-100% pt-4 w- border-r bg-white mt-16 ">
-      <ul className="relative">
+    <div className="sticky top-0 h-screen pt-20 border-r bg-white ">
+      <ul className="relative ">
         <li className="relative">
           <Link
             to="/"
