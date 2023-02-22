@@ -8,47 +8,47 @@ function Header() {
   const [toggle, setToggle] = useState(false);
   return (
     <div>
-      <nav className="bg-white dark:bg-gray-800  shadow p-1">
-        <div className="px-40 mx-2">
-          <div className="flex items-center justify-between h-9 ">
+      <nav className="bg-white dark:bg-gray-800  shadow p-2 ">
+        <div className="px-40 items-center ">
+          <div className="flex items-center h-10 ">
             <div className=" flex items-center">
-              <a className="flex-shrink-0" href="/">
-                <img className="w-40 h-10" alt="" src={HeaderLogo} />
+              <a className="" href="/">
+                <img className="w-56 h-10" alt="" src={HeaderLogo} />
               </a>
-              <div className="hidden md:block">
-                <div className="flex items-baseline ml-2 space-x-4">
-                  <a
-                    className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-3xl text-sm font-medium"
-                    href="/#"
-                  >
-                    About
-                  </a>
-                  <a
-                    className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-3xl text-sm font-medium"
-                    href="/#"
-                  >
-                    Products
-                  </a>
-                  <a
-                    className="text-gray-500  hover:bg-gray-200 hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-3xl text-sm font-medium"
-                    href="/#"
-                  >
-                    For Teams
-                  </a>
-                </div>
+
+              <div className="flex items-baseline  space-x-4">
+                <a
+                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
+                  href="/#"
+                >
+                  About
+                </a>
+                <a
+                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
+                  href="/#"
+                >
+                  Products
+                </a>
+                <a
+                  className="text-gray-500  hover:bg-gray-200 hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
+                  href="/#"
+                >
+                  For Teams
+                </a>
               </div>
             </div>
             <button
+              className="w-6/12 pl-4 py-1 "
               onClick={() => {
                 setToggle(e => !e);
               }}
             >
-              <SearchBar className="w-96" placeholder="Search..." />
+              <SearchBar className="" placeholder="Search..." />
             </button>
             <div className="">
-              <div className="flex items-center ml-4 md:ml-6">
+              <div className="flex items-center ml-4  ">
                 <Link to="/login">
-                  <Button>Log in</Button>
+                  <Button color="clear-blue">Log in</Button>
                 </Link>
                 <div className="relative ml-3">
                   <div className="relative inline-block text-left">
@@ -63,9 +63,9 @@ function Header() {
         </div>
       </nav>
       {toggle && (
-        <div>
-          <div className="bg-white dark:bg-gray-900 w-fit shadow-lg rounded-lg p-2">
-            <div className="flex items-center text-start ">
+        <div className="w-3/4 z-40 top-16  absolute ">
+          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-2 absolute left-1/2 w-1/2 ">
+            <div className="flex ">
               <div>
                 <div className="mb-2">
                   <span className="text-xs font-medium">[ tag ]</span>
