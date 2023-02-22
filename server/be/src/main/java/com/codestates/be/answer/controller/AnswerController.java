@@ -5,6 +5,9 @@ import com.codestates.be.answer.dto.AnswerDto;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
+import com.codestates.be.member.entity.Member;
+import com.codestates.be.member.service.MemberService;
+import com.codestates.be.responseDto.SingleResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,16 +19,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/answer")
+@RequestMapping("/answers")
 @Validated
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
+    private final MemberService memberService;
 
     // mapper DI
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+
+    public AnswerController(AnswerService answerService, AnswerMapper mapper, MemberService memberService) {
         this.answerService = answerService;
         this.mapper = mapper;
+        this.memberService = memberService;
     }
 
     // 답변 등록
@@ -34,12 +40,15 @@ public class AnswerController {
                                      @Valid @RequestBody AnswerDto.Post answerDto){
         answerDto.setQuestionId(questionId);
 
-
         Answer answer = mapper.answerPostDtoToAnswer(answerDto);
         Answer response = answerService.createAnswer(answer);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.CREATED);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        AnswerDto.Response result =  mapper.answerToAnswerResponseDto(response);
+        Member member = memberService.findVerifiedMember(response.getMember().getMemberId());
+
+        result.setDisplayName(member.getDisplayName());
+
+        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.CREATED);
     }
 
     // 답변 수정
@@ -49,26 +58,22 @@ public class AnswerController {
         answerDto.setAnswerId(answerId);
 
         Answer answer = mapper.answerPatchDtoToAnswer(answerDto);
+        
         Answer response = answerService.updateAnswer(answer);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.OK);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
+
+        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.OK);
     }
 
     // 답변 전체 조회
-
-//     에러 나서 임시 주석 처리
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
-        List<Answer> answers = answerService.findAnswers();
+        List<Answer> answers = answerService.findAnswers(questionId);
 
-        List<AnswerDto.Response> response =
-                answers.stream()
-                        .map(answer -> mapper.answerToAnswerResponseDto(answer))
-                        .collect(Collectors.toList());
+        List<AnswerDto.Response> response = mapper.answersToAnswerResponseDtos(answers);
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
+        return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
 
 
@@ -79,6 +84,5 @@ public class AnswerController {
         answerService.deleteAnswer(answerId);
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
-//        throw new BuissnessLogicException(ExceptionCode.SERVICE_NOT_READY);
     }
 }
