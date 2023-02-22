@@ -4,11 +4,11 @@ import Button from '../Ui/Button';
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
-function Header() {
+function LoginHeader() {
   const [toggle, setToggle] = useState(false);
   return (
     <div>
-      <nav className="bg-white dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 fixed top-0 left-0 right-0">
+      <nav className="bg-white dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 ">
         <div className="px-40 items-center ">
           <div className="flex items-center h-10 ">
             <div className=" flex items-center">
@@ -122,4 +122,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default LoginHeader;
