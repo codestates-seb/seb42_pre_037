@@ -8,8 +8,7 @@ function Question() {
   const navigate = useNavigate();
   const location = useLocation();
   const { question } = location.state;
-  const timeDiff = getTimeDiffString(question.createAt);
-
+  const timeDiff = getTimeDiffString(question.createdAt);
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
@@ -46,6 +45,7 @@ function Question() {
           </div>
         </div>
       </div>
+
       <div>
         <h1 className="text-3xl w-4/5 my-7">Your Answer</h1>
         <div className="mb-10">

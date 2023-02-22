@@ -24,7 +24,7 @@ function QuestionsItem({ question }) {
 
         <p className="h-blue text-sm mr-1">{question.displayName}</p>
         <p className="text-sm text-gray-400">
-          {getTimeDiffString(question.createAt)}
+          {getTimeDiffString(question.createdAt)}
         </p>
       </div>
     </li>
