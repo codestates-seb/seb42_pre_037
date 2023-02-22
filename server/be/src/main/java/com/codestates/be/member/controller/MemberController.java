@@ -63,7 +63,7 @@ public class MemberController {
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping("/userInfo")
+    @PostMapping("/userInfo")
     public ResponseEntity messageForHeader(@RequestHeader HttpHeaders headers) {
 
         String token = headers.get("authorization").get(0);
@@ -81,7 +81,11 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseEntity<>(userInfo), HttpStatus.OK);
     }
 
-
+    @GetMapping("/logout")
+    public ResponseEntity getLogout(){
+        log.info("# 사용자가 로그아웃 했습니다.");
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping//admin
     public ResponseEntity getUsers(@RequestParam @Positive int page,
