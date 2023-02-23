@@ -20,8 +20,10 @@ import Logout from './Pages/Logout';
 import ErrorPage from './Pages/ErrorPage';
 
 function App() {
-  const { setIsLogin } = useIsLoginStore(state => state);
+  const { isLogin, setIsLogin } = useIsLoginStore(state => state);
   const { setUserInfo } = useUserInfoStore(state => state);
+  if (isLogin === false) setIsLogin(true);
+  console.log(isLogin);
 
   const authHandler = () => {
     axios
