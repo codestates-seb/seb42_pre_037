@@ -12,7 +12,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 2,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -22,7 +22,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 3,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -32,7 +32,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 4,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -42,7 +42,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 5,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -52,7 +52,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 6,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -62,7 +62,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 7,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -72,7 +72,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 8,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
@@ -82,7 +82,7 @@ export const dummyQuestions = {
       displayName: '사용자 닉네임',
     },
     {
-      questionId: 1,
+      questionId: 9,
       title: 'How can I resolve the segmentation fault?',
       content:
         "I asked this question before but the same problem still persists, so I'm seeking your help once again I have a code called unscramble that takes two files, Jumbled.txt and dictionary.txt and finds...",
