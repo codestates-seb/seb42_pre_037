@@ -58,7 +58,7 @@ function App() {
       {isLogin ? <LoginHeader /> : <Header />}
       <Routes>
         <Route path="/" element={<Questions />} />
-        <Route path="question" element={<Question />} />
+        <Route path="question/:questionId" element={<Question />} />
         <Route path="questionForm" element={<QuestionForm />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />

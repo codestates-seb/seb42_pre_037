@@ -7,7 +7,7 @@ function QuestionsItem({ question }) {
       <div>{question.count_answer} answer</div>
 
       <div className="mb-1">
-        <Link to="/question" state={{ question }}>
+        <Link to={`/question/${question.questionId}`} state={{ question }}>
           <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
         </Link>
         <p className=" line-clamp-2">{question.content}</p>

@@ -56,7 +56,7 @@ function Question() {
           <div>
             {/* 답변 목록 */}
             <Answers answers={answers} />
-            <AnswersForm />
+            <AnswersForm questionId={question.questionId} />
           </div>
         </div>
       </div>
