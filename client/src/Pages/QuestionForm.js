@@ -3,11 +3,16 @@ import axios from 'axios';
 import AnswersImg from '../Components/icons/AnswersImg.png';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
+import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function QuestionForm() {
+  const { userInfo } = useUserInfoStore(state => state);
+
   const pathData = {
     title: '',
     body: '',
+    memberId : null,
+    createdAt : ''
   };
 
   const [title, setTitle] = useState('');
@@ -33,8 +38,11 @@ function QuestionForm() {
     e.preventDefault();
     pathData.title = title;
     pathData.body = body;
+    pathData.memberId = userInfo.memberId;
+    const currentTime = new Date()
+    pathData.createdAt = currentTime.toString()
     pathQuestionData();
-    console.log('pathData', pathData.title, pathData.body);
+    console.log('pathData', pathData.title, pathData.body, pathData.memberId, pathData.createdAt);
   };
 
   return (
