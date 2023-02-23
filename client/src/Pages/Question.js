@@ -1,15 +1,19 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 import Button from '../Components/Ui/Button';
-import TextEditor from '../Components/Ui/TextEditor';
 import { getTimeDiffString } from '../utils';
 
+import { dummyAnswers } from '../dummyData';
 import Nav from '../Components/layouts/Navbar';
+import Answers from '../Components/Answers';
+import AnswersForm from '../Components/AnswersForm';
 
 function Question() {
   const navigate = useNavigate();
   const location = useLocation();
   const { question } = location.state;
+  const [answers] = useState(dummyAnswers.data);
   const timeDiff = getTimeDiffString(question.createdAt);
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
@@ -50,13 +54,10 @@ function Question() {
             </div>
           </div>
           <div>
-            <h1 className="text-3xl w-4/5 my-7">Your Answer</h1>
-            <div className="mb-10">
-              <TextEditor />
-            </div>
-            <Button>Post Your Answer</Button>
+            {/* 답변 목록 */}
+            <Answers answers={answers} />
+            <AnswersForm />
           </div>
-          {/* ... */}
         </div>
       </div>
     </div>
