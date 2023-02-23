@@ -111,7 +111,7 @@ function SignUp() {
       </div>
       <div className="flex flex-col">
         <Card className="formContainer max-w-xs">
-          <form className="signupForm">
+          <form className="signupForm my-1.5">
             <Input
               className="usernameInput"
               label="Display name"
@@ -129,7 +129,7 @@ function SignUp() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
-            <p>
+            <p className=" mb-4 font-medium text-xs">
               Passwords must contain at least eight characters, including at
               least 1 letter and 1 number.
             </p>
@@ -143,10 +143,10 @@ function SignUp() {
             </Button>
           </form>
         </Card>
-        <div className="linkPage text-center">
+        <div className="linkPage text-center mt-6">
           Already have an account?
           <Link
-            className="loginLink inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
+            className="loginLink inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800 ml-2"
             to="/login"
           >
             Log in
