@@ -1,6 +1,12 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import Button from '../Ui/Button';
+
+import { GoInbox } from 'react-icons/go';
+import { MdHelp } from 'react-icons/md';
+import { CgBoy } from 'react-icons/cg';
+import { ImTrophy } from 'react-icons/im';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
+
+// import Button from '../Ui/Button';
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
@@ -8,32 +14,19 @@ function LoginHeader() {
   const [toggle, setToggle] = useState(false);
   return (
     <div>
-      <nav className="bg-white dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 ">
-        <div className="px-40 items-center ">
+      <nav className="bg-slate-50 dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 fixed z-40 top-30 left-0 right-0">
+        <div className="px-44 items-center ">
           <div className="flex items-center h-10 ">
             <div className=" flex items-center">
               <a className="" href="/">
                 <img className="w-56 h-10" alt="" src={HeaderLogo} />
               </a>
-
               <div className="flex items-baseline  space-x-4">
                 <a
                   className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
                   href="/#"
                 >
-                  About
-                </a>
-                <a
-                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
-                  href="/#"
-                >
                   Products
-                </a>
-                <a
-                  className="text-gray-500  hover:bg-gray-200 hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
-                  href="/#"
-                >
-                  For Teams
                 </a>
               </div>
             </div>
@@ -47,15 +40,23 @@ function LoginHeader() {
             </button>
             <div className="">
               <div className="flex items-center ml-4  ">
-                <Link to="/login">
-                  <Button color="clear-blue">Log in</Button>
-                </Link>
-                <div className="relative ml-3">
-                  <div className="relative inline-block text-left">
-                    <Link to="/signup">
-                      <Button>Sign up</Button>
-                    </Link>
+                <div className="mx-2 flex items-center">
+                  <div className="text-3xl text-slate-600">
+                    <CgBoy className="" />
                   </div>
+                  <div>1</div>
+                </div>
+                <div className="text-3xl text-slate-600 ml-6 ">
+                  <GoInbox />
+                </div>
+                <div className="text-3xl text-slate-600 ml-4">
+                  <ImTrophy />
+                </div>
+                <div className="relative text-3xl text-slate-600 ml-4">
+                  <MdHelp />
+                </div>
+                <div className="text-3xl text-slate-600 ml-4 cursor-pointer hover:bg-slate-300">
+                  <RiLogoutBoxRLine className="" />
                 </div>
               </div>
             </div>

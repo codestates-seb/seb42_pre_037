@@ -1,15 +1,19 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+
 import Button from '../Ui/Button';
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
+// import LoginHeader from '../layouts/LoginHeader'
+
 function Header() {
   const [toggle, setToggle] = useState(false);
+  // const [header,loginHeader] = useState(LoginHeader)
   return (
     <div>
-      <nav className="bg-white dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 fixed z-40 top-0 left-0 right-0">
-        <div className="px-40 items-center ">
+      <nav className="bg-slate-50 dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 fixed z-40 top-0 left-0 right-0">
+        <div className="px-44 items-center ">
           <div className="flex items-center h-10 ">
             <div className=" flex items-center">
               <a className="" href="/">

@@ -2,7 +2,7 @@ import Button from '../Components/Ui/Button';
 import SearchBar from '../Components/Ui/SearchBar';
 import Card from '../Components/Ui/Card';
 import Input from '../Components/Ui/Input';
-import Loginheader from '../Components/layouts/loginHeader';
+import Loginheader from '../Components/layouts/LoginHeader';
 
 function Test() {
   return (
