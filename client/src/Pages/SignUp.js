@@ -83,6 +83,7 @@ function SignUp() {
       .catch(err => {
         // Handle error.
         console.log('An error occurred:', err.response);
+        navigate('/404');
       });
   };
 
