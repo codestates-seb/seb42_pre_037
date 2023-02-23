@@ -13,6 +13,7 @@ import com.codestates.be.security.verification.handler.MemberAccessDeniedHandler
 import com.codestates.be.security.verification.handler.MemberAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -65,21 +66,20 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-//                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
-//                            .antMatchers(HttpMethod.PATCH, "/members/{member-Id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
-//                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
-//
-//                            .antMatchers(HttpMethod.DELETE, "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
+                            .antMatchers(HttpMethod.PATCH, "/members/{member-Id}").hasRole("USER")
+                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
+                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
+                            .antMatchers(HttpMethod.DELETE, "/members/{memberId}").hasRole("USER, ADMIN")
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
+                            .antMatchers("/", "/**").permitAll()
                             .antMatchers("/", "/**").permitAll();
                 });
 
