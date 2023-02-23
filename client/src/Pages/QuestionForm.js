@@ -125,7 +125,7 @@ function QuestionForm() {
               Introduce the problem and expand on what you put in the title.
               Minimum 20 characters.
             </div>
-            <TextEditor body={body} setBody={setBody} />
+            <TextEditor content={body} setContent={setBody} />
           </div>
           <Button onClick={handlerSubmit}>submit</Button>
         </form>

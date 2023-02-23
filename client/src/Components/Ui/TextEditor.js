@@ -15,15 +15,15 @@ const modules = {
   },
 };
 
-function TextEditor({ body, setBody }) {
+function TextEditor({ content, setContent }) {
   const handleChange = value => {
-    setBody(value);
+    setContent(value);
   };
 
   return (
     <ReactQuill
       onChange={handleChange}
-      value={body}
+      value={content}
       theme="snow"
       modules={modules}
     />
