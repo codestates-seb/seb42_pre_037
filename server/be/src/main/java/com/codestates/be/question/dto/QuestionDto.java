@@ -21,7 +21,8 @@ public class QuestionDto {
         @Min(1)
         private long memberId;
         @NotBlank
-        @Pattern(regexp = "^([0-9]+)-([0-9]+)-([0-9A-Z]+):([0-9]+):([0-9]+).([0-9A-Z]+)$")
+        @Pattern(regexp = "^([0-9]+[0-9]+[0-9]+[0-9])-([0-9]+[0-9])-([0-9]+[0-9])([T]):([0-9]+[0-9]):([0-9]+[0-9]).([0-9]+[0-9]+[0-9])([A-Z])$",
+                message = "날짜 형식이 잘못됐습니다. ex) '2023-02-22T04:11:17.285Z'")
         private String createdAt;   //     //'2023-02-22T04:11:17.285Z'
     }
 
