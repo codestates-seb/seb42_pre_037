@@ -7,10 +7,12 @@ import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.answer.repository.AnswerRepository;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class AnswerService {
     private final AnswerRepository answerRepository;
 
@@ -20,6 +22,7 @@ public class AnswerService {
     // 답변 등록
     public Answer createAnswer(Answer answer) {
         Answer response = answerRepository.save(answer);
+
         return response;
     }
 

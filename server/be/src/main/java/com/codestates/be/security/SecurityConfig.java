@@ -13,6 +13,7 @@ import com.codestates.be.security.verification.handler.MemberAccessDeniedHandler
 import com.codestates.be.security.verification.handler.MemberAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -65,6 +66,21 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
+                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
+                            .antMatchers(HttpMethod.PATCH, "/members/{member-Id}").hasRole("USER")
+                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
+                            .antMatchers(HttpMethod.DELETE, "/members/{memberId}").hasRole("USER, ADMIN")
+                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
+
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
+//                            .antMatchers("/", "/**").permitAll()
                             .antMatchers("/", "/**").permitAll();
                 });
 
@@ -82,7 +98,7 @@ public class SecurityConfig {
 
         configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); //어디서 오는 요청을 허용할 것인지.
 
-        configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE")); //어떤 HTTP 메서드를 허용할 것인지.
+        configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE", "OPTIONS")); //어떤 HTTP 메서드를 허용할 것인지.
         configuration.setExposedHeaders(Arrays.asList("*")); // 어떤 헤더값을 우리가 응답에 넣어서 보내줄지.
         configuration.setAllowedHeaders(Arrays.asList("*")); // 어떤 헤더값을 받아들이는데 성공할지.
         configuration.setAllowCredentials(true);
