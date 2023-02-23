@@ -43,7 +43,7 @@ public class MemberController {
         this.tokenizer = tokenizer;
     }
 
-    @PostMapping("/signup") //all
+    @PostMapping("/signup") //f
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post postMember) throws ParseException {
         Member member = mapper.MemberPostDtoToMember(postMember);
 
@@ -52,7 +52,7 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{member-id}") //user(본인)
+    @PatchMapping("/{member-id}") //uu
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @RequestBody @Valid MemberDto.Patch patchMember) throws Exception {
         Member member = mapper.MemberPatchDtoToMember(patchMember);
@@ -63,7 +63,7 @@ public class MemberController {
         return ResponseEntity.accepted().build();
     }
 
-    @PostMapping("/userInfo")
+    @PostMapping("/userInfo")// u?
     public ResponseEntity messageForHeader(@RequestHeader HttpHeaders headers) {
 
         String token = headers.get("authorization").get(0);
@@ -81,13 +81,20 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseEntity<>(userInfo), HttpStatus.OK);
     }
 
-    @GetMapping("/logout")
+    @GetMapping("/logout")//u
     public ResponseEntity getLogout(){
         log.info("# 사용자가 로그아웃 했습니다.");
+
+        //블랙리스트 만들어서 관리하는 방법.
+        //토큰을 지우는 식으로 logout
+        //토큰을 보관한다.
+        //보관한 토큰을 다시 보내면 ...
+        //토큰을 블랙리스트로 등록 구글링 해보시면 바로 나오더라구요!
+
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping//admin
+    @GetMapping//f
     public ResponseEntity getUsers(@RequestParam @Positive int page,
                                     @RequestParam @Positive int size){
         Page<Member> memberPage = memberService.getMembers(page-1, size);
@@ -102,7 +109,7 @@ public class MemberController {
         return new ResponseEntity(new MultiResponseEntity<>(users, pageInfo), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{member-id}") //admin, user(본인)
+    @DeleteMapping("/{member-id}") //a, uu
     public ResponseEntity deleteMember(@PathVariable @Positive long memberId){
         memberService.deleteMember(memberId);
 
