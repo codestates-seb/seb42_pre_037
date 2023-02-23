@@ -23,10 +23,10 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long questionId;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 5000)
     private String content;
 
     @Column(nullable = false)

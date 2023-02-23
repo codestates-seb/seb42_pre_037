@@ -63,7 +63,7 @@ public class MemberController {
         return ResponseEntity.accepted().build();
     }
 
-    @PostMapping("/userInfo")// u?
+    @PostMapping("/userInfo")// 토큰 없을 경우 에러 핸들링 추가
     public ResponseEntity messageForHeader(@RequestHeader HttpHeaders headers) {
 
         String token = headers.get("authorization").get(0);

@@ -66,21 +66,28 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
-                            .antMatchers(HttpMethod.PATCH, "/members/{member-Id}").hasRole("USER")
-                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
-                            .antMatchers(HttpMethod.DELETE, "/members/{memberId}").hasRole("USER, ADMIN")
-                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
+//                            .antMatchers(HttpMethod.POST, "/*/members/signup").permitAll()
+//                            .antMatchers(HttpMethod.POST, "/*/auth/login").permitAll()
+//                            .antMatchers(HttpMethod.GET,"/*/members/logout").hasRole("USER")
+//                            .antMatchers(HttpMethod.PATCH, "/*/members/{member-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.POST, "/*/members/userInfo").hasRole("USER")
+//                            .antMatchers(HttpMethod.DELETE, "/*/members/{member-id}").hasRole("USER, ADMIN")
+//                            .antMatchers(HttpMethod.GET, "/*/members/**").permitAll()
+//
+//
+//                            //TODO 로그 아웃, 로그인, 순서 꼬이지 않게 재배치
+//
+//                            .antMatchers(HttpMethod.POST, "/*/questions").hasRole("USER")
+//                            .antMatchers(HttpMethod.PATCH, "/*/questions/{question-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.GET, "/*/questions/{question-id}").permitAll()
+//                            .antMatchers(HttpMethod.GET, "/*/questions/**").permitAll()
+//                            .antMatchers(HttpMethod.DELETE, "/*/questions/{question-id}").hasRole("USER, ADMIN")
+//
+//                            .antMatchers(HttpMethod.POST, "/*/answers/{questions-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.PATCH, "/*/answers/{answer-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.GET, "/*/answers/{question-id}").permitAll()
+//                            .antMatchers(HttpMethod.DELETE, "/*/answers/{answer-id}").hasRole("ADMIN, USER")
 
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
-//                            .antMatchers("/", "/**").permitAll()
                             .antMatchers("/", "/**").permitAll();
                 });
 
