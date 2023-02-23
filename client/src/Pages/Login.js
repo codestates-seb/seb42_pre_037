@@ -74,13 +74,13 @@ const Login = () => {
 
   return (
     <div className="content justify-center flex flex-col stack-gray place-content-center h-screen items-center">
-      <div className="">
+      <Link to="/">
         <img
           className="object-scale-down w-14 h-16"
           src={iconStack}
           alt="icon_stack"
         />
-      </div>
+      </Link>
       <Card className="formContainer bg-white shadow-md rounded p-6 my-6 mx-auto">
         <form className="loginForm my-1.5">
           <Input
