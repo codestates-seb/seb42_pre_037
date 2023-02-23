@@ -76,7 +76,6 @@ public class SecurityConfig {
 //
 //
 //                            //TODO 로그 아웃, 로그인, 순서 꼬이지 않게 재배치
-//
 //                            .antMatchers(HttpMethod.POST, "/*/questions").hasRole("USER")
 //                            .antMatchers(HttpMethod.PATCH, "/*/questions/{question-id}").hasRole("USER")
 //                            .antMatchers(HttpMethod.GET, "/*/questions/{question-id}").permitAll()

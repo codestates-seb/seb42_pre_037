@@ -7,6 +7,7 @@ import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.service.MemberService;
+import com.codestates.be.question.service.QuestionService;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,16 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
     private final MemberService memberService;
+    private final QuestionService questionService;
 
     // mapper DI
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper, MemberService memberService) {
+
+    public AnswerController(AnswerService answerService, AnswerMapper mapper, MemberService memberService, QuestionService questionService) {
         this.answerService = answerService;
         this.mapper = mapper;
         this.memberService = memberService;
+        this.questionService = questionService;
     }
 
     // 답변 등록
@@ -69,6 +73,8 @@ public class AnswerController {
     // 답변 전체 조회
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
+        questionService.findVerifiedExistQuestion(questionId);
+
         List<Answer> answers = answerService.findAnswers(questionId);
 
         List<AnswerDto.Response> response = mapper.answersToAnswerResponseDtos(answers);

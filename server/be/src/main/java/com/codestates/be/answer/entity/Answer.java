@@ -17,7 +17,7 @@ import java.util.Date;
 @Getter
 public class Answer {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerId;
 
     @Column(nullable = false)

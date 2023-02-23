@@ -38,7 +38,6 @@ public interface AnswerMapper {
                 answer.getAnswerId(),
                 answer.getQuestion().getQuestionId()//questionId;
         );
-
         return answerResponseDto;
     };
 
