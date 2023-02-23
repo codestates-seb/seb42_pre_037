@@ -7,6 +7,7 @@ import { getTimeDiffString } from '../utils';
 
 import { dummyAnswers } from '../dummyData';
 import Nav from '../Components/layouts/Navbar';
+import Answers from '../Components/Answers';
 
 function Question() {
   const navigate = useNavigate();
@@ -54,9 +55,7 @@ function Question() {
           </div>
           <div>
             {/* 답변 목록 */}
-            <div>
-              <h3 className="text-xl">{answers.length + 1} Answers</h3>
-            </div>
+            <Answers answers={answers} />
             <h1 className="text-3xl w-4/5 my-7">Your Answer</h1>
             <div className="mb-10">
               <TextEditor />
