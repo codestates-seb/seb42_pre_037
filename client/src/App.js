@@ -17,14 +17,13 @@ import Header from './Components/layouts/Header';
 import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
 import Logout from './Pages/Logout';
+import ErrorPage from './Pages/ErrorPage';
 
 function App() {
   const { setIsLogin } = useIsLoginStore(state => state);
   const { setUserInfo } = useUserInfoStore(state => state);
 
   const authHandler = () => {
-    console.log(localStorage.getItem('token'));
-
     axios
       .post(
         'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/userInfo',
@@ -66,6 +65,7 @@ function App() {
         <Route path="logout" element={<Logout />} />
         <Route path="test" element={<Test />} />
         <Route path="question/ask" element={<QuestionForm />} />
+        <Route path="404" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

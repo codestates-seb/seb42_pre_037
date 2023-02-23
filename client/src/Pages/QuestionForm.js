@@ -8,7 +8,6 @@ import AnswersImg from '../Components/icons/AnswersImg.png';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
 
-
 function QuestionForm() {
   const { userInfo } = useUserInfoStore(state => state);
   const { isLogin } = useIsLoginStore(state => state);
@@ -16,8 +15,8 @@ function QuestionForm() {
   const pathData = {
     title: '',
     body: '',
-    memberId : null,
-    createdAt : ''
+    memberId: null,
+    createdAt: '',
   };
 
   const navigate = useNavigate();
@@ -41,24 +40,26 @@ function QuestionForm() {
     }
   };
 
-
   const handlerSubmit = e => {
     if (isLogin) {
-    
-    e.preventDefault();
-    pathData.title = title;
-    pathData.body = body;
-    pathData.memberId = userInfo.memberId;
-    const currentTime = new Date()
-    pathData.createdAt = currentTime.toString()
-    pathQuestionData();
-    console.log('pathData', pathData.title, pathData.body, pathData.memberId, pathData.createdAt);
+      e.preventDefault();
+      pathData.title = title;
+      pathData.body = body;
+      pathData.memberId = userInfo.memberId;
+      const currentTime = new Date();
+      pathData.createdAt = currentTime.toString();
+      pathQuestionData();
+      console.log(
+        'pathData',
+        pathData.title,
+        pathData.body,
+        pathData.memberId,
+        pathData.createdAt,
+      );
+    } else {
+      alert('You need to Login.');
+      navigate('/login');
     }
-
-    else { alert('You need to Login.')
-    navigate('/login')
-  }
-
   };
 
   return (
@@ -126,7 +127,7 @@ function QuestionForm() {
             </div>
             <TextEditor body={body} setBody={setBody} />
           </div>
-           <Button onClick={handlerSubmit}>submit</Button> 
+          <Button onClick={handlerSubmit}>submit</Button>
         </form>
       </div>
     </>
