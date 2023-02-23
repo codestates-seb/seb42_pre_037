@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -19,8 +20,9 @@ public class QuestionDto {
         private String content;
         @Min(1)
         private long memberId;
-        @NotBlank //정규 표현식 추가
-        private String createdAt;
+        @NotBlank
+        @Pattern(regexp = "^([0-9]+)-([0-9]+)-([0-9A-Z]+):([0-9]+):([0-9]+).([0-9A-Z]+)$")
+        private String createdAt;   //     //'2023-02-22T04:11:17.285Z'
     }
 
     @Getter
@@ -30,7 +32,6 @@ public class QuestionDto {
         private String content;
         @NotBlank
         private String modifiedAt;
-        // 태그 수정 가능해야 하나?
     }
 
     @Getter

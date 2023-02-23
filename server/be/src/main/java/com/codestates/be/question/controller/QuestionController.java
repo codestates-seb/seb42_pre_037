@@ -11,16 +11,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
 @RestController
 @RequestMapping("/questions")
 @Slf4j
-
-// 현재 매퍼 완성 후 return 부분 수정 필요!!!!!!!!!!!!!!!!!!!!
+@Validated
 public class QuestionController {
 
     private final QuestionService questionService;
@@ -31,18 +32,18 @@ public class QuestionController {
         this.mapper = mapper;
     }
 
-    @PostMapping    // 질문 등록
-    public ResponseEntity postQuestion(@RequestBody QuestionDto.Post postDto) {
+    @PostMapping    // 질문 등록 <U>
+    public ResponseEntity postQuestion(@RequestBody @Valid QuestionDto.Post postDto) {
 
         Question createdQuestion =  questionService.createQuestion(mapper.questionPostDtoToQuestion(postDto));
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(createdQuestion);
         //question member 아이디만 설정된 상태. -> JPA 트랜잭션 -> 불러오기 member. -> 저장 ->  (entitymanager 닫힘(flush) -> 불러올 때)
-        //
+
 
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{question-id}")    //질문 수정
+    @PatchMapping("/{question-id}")    //질문 수정 <UU>
     public ResponseEntity patchQuestion(@RequestBody QuestionDto.Patch patchDto,
                                         @PathVariable("question-id") Long questionId) {
 
@@ -53,22 +54,22 @@ public class QuestionController {
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
 
-    @GetMapping("/{question-id}")    //질문 조회
+    @GetMapping("/{question-id}")    //질문 조회 <F>
     public ResponseEntity getQuestion(@PathVariable("question-id") Long questionId) {
 
         Question foundQuestion = questionService.findQuestion(questionId);
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(foundQuestion);
 
-        //질문자 이메일, 이름 조회
+        //질문자 이메일, 이름 조회 -> mapper로 옮김
         //  response.setEmail(foundQuestion.getMember().getEmail());
         //        response.setDisplayName(foundQuestion.getMember().getDisplayName());
 
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
 
-    @GetMapping     //질문 전체 조회
+    @GetMapping     //질문 전체 조회 <F>
     public ResponseEntity getQuestions (@RequestParam int page,
-                                        @Positive @RequestParam int size) {
+                                        @RequestParam @Positive int size) {
 
         Page<Question> pageQuestions = questionService.findQuestions(page, size);
         List<Question> questionList = pageQuestions.getContent();
@@ -79,7 +80,7 @@ public class QuestionController {
         return new ResponseEntity<>(new MultiResponseEntity<>(mapper.questionsToQuestionsResponseDto(questionList),pageInfo),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{question-id}")    //질문 삭제
+    @DeleteMapping("/{question-id}")    //질문 삭제 <UU,A>
     public ResponseEntity deleteQuestion(@PathVariable("question-id") Long questionId) {
 
         questionService.deleteQuestion(questionId);

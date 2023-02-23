@@ -12,7 +12,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
 
-    QuestionMapper INSTANCE = Mappers.getMapper(QuestionMapper.class);
+//    QuestionMapper INSTANCE = Mappers.getMapper(QuestionMapper.class);
 
     // postDto -> entity
     default Question questionPostDtoToQuestion(QuestionDto.Post questionPost){
