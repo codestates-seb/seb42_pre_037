@@ -10,10 +10,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@RequestMapping("/questions")
+@Transactional
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
