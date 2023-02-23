@@ -14,7 +14,7 @@ function LoginHeader() {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="py-7 ">
-      <nav className="bg-slate-50 dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 fixed z-40 top-30 left-0 right-0">
+      <nav className="bg-slate-50 dark:bg-gray-800 shadow p-2 border-t-4 border-solid border-orange-400 fixed z-40 top-30 left-0 right-0">
         <div className="px-44 items-center ">
           <div className="flex items-center h-10 ">
             <div className=" flex items-center">
