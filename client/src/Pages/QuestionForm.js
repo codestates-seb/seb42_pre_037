@@ -1,12 +1,17 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUserInfoStore } from '../Stores/userInfoStore';
+import { useIsLoginStore } from '../Stores/loginStore';
+
 import AnswersImg from '../Components/icons/AnswersImg.png';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
-import { useUserInfoStore } from '../Stores/userInfoStore';
+
 
 function QuestionForm() {
   const { userInfo } = useUserInfoStore(state => state);
+  const { isLogin } = useIsLoginStore(state => state);
 
   const pathData = {
     title: '',
@@ -14,6 +19,8 @@ function QuestionForm() {
     memberId : null,
     createdAt : ''
   };
+
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -34,7 +41,10 @@ function QuestionForm() {
     }
   };
 
+
   const handlerSubmit = e => {
+    if (isLogin) {
+    
     e.preventDefault();
     pathData.title = title;
     pathData.body = body;
@@ -43,6 +53,12 @@ function QuestionForm() {
     pathData.createdAt = currentTime.toString()
     pathQuestionData();
     console.log('pathData', pathData.title, pathData.body, pathData.memberId, pathData.createdAt);
+    }
+
+    else { alert('You need to Login.')
+    navigate('/login')
+  }
+
   };
 
   return (
@@ -110,7 +126,7 @@ function QuestionForm() {
             </div>
             <TextEditor body={body} setBody={setBody} />
           </div>
-          <Button onClick={handlerSubmit}>submit</Button>
+           <Button onClick={handlerSubmit}>submit</Button> 
         </form>
       </div>
     </>
