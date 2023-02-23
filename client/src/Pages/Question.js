@@ -2,12 +2,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
 import Button from '../Components/Ui/Button';
-import TextEditor from '../Components/Ui/TextEditor';
 import { getTimeDiffString } from '../utils';
 
 import { dummyAnswers } from '../dummyData';
 import Nav from '../Components/layouts/Navbar';
 import Answers from '../Components/Answers';
+import AnswersForm from '../Components/AnswersForm';
 
 function Question() {
   const navigate = useNavigate();
@@ -56,11 +56,7 @@ function Question() {
           <div>
             {/* 답변 목록 */}
             <Answers answers={answers} />
-            <h1 className="text-3xl w-4/5 my-7">Your Answer</h1>
-            <div className="mb-10">
-              <TextEditor />
-            </div>
-            <Button>Post Your Answer</Button>
+            <AnswersForm />
           </div>
         </div>
       </div>
