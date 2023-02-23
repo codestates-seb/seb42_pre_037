@@ -7,7 +7,7 @@ import SearchBar from '../Ui/SearchBar';
 function Header() {
   const [toggle, setToggle] = useState(false);
   return (
-    <div>
+    <div className="py-7">
       <nav className="bg-white dark:bg-gray-800 shadow p-2 border-t-4 border-orange-500 fixed z-40 top-0 left-0 right-0">
         <div className="px-40 items-center ">
           <div className="flex items-center h-10 ">

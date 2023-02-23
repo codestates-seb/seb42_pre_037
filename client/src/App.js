@@ -20,9 +20,8 @@ import Logout from './Pages/Logout';
 
 function App() {
   const { setIsLogin } = useIsLoginStore(state => state);
-  const { userInfo, setUserInfo } = useUserInfoStore(state => state);
+  const { setUserInfo } = useUserInfoStore(state => state);
 
-  console.log(userInfo);
   const authHandler = () => {
     console.log(localStorage.getItem('token'));
 

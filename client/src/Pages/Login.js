@@ -73,7 +73,7 @@ const Login = () => {
   };
 
   return (
-    <div className="content justify-center items-center flex flex-col bg-gray-200">
+    <div className="content justify-center flex flex-col stack-gray place-content-center h-screen items-center">
       <div className="">
         <img
           className="object-scale-down w-14 h-16"
