@@ -55,6 +55,7 @@ const Login = () => {
       .catch(err => {
         if (err.response.status === 401) {
           setErrorMessage('로그인에 실패했습니다.');
+          navigate('/404');
         }
       });
 
