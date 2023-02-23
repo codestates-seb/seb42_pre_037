@@ -9,9 +9,9 @@ function Input({
   ...rest
 }) {
   return (
-    <div className={`flex flex-col w-full ${className}`}>
+    <div className={`flex flex-col w-full ${className} mb-4`}>
       <div className="flex flex-row justify-between">
-        <label htmlFor={id} className="mb-2 font-medium text-gray-700">
+        <label htmlFor={id} className="mb-2 font-semibold text-gray-700">
           {label}
         </label>
         {children}

@@ -1,14 +1,25 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUserInfoStore } from '../Stores/userInfoStore';
+import { useIsLoginStore } from '../Stores/loginStore';
+
 import AnswersImg from '../Components/icons/AnswersImg.png';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
 
 function QuestionForm() {
+  const { userInfo } = useUserInfoStore(state => state);
+  const { isLogin } = useIsLoginStore(state => state);
+
   const pathData = {
     title: '',
     body: '',
+    memberId: null,
+    createdAt: '',
   };
+
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -30,11 +41,25 @@ function QuestionForm() {
   };
 
   const handlerSubmit = e => {
-    e.preventDefault();
-    pathData.title = title;
-    pathData.body = body;
-    pathQuestionData();
-    console.log('pathData', pathData.title, pathData.body);
+    if (isLogin) {
+      e.preventDefault();
+      pathData.title = title;
+      pathData.body = body;
+      pathData.memberId = userInfo.memberId;
+      const currentTime = new Date();
+      pathData.createdAt = currentTime.toString();
+      pathQuestionData();
+      console.log(
+        'pathData',
+        pathData.title,
+        pathData.body,
+        pathData.memberId,
+        pathData.createdAt,
+      );
+    } else {
+      alert('You need to Login.');
+      navigate('/login');
+    }
   };
 
   return (

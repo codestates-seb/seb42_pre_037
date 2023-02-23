@@ -87,29 +87,31 @@ function SignUp() {
   };
 
   return (
-    <div className="content flex flex-row">
-      <div>
-        <h1 className="text-lg">Join the Stack Overflow community</h1>
-        <div className="flex flex-row">
-          <RiQuestionnaireLine />
-          <div>Get unstuck — ask a question</div>
-        </div>
-        <div className="flex flex-row">
-          <HiChevronUpDown />
-          <div>Unlock new privileges like voting and commenting</div>
-        </div>
-        <div className="flex flex-row">
-          <IoPricetagsSharp />
-          <div>Save your favorite tags, filters, and jobs</div>
-        </div>
-        <div className="flex flex-row">
-          <GiTrophy />
-          <div>Earn reputation and badges</div>
+    <div className="content flex flex-row stack-gray place-content-center h-screen items-center box-border">
+      <div className=" mr-12">
+        <h1 className="text-3xl mb-8">Join the Stack Overflow community</h1>
+        <div className="">
+          <div className="flex flex-row mb-6">
+            <RiQuestionnaireLine className="mr-2 h-blue" />
+            <div>Get unstuck — ask a question</div>
+          </div>
+          <div className="flex flex-row mb-6">
+            <HiChevronUpDown className="mr-2 h-blue" />
+            <div>Unlock new privileges like voting and commenting</div>
+          </div>
+          <div className="flex flex-row mb-6">
+            <IoPricetagsSharp className="mr-2 h-blue" />
+            <div>Save your favorite tags, filters, and jobs</div>
+          </div>
+          <div className="flex flex-row mb-6">
+            <GiTrophy className="mr-2 h-blue" />
+            <div>Earn reputation and badges</div>
+          </div>
         </div>
       </div>
       <div className="flex flex-col">
-        <Card className="formContainer">
-          <form className="signupForm">
+        <Card className="formContainer max-w-xs">
+          <form className="signupForm my-1.5">
             <Input
               className="usernameInput"
               label="Display name"
@@ -124,9 +126,10 @@ function SignUp() {
             <Input
               label="Password"
               id="passwordInput"
+              type="password"
               onChange={e => setPassword(e.target.value)}
             />
-            <p>
+            <p className=" mb-4 font-medium text-xs">
               Passwords must contain at least eight characters, including at
               least 1 letter and 1 number.
             </p>
@@ -140,10 +143,10 @@ function SignUp() {
             </Button>
           </form>
         </Card>
-        <div className="linkPage">
+        <div className="linkPage text-center mt-6">
           Already have an account?
           <Link
-            className="loginLink inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
+            className="loginLink inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800 ml-2"
             to="/login"
           >
             Log in

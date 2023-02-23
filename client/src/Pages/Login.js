@@ -73,7 +73,7 @@ const Login = () => {
   };
 
   return (
-    <div className="content justify-center items-center flex flex-col bg-gray-200">
+    <div className="content justify-center flex flex-col stack-gray place-content-center h-screen items-center">
       <div className="">
         <img
           className="object-scale-down w-14 h-16"
@@ -81,9 +81,8 @@ const Login = () => {
           alt="icon_stack"
         />
       </div>
-      <div>this is Login page</div>
-      <Card className="formContainer bg-white shadow-md rounded p-6 mb-6 mx-auto">
-        <form className="loginForm">
+      <Card className="formContainer bg-white shadow-md rounded p-6 my-6 mx-auto">
+        <form className="loginForm my-1.5">
           <Input
             className="emailInput"
             label="Email"
@@ -121,7 +120,7 @@ const Login = () => {
       <div>
         Don’t have an account?
         <Link
-          className="inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800"
+          className="inline-block items-end font-light text-sm text-blue-500 hover:text-blue-800 ml-2"
           to="/signup"
         >
           Sign up
