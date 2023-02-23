@@ -51,7 +51,7 @@ function Questions() {
     <div className=" flex flex-row flex-auto flex-nowrap w-[100vw]">
       <div className="flex mx-auto my-0 w-10/12  ">
         <Nav />
-        <div className="flex flex-col mt-16 mr-[40rem] ">
+        <div className="flex flex-col  mr-[40rem] ">
           <div className="flex items-end justify-between p-5">
             <h1 className="text-4xl">All Questions</h1>
             <Button onClick={handlerChangeQuestion} size="large">

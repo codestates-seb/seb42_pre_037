@@ -18,12 +18,16 @@ import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
 import Logout from './Pages/Logout';
 import ErrorPage from './Pages/ErrorPage';
+import LoginHeader from './Components/layouts/LoginHeader';
 
 function App() {
   const { isLogin, setIsLogin } = useIsLoginStore(state => state);
   const { setUserInfo } = useUserInfoStore(state => state);
   if (isLogin === false) setIsLogin(true);
   console.log(isLogin);
+
+  if (isLogin === true) setIsLogin(false);
+  // console.log(isLogin);
 
   const authHandler = () => {
     axios
@@ -56,8 +60,7 @@ function App() {
   return (
     <BrowserRouter>
       {/* <Mainlayout /> */}
-      <Header />
-
+      {isLogin ? <LoginHeader /> : <Header />}
       <Routes>
         <Route path="/" element={<Questions />} />
         <Route path="question" element={<Question />} />
