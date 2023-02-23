@@ -66,11 +66,12 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-//                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
-//                            .antMatchers(HttpMethod.PATCH, "/members/{member-Id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
-//                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
-//                            .antMatchers(HttpMethod.DELETE, "/members/{memberId}").hasRole("USER, ADMIN")
+                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
+                            .antMatchers(HttpMethod.PATCH, "/members/{member-Id}").hasRole("USER")
+                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
+                            .antMatchers(HttpMethod.DELETE, "/members/{memberId}").hasRole("USER, ADMIN")
+                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
+
 //                            .antMatchers("/", "/**").permitAll()
 //                            .antMatchers("/", "/**").permitAll()
 //                            .antMatchers("/", "/**").permitAll()
