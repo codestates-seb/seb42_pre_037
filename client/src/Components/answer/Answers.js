@@ -9,7 +9,9 @@ function Answers({ answers }) {
       <h3 className="text-xl">{answers.length} Answers</h3>
       <ul>
         {answers.length > 0 &&
-          answers.map(answer => <Answer answer={answer} />)}
+          answers.map(answer => (
+            <Answer key={answer.answerId} answer={answer} />
+          ))}
       </ul>
     </div>
   );

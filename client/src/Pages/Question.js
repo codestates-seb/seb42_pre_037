@@ -16,13 +16,13 @@ import PTagButton from '../Components/Ui/PTagButton';
 function Question() {
   const navigate = useNavigate();
   const location = useLocation();
-  const purify = DOMPurify(window);
   const { question } = location.state;
+  const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
   const [answers, setAnswers] = useState([]);
-
+  console.log(location);
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
@@ -34,9 +34,12 @@ function Question() {
         console.error(error);
       }
     };
-    fetchAnswers();
-  }, [<Answers />, <AnswersForm />]);
 
+    fetchAnswers();
+  }, [question.questionId, location]);
+
+  console.log(answers);
+  // <Answers />, <AnswersForm />
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
@@ -78,6 +81,10 @@ function Question() {
     }
   };
 
+  const handlerClickEdit = () => {
+    navigate('/question/:questionId/edit', { state: { question } });
+  };
+
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
       <div className="flex mx-auto my-0 w-10/12">
@@ -105,7 +112,9 @@ function Question() {
           <div className="mt-5 flex justify-between border-b">
             <div className="flex jus space-x-3 text-gray-500 ">
               <p>Share</p>
-              {verifyLoginAndPostAuthorship(<p>edit</p>)}
+              {verifyLoginAndPostAuthorship(
+                <PTagButton onClick={handlerClickEdit}>edit</PTagButton>,
+              )}
               {verifyLoginAndPostAuthorship(
                 <PTagButton onClick={handlerClickDelete}>delete</PTagButton>,
               )}
