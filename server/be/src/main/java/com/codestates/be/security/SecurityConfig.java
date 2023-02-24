@@ -74,13 +74,13 @@ public class SecurityConfig {
                             .antMatchers(HttpMethod.DELETE, "/members/{member-id}").hasRole("USER")
                             .antMatchers(HttpMethod.GET, "/members/**").permitAll()
 
-                            .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
+//                            .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
                             .antMatchers(HttpMethod.PATCH, "/questions/{question-id}").hasRole("USER")
                             .antMatchers(HttpMethod.GET, "/questions/{question-id}").permitAll()
                             .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
                             .antMatchers(HttpMethod.DELETE, "/questions/{question-id}").hasRole("USER")
 
-                            .antMatchers(HttpMethod.POST, "/answers/{question-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.POST, "/answers/{question-id}").hasRole("USER")
                             .antMatchers(HttpMethod.PATCH, "/answers/{answer-id}").hasRole("USER")
                             .antMatchers(HttpMethod.GET, "/answers/{question-id}").permitAll()
                             .antMatchers(HttpMethod.DELETE, "/answers/{answer-id}").hasRole("USER")
