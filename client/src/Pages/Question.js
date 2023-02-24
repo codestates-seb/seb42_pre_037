@@ -22,7 +22,7 @@ function Question() {
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
   const [answers, setAnswers] = useState([]);
-
+  console.log(location);
   useEffect(() => {
     const fetchAnswers = async () => {
       try {
@@ -35,8 +35,8 @@ function Question() {
       }
     };
 
-    fetchAnswers(answers);
-  }, [question.questionId]);
+    fetchAnswers();
+  }, [question.questionId, location]);
 
   console.log(answers);
   // <Answers />, <AnswersForm />

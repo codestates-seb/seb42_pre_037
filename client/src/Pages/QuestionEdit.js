@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Input from '../Components/Ui/Input';
@@ -10,6 +10,7 @@ function QuestionEdit() {
   const location = useLocation();
   const { question } = location.state;
   const currentTime = new Date().toString();
+  const navigate = useNavigate();
 
   const pathData = {
     content: '',
@@ -48,6 +49,7 @@ function QuestionEdit() {
     pathData.content = body;
     pathData.modifiedAt = currentTime;
     pathQuestionData();
+    navigate(-1);
   };
 
   return (
