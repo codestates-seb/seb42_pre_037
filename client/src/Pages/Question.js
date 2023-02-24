@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
+import avatar from '../Components/icons/avatar.png';
 import Button from '../Components/Ui/Button';
 import { getTimeDiffString } from '../utils';
 import Nav from '../Components/layouts/Navbar';
@@ -108,7 +109,7 @@ function Question() {
             <div className="p-2 w-48 rounded clear-blue mb-10">
               <div className="text-gray-500 text-sm">edit {timeDiff}</div>
               <div className="flex h-10">
-                <img className="bg-white" src="img/avatar.png" alt="avatar" />
+                <img className="bg-white" src={avatar} alt="avatar" />
                 <p className="h-blue ml-2 text-sm">{question.displayName}</p>
               </div>
             </div>
