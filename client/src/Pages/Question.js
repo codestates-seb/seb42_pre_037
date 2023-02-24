@@ -36,7 +36,7 @@ function Question() {
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
       <div className="flex mx-auto my-0 w-10/12">
         <Nav />
-        <div className="p-5 mt-16 mr-[40rem]">
+        <div className="p-5 mt-16 mr-[10rem]">
           <div className="flex items-start justify-between ">
             <h1 className="text-3xl w-4/5">{question.title}</h1>
             <Button onClick={handlerChangeQuestion} size="large">
