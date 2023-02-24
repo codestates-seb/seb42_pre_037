@@ -1,5 +1,6 @@
 package com.codestates.be.advice;
 
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.JDBCException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -52,6 +53,14 @@ public class GlobalExceptionAdvice {
         log.error("데이터 무결성 확인 오류. : {}", e.getMessage());
 
         ErrorResponse response = new ErrorResponse(ExceptionCode.INCORRECT_DATA_REQUESTED);
+
+        return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity handleMalformedJwtException(MalformedJwtException exception){
+
+        ErrorResponse response = new ErrorResponse(ExceptionCode.WRONG_TOKEN_INPUT);
 
         return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
     }

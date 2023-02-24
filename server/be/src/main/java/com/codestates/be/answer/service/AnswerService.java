@@ -5,6 +5,7 @@ import com.codestates.be.advice.BuissnessLogicException;
 import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.answer.entity.Answer;
 import com.codestates.be.answer.repository.AnswerRepository;
+import com.codestates.be.question.service.QuestionService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,12 +16,17 @@ import java.util.stream.Collectors;
 @Transactional
 public class AnswerService {
     private final AnswerRepository answerRepository;
+    private final QuestionService questionService;
 
-    public AnswerService(AnswerRepository answerRepository) {
+    public AnswerService(AnswerRepository answerRepository, QuestionService questionService) {
         this.answerRepository = answerRepository;
+        this.questionService = questionService;
     }
+
     // 답변 등록
     public Answer createAnswer(Answer answer) {
+        questionService.findVerifiedExistQuestion(answer.getQuestion().getQuestionId());
+
         Answer response = answerRepository.save(answer);
 
         return response;

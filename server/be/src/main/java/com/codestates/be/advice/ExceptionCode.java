@@ -14,6 +14,7 @@ public enum ExceptionCode {
     QUESTION_NOT_FOUND(404, "질문을 찾을 수 없습니다."),
     ANSWER_NOT_FOUND(404, "답변을 찾을 수 없습니다."),
     ANSWER_NOT_CHANGE(404, "수정할 내용이 없습니다."),
+    WRONG_TOKEN_INPUT(403, "잘못된 토큰이 들어왔습니다."),
     WRONG_FORMAT_OF_DATE(400, "전달한 날짜 형식이 올바르지 않습니다. (ex. YYYY MM DD hh mm)");
     private int httpStatus;
     private String message;

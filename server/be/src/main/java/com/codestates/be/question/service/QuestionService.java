@@ -59,7 +59,7 @@ public class QuestionService {
         questionRepository.delete(existQuestion);
     }
 
-    private Question findVerifiedExistQuestion(long questionId) {
+    public Question findVerifiedExistQuestion(long questionId) {
         Optional<Question> optionalQuestion = questionRepository.findById(questionId);
         Question existQuestion = optionalQuestion.orElseThrow(
                 () -> new BuissnessLogicException(ExceptionCode.QUESTION_NOT_FOUND)
