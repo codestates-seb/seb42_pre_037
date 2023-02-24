@@ -4,7 +4,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 
-import QuestionsItem from '../Components/QuestionsItem';
+import QuestionsItem from '../Components/question/QuestionsItem';
 import Button from '../Components/Ui/Button';
 import { dummyQuestions } from '../dummyData';
 
@@ -48,18 +48,18 @@ function Questions() {
     navigate('/question/ask');
   };
   return (
-    <div className=" flex flex-row flex-auto flex-nowrap w-[100vw]">
-      <div className="flex mx-auto my-0 w-10/12  ">
+    <div className=" flex justify-center">
+      <div className="flex xl:w-10/12 w-full">
         <Nav />
-        <div className="flex flex-col  mr-[40rem] ">
-          <div className="flex items-end justify-between p-5">
+        <div className="flex flex-col w-full">
+          <div className="question-header">
             <h1 className="text-4xl">All Questions</h1>
             <Button onClick={handlerChangeQuestion} size="large">
               Ask Question
             </Button>
           </div>
 
-          <div className="flex items-end justify-between p-5 border-b-2">
+          <div className="question-header border-b-2">
             <h3 className="text-2xl">
               {totalQuestion.totalElements} questions
             </h3>

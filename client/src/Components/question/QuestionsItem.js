@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getTimeDiffString } from '../utils';
+import { getTimeDiffString } from '../../utils';
 
 function QuestionsItem({ question }) {
   return (
