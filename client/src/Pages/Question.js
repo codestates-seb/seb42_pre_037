@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 import Button from '../Components/Ui/Button';
 import { getTimeDiffString } from '../utils';
@@ -8,28 +9,58 @@ import Nav from '../Components/layouts/Navbar';
 import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
-import { useUserInfoStore } from '../Stores/userInfoStore';
+import PTagButton from '../Components/Ui/PTagButton';
+// import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const { question } = location.state;
+  // const { userInfo } = useUserInfoStore(state => state);
   const [answers] = useState(dummyAnswers.data);
   const timeDiff = getTimeDiffString(question.createdAt);
+  const { isLogin } = useIsLoginStore(state => state);
 
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
 
   const verifyLoginAndPostAuthorship = tag => {
-    if (
-      useIsLoginStore &&
-      question.displayName === useUserInfoStore.displayName
-    ) {
+    // if (isLogin && question.displayName === userInfo.displayName) {
+    //   return tag;
+    // }
+    // return '';
+    if (isLogin) {
       return tag;
     }
     return '';
+  };
+
+  const deletePost = async () => {
+    const response = await axios
+      .delete(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            withCredentials: true,
+          },
+        },
+      )
+      .catch(error => {
+        console.error(error);
+      });
+    if (response && response.data) {
+      console.log(response);
+    }
+  };
+
+  const handlerClickDelete = () => {
+    if (window.confirm('Delete this post?')) {
+      deletePost();
+      navigate('/');
+    }
   };
 
   return (
@@ -55,22 +86,10 @@ function Question() {
           <div className="mt-5 flex justify-between border-b">
             <div className="flex jus space-x-3 text-gray-500 ">
               <p>Share</p>
-
-              {/* {useIsLoginStore &&
-              useUserInfoStore.displayName === question.displayName ? (
-                ''
-              ) : (
-                <p>Edit</p>
-              )}
-
-              {useIsLoginStore &&
-              useUserInfoStore.displayName === question.displayName ? (
-                ''
-              ) : (
-                <p>delete</p>
-              )} */}
               {verifyLoginAndPostAuthorship(<p>edit</p>)}
-
+              {verifyLoginAndPostAuthorship(
+                <PTagButton onClick={handlerClickDelete}>delete</PTagButton>,
+              )}
               <p>Follow</p>
             </div>
             <div className="p-2 w-48 rounded clear-blue mb-10">

@@ -25,7 +25,6 @@ function QuestionForm() {
   const [body, setBody] = useState('');
 
   const handlerChange = e => {
-    console.log(e.target.value);
     setTitle(e.target.value);
   };
 
@@ -52,12 +51,15 @@ function QuestionForm() {
   const handlerSubmit = e => {
     if (isLogin) {
       e.preventDefault();
+      const currentTime = new Date();
+
       pathData.title = title;
       pathData.content = body;
       pathData.memberId = userInfo.memberId;
-      const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
+
       pathQuestionData();
+      navigate('/');
     } else {
       alert('You need to Login.');
       navigate('/login');
