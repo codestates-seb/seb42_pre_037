@@ -45,7 +45,10 @@ function Answer({ answer }) {
 
   return (
     <li key={answer.answerId} className="py-6 border-b">
-      <p className="mb-5">{answer.content}</p>
+      <p
+        className="mb-5"
+        dangerouslySetInnerHTML={{ __html: answer.content }}
+      />
       <div className="flex justify-between">
         <div className="flex jus space-x-3 text-gray-500 ">
           <p>Share</p>

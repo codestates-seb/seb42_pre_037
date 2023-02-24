@@ -94,7 +94,7 @@ function Question() {
           </div>
 
           {/* Question content */}
-          <div>{question.content}</div>
+          <div dangerouslySetInnerHTML={{ __html: question.content }} />
 
           {/* Question footer */}
           <div className="mt-5 flex justify-between border-b">
