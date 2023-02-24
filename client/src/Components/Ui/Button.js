@@ -35,7 +35,7 @@ function Button({
       break;
     default:
       backgroundColorClass =
-        'bg-blue-500 hover:bg-blue-600 focus:ring-blue-400';
+        'bg-[#4495FF] hover:bg-[#3474CC] focus:ring-blue-400';
       textColorClass = 'text-white';
   }
 

@@ -52,14 +52,14 @@ function Questions() {
       <div className="flex xl:w-10/12 w-full">
         <Nav />
         <div className="flex flex-col w-full">
-          <div className="flex items-end justify-between p-5">
+          <div className="question-header">
             <h1 className="text-4xl">All Questions</h1>
             <Button onClick={handlerChangeQuestion} size="large">
               Ask Question
             </Button>
           </div>
 
-          <div className="flex items-end justify-between p-5 border-b-2">
+          <div className="question-header border-b-2">
             <h3 className="text-2xl">
               {totalQuestion.totalElements} questions
             </h3>
