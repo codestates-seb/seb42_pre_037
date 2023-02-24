@@ -48,7 +48,7 @@ function QuestionForm() {
       e.preventDefault();
       pathData.title = title;
       pathData.content = body;
-      pathData.memberId = userInfo.data.memberId;
+      pathData.memberId = userInfo.memberId;
       const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
       pathQuestionData();
