@@ -39,7 +39,7 @@ function AnswersForm({ questionId }) {
     if (isLogin) {
       e.preventDefault();
       pathData.content = content.replaceAll('"', "'");
-      pathData.memberId = userInfo.data.memberId;
+      pathData.memberId = userInfo.memberId;
       const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
       pathQuestionData();
