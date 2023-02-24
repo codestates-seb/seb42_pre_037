@@ -2,11 +2,11 @@ import { useState } from 'react';
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
-import TextEditor from './Ui/TextEditor';
-import Button from './Ui/Button';
+import TextEditor from '../Ui/TextEditor';
+import Button from '../Ui/Button';
 
-import { useUserInfoStore } from '../Stores/userInfoStore';
-import { useIsLoginStore } from '../Stores/loginStore';
+import { useUserInfoStore } from '../../Stores/userInfoStore';
+import { useIsLoginStore } from '../../Stores/loginStore';
 
 function AnswersForm({ questionId }) {
   const pathData = {

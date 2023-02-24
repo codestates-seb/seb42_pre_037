@@ -5,8 +5,8 @@ import Button from '../Components/Ui/Button';
 import { getTimeDiffString } from '../utils';
 import { dummyAnswers } from '../dummyData';
 import Nav from '../Components/layouts/Navbar';
-import Answers from '../Components/Answers';
-import AnswersForm from '../Components/AnswersForm';
+import Answers from '../Components/answer/Answers';
+import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import { useUserInfoStore } from '../Stores/userInfoStore';
 

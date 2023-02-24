@@ -4,7 +4,7 @@ import axios from 'axios';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 
-import QuestionsItem from '../Components/QuestionsItem';
+import QuestionsItem from '../Components/question/QuestionsItem';
 import Button from '../Components/Ui/Button';
 import { dummyQuestions } from '../dummyData';
 
