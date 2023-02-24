@@ -9,6 +9,7 @@ import Nav from '../Components/layouts/Navbar';
 import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
+import PTagButton from '../Components/Ui/PTagButton';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
@@ -55,7 +56,7 @@ function Question() {
     }
   };
 
-  const handlerClick = () => {
+  const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
       deletePost();
       navigate('/');
@@ -87,9 +88,7 @@ function Question() {
               <p>Share</p>
               {verifyLoginAndPostAuthorship(<p>edit</p>)}
               {verifyLoginAndPostAuthorship(
-                <p role="presentation" onClick={handlerClick}>
-                  delete
-                </p>,
+                <PTagButton onClick={handlerClickDelete}>delete</PTagButton>,
               )}
               <p>Follow</p>
             </div>
