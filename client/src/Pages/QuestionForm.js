@@ -14,7 +14,7 @@ function QuestionForm() {
 
   const pathData = {
     title: '',
-    body: '',
+    content: '',
     memberId: null,
     createdAt: '',
   };
@@ -31,7 +31,10 @@ function QuestionForm() {
 
   const pathQuestionData = async () => {
     const response = await axios
-      .post('http://localhost:8080/questions', pathData)
+      .post(
+        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions',
+        pathData,
+      )
       .catch(error => {
         console.error(error);
       });
@@ -44,18 +47,11 @@ function QuestionForm() {
     if (isLogin) {
       e.preventDefault();
       pathData.title = title;
-      pathData.body = body;
-      pathData.memberId = userInfo.memberId;
+      pathData.content = body;
+      pathData.memberId = userInfo.data.memberId;
       const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
       pathQuestionData();
-      console.log(
-        'pathData',
-        pathData.title,
-        pathData.body,
-        pathData.memberId,
-        pathData.createdAt,
-      );
     } else {
       alert('You need to Login.');
       navigate('/login');

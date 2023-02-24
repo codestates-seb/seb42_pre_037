@@ -25,7 +25,7 @@ function Questions() {
     const fetchQuestions = async () => {
       try {
         const response = await axios.get(
-          `https://6854-121-177-26-57.jp.ngrok.io/questions?page=${currentPage}&size=${PER_PAGE}`,
+          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions?page=${currentPage}&size=${PER_PAGE}`,
         );
         setQuestions(response.data.data);
         setTotalElements(response.data.pageInfo.totalElements);
