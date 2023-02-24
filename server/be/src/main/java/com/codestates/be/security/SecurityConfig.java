@@ -68,7 +68,7 @@ public class SecurityConfig {
                     auth
                             .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
                             .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                            .antMatchers(HttpMethod.GET,"/members/logout").hasRole("USER")
+                            .antMatchers(HttpMethod.GET,"/members/logout").permitAll()
                             .antMatchers(HttpMethod.PATCH, "/members/{member-id}").hasRole("USER")
                             .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
                             .antMatchers(HttpMethod.DELETE, "/members/{member-id}").hasRole("USER")
