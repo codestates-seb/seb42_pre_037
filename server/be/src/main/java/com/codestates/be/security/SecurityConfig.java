@@ -66,24 +66,24 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
-                            .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                            .antMatchers(HttpMethod.GET,"/members/logout").hasRole("USER")
-                            .antMatchers(HttpMethod.PATCH, "/members/{member-id}").hasRole("USER")
-                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
-                            .antMatchers(HttpMethod.DELETE, "/members/{member-id}").hasRole("USER")
-                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
-
-                            .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
-                            .antMatchers(HttpMethod.PATCH, "/questions/{question-id}").hasRole("USER")
-                            .antMatchers(HttpMethod.GET, "/questions/{question-id}").permitAll()
-                            .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
-                            .antMatchers(HttpMethod.DELETE, "/questions/{question-id}").hasRole("USER")
-
-                            .antMatchers(HttpMethod.POST, "/answers/{question-id}").hasRole("USER")
-                            .antMatchers(HttpMethod.PATCH, "/answers/{answer-id}").hasRole("USER")
-                            .antMatchers(HttpMethod.GET, "/answers/{question-id}").permitAll()
-                            .antMatchers(HttpMethod.DELETE, "/answers/{answer-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
+//                            .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+//                            .antMatchers(HttpMethod.GET,"/members/logout").hasRole("USER")
+//                            .antMatchers(HttpMethod.PATCH, "/members/{member-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
+//                            .antMatchers(HttpMethod.DELETE, "/members/{member-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
+//
+//                            .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
+//                            .antMatchers(HttpMethod.PATCH, "/questions/{question-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.GET, "/questions/{question-id}").permitAll()
+//                            .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
+//                            .antMatchers(HttpMethod.DELETE, "/questions/{question-id}").hasRole("USER")
+//
+//                            .antMatchers(HttpMethod.POST, "/answers/{question-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.PATCH, "/answers/{answer-id}").hasRole("USER")
+//                            .antMatchers(HttpMethod.GET, "/answers/{question-id}").permitAll()
+//                            .antMatchers(HttpMethod.DELETE, "/answers/{answer-id}").hasRole("USER")
 
                             .antMatchers("/", "/**").permitAll();
                 });

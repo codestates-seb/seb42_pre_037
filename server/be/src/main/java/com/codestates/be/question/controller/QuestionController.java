@@ -39,7 +39,6 @@ public class QuestionController {
         QuestionDto.Response response = mapper.questionToQuestionResponseDto(createdQuestion);
         //question member 아이디만 설정된 상태. -> JPA 트랜잭션 -> 불러오기 member. -> 저장 ->  (entitymanager 닫힘(flush) -> 불러올 때)
 
-
         return ResponseEntity.ok().build();
     }
 

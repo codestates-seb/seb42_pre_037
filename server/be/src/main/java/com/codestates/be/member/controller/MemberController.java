@@ -12,7 +12,9 @@ import com.codestates.be.responseDto.PageInfo;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import com.codestates.be.security.dto.ClaimsToUser;
 import com.codestates.be.security.jwt.JwtTokenizer;
+import com.codestates.be.security.util.JwtToResponseUtils;
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.text.ParseException;
@@ -36,11 +39,13 @@ public class MemberController {
     private final MemberMapper mapper;
     private final MemberService memberService;
     private final JwtTokenizer tokenizer;
+    private final JwtToResponseUtils jwtToResponseUtils;
 
-    public MemberController(MemberMapper mapper, MemberService memberService, JwtTokenizer tokenizer) {
+    public MemberController(MemberMapper mapper, MemberService memberService, JwtTokenizer tokenizer, JwtToResponseUtils jwtToResponseUtils) {
         this.mapper = mapper;
         this.memberService = memberService;
         this.tokenizer = tokenizer;
+        this.jwtToResponseUtils = jwtToResponseUtils;
     }
 
     @PostMapping("/signup") //f
@@ -66,18 +71,16 @@ public class MemberController {
     @PostMapping("/userInfo")// 토큰 없을 경우 에러 핸들링 추가
     public ResponseEntity messageForHeader(@RequestHeader HttpHeaders headers) {
 
-        String token = headers.get("authorization").get(0);
+        HttpServletRequest request;
+        String token;
 
-        token = token.replace("Bearer ", "");
-        Map<String, Object> claims =
-                tokenizer.getClaims(token, tokenizer.encodeBase64SecretKey(tokenizer.getSecretKey()));
+        try{
+            token = headers.get("authorization").get(0);
+        }catch (NullPointerException exception){
+            throw new MalformedJwtException("");
+        }
 
-        ClaimsToUser userInfo = ClaimsToUser.builder()
-                .email((String) claims.get("email"))
-                .memberId( claims.get("memberId"))
-                .displayName((String) claims.get("displayName")).build();
-
-        //TODO : Refactoring
+        ClaimsToUser userInfo = jwtToResponseUtils.getClaimsToUser(token);
 
         return new ResponseEntity<>(new SingleResponseEntity<>(userInfo), HttpStatus.OK);
     }
@@ -85,12 +88,6 @@ public class MemberController {
     @GetMapping("/logout")//u
     public ResponseEntity getLogout(){
         log.info("# 사용자가 로그아웃 했습니다.");
-
-        //블랙리스트 만들어서 관리하는 방법.
-        //토큰을 지우는 식으로 logout
-        //토큰을 보관한다.
-        //보관한 토큰을 다시 보내면 ...
-        //토큰을 블랙리스트로 등록 구글링 해보시면 바로 나오더라구요!
 
         return ResponseEntity.noContent().build();
     }

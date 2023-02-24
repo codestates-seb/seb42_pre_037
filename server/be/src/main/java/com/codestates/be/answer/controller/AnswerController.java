@@ -52,7 +52,7 @@ public class AnswerController {
 
         result.setDisplayName(member.getDisplayName());
 
-        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.CREATED);
+        return ResponseEntity.ok().build();
     }
 
     // 답변 수정
@@ -67,7 +67,7 @@ public class AnswerController {
 
         AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
 
-        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     // 답변 전체 조회
@@ -89,6 +89,6 @@ public class AnswerController {
 
         answerService.deleteAnswer(answerId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }
