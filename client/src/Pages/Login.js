@@ -13,8 +13,6 @@ const Login = () => {
   const navigate = useNavigate();
   const { loginInfo, setLoginInfo } = useLoginInfoStore(state => state);
   const { setIsLogin } = useIsLoginStore(state => state);
-  // const { setUserInfo } = useUserInfoStore(state => state);
-  // const [setCheckedKeepLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   // Input 정보 처리
