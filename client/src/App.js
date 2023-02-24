@@ -38,8 +38,8 @@ function App() {
       )
       .then(res => {
         setIsLogin(true);
-        setUserInfo(res.data);
-        console.log('success: ', res.data);
+        setUserInfo(res.data.data);
+        console.log('success: ', res.data.data);
       })
       .catch(err => {
         if (err.response) {
