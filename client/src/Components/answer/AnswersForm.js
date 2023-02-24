@@ -49,6 +49,7 @@ function AnswersForm({ questionId }) {
       const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
       pathQuestionData();
+      setContent('');
     } else {
       alert('You need to Login.');
       navigate('/login');

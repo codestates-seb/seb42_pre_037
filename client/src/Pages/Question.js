@@ -1,10 +1,11 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 
+import avatar from '../Components/icons/avatar.png';
 import Button from '../Components/Ui/Button';
 import { getTimeDiffString } from '../utils';
-import { dummyAnswers } from '../dummyData';
 import Nav from '../Components/layouts/Navbar';
 import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
@@ -15,12 +16,26 @@ import PTagButton from '../Components/Ui/PTagButton';
 function Question() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const purify = DOMPurify(window);
   const { question } = location.state;
   // const { userInfo } = useUserInfoStore(state => state);
-  const [answers] = useState(dummyAnswers.data);
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const response = await axios.get(
+          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${question.questionId}`,
+        );
+        setAnswers(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAnswers();
+  }, [<Answers />, <AnswersForm />]);
 
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
@@ -80,7 +95,11 @@ function Question() {
           </div>
 
           {/* Question content */}
-          <div>{question.content}</div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: purify.sanitize(question.content),
+            }}
+          />
 
           {/* Question footer */}
           <div className="mt-5 flex justify-between border-b">
@@ -95,14 +114,14 @@ function Question() {
             <div className="p-2 w-48 rounded clear-blue mb-10">
               <div className="text-gray-500 text-sm">edit {timeDiff}</div>
               <div className="flex h-10">
-                <img className="bg-white" src="img/avatar.png" alt="avatar" />
+                <img className="bg-white" src={avatar} alt="avatar" />
                 <p className="h-blue ml-2 text-sm">{question.displayName}</p>
               </div>
             </div>
           </div>
           <div>
             {/* 답변 목록 */}
-            <Answers answers={answers} />
+            <Answers answers={answers} isLogin={isLogin} />
             <AnswersForm questionId={question.questionId} />
           </div>
         </div>

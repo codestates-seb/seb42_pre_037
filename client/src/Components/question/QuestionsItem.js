@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import { getTimeDiffString } from '../../utils';
 
 function QuestionsItem({ question }) {
+  const purify = DOMPurify(window);
+
   return (
     <li className=" border-b-2 p-5">
       <div>{question.count_answer} answer</div>
@@ -10,7 +13,12 @@ function QuestionsItem({ question }) {
         <Link to={`/question/${question.questionId}`} state={{ question }}>
           <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
         </Link>
-        <p className=" line-clamp-2">{question.content}</p>
+        <p
+          className=" line-clamp-2"
+          dangerouslySetInnerHTML={{
+            __html: purify.sanitize(question.content),
+          }}
+        />
       </div>
 
       <div className="flex items-end justify-end">
