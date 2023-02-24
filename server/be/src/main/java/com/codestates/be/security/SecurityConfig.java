@@ -102,6 +102,7 @@ public class SecurityConfig {
 
         configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); //어디서 오는 요청을 허용할 것인지.
 
+
         configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE", "OPTIONS")); //어떤 HTTP 메서드를 허용할 것인지.
         configuration.setExposedHeaders(Arrays.asList("*")); // 어떤 헤더값을 우리가 응답에 넣어서 보내줄지.
         configuration.setAllowedHeaders(Arrays.asList("*")); // 어떤 헤더값을 받아들이는데 성공할지.

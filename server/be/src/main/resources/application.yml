@@ -1,6 +1,9 @@
 spring:
   datasource:
+    url: jdbc:mysql://database-2.claqadurzooy.ap-northeast-2.rds.amazonaws.com:3306/test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+    username: admin
+    password: ${DB_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: create  # (1) 스키마 자동 생성
@@ -9,8 +12,7 @@ spring:
       hibernate:
         format_sql: true  # (3) SQL pretty print
     defer-datasource-initialization: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
   sql:
     init:
       data-locations: classpath:data.sql
@@ -26,6 +28,6 @@ server:
       force-response: true
 
 jwt:
-#  key: kevin789456123789456123789456123789456123789456123789456123
+  key: ${JWT_SECRET_KEY}
   access-token-expiration-minutes: 8000
   refresh-token-expiration-minutes: 8000
