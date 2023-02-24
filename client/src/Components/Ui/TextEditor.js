@@ -26,6 +26,7 @@ function TextEditor({ content, setContent }) {
       value={content}
       theme="snow"
       modules={modules}
+      className="h-52"
     />
   );
 }

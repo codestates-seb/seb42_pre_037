@@ -8,8 +8,7 @@ function Answers({ answers }) {
             key={answer.answerId}
             className="py-6 border-y border-solid border-gray-400 px-5"
           >
-            <p>{answer.content}</p>
-
+            <p className="mb-5">{answer.content}</p>
             <div className="flex justify-end">
               <div className="p-2 w-48 rounded clear-blue mt-3">
                 <div className="flex h-10">
