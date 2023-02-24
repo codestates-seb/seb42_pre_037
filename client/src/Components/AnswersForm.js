@@ -12,16 +12,20 @@ function AnswersForm({ questionId }) {
   const pathData = {
     content: '',
     memberId: null,
+    createdAt: '',
   };
 
   const [content, setContent] = useState();
   const { userInfo } = useUserInfoStore(state => state);
   const { isLogin } = useIsLoginStore(state => state);
   const navigate = useNavigate();
-
+  // 'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/
   const pathQuestionData = async () => {
     const response = await axios
-      .post(`http://localhost:8080/answers/${questionId}`, pathData)
+      .post(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${questionId}`,
+        pathData,
+      )
       .catch(error => {
         console.error(error);
       });
@@ -35,7 +39,9 @@ function AnswersForm({ questionId }) {
     if (isLogin) {
       e.preventDefault();
       pathData.content = content.replaceAll('"', "'");
-      pathData.memberId = userInfo.memberId;
+      pathData.memberId = userInfo.data.memberId;
+      const currentTime = new Date();
+      pathData.createdAt = currentTime.toString();
       pathQuestionData();
     } else {
       alert('You need to Login.');
