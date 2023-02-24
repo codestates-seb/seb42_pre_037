@@ -67,6 +67,7 @@ public class MemberController {
     public ResponseEntity messageForHeader(@RequestHeader HttpHeaders headers) {
 
         String token = headers.get("authorization").get(0);
+
         token = token.replace("Bearer ", "");
         Map<String, Object> claims =
                 tokenizer.getClaims(token, tokenizer.encodeBase64SecretKey(tokenizer.getSecretKey()));
