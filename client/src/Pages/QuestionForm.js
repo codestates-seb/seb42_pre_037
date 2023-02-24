@@ -58,6 +58,7 @@ function QuestionForm() {
       const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
       pathQuestionData();
+      navigate('/');
     } else {
       alert('You need to Login.');
       navigate('/login');
