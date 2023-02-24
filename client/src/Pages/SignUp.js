@@ -21,44 +21,36 @@ function SignUp() {
   const navigate = useNavigate();
 
   // 유효성 검사 함수
-  // const isValidPassword = str => {
-  //   const regex = '^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{8,}$';
+  const isValidPassword = str => {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-  //   if (!regex.test(str)) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
+    return regex.test(str);
+  };
 
-  // const isValidEmail = str => {
-  //   const regex =
-  //     '/([w-.]+)@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.)|(([w-]+.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(]?)$/';
+  const isValidEmail = str => {
+    const regex =
+      /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
-  //   if (!regex.test(str)) {
-  //     return false;
-  //   }
-  //   return true;
-  // };
+    return regex.test(str);
+  };
 
   const register = () => {
-    //
     if (!username || !email || !password) {
       setErrorMessage('아이디와 비밀번호를 입력하세요');
       console.log(errorMessage);
       return;
     }
-    // if (!isValidPassword(password)) {
-    //   setErrorMessage(
-    //     '최소 8글자, 문자 1개, 숫자 1개, 특수문자가 들어간 비밀번호를 입력해주세요',
-    //   );
-    //   console.log(errorMessage);
-    //   return;
-    // }
-    // if (!isValidEmail(email)) {
-    //   setErrorMessage('Email 형식에 맞게 입력해주세요');
-    //   console.log(errorMessage);
-    //   return;
-    // }
+    if (!isValidEmail(email)) {
+      setErrorMessage('Email 형식에 맞게 입력해주세요');
+      console.log(errorMessage);
+      return;
+    }
+    if (!isValidPassword(password)) {
+      setErrorMessage(
+        '최소 8글자, 문자 1개, 숫자 1개가 들어간 비밀번호를 입력해주세요',
+      );
+      return;
+    }
 
     const date = new Date();
     const createdAt = date;
@@ -78,12 +70,17 @@ function SignUp() {
         // Handle success.
         console.log('Well done!');
         console.log('User profile', res.data);
+        setErrorMessage('');
         navigate('/login');
       })
       .catch(err => {
         // Handle error.
         console.log('An error occurred:', err.response);
-        navigate('/404');
+        if (err.response.status === 406) {
+          setErrorMessage(err.response.data.message);
+        } else {
+          navigate('/404');
+        }
       });
   };
 
@@ -134,6 +131,11 @@ function SignUp() {
               Passwords must contain at least eight characters, including at
               least 1 letter and 1 number.
             </p>
+            {errorMessage ? (
+              <p className=" mb-4 font-medium text-xs text-red-600">
+                {errorMessage}
+              </p>
+            ) : null}
             <Button
               color="blue"
               size="medium"
