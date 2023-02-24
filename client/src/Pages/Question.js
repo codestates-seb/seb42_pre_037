@@ -1,10 +1,9 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useState } from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 
 import Button from '../Components/Ui/Button';
 import { getTimeDiffString } from '../utils';
-import { dummyAnswers } from '../dummyData';
 import Nav from '../Components/layouts/Navbar';
 import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
@@ -18,9 +17,23 @@ function Question() {
 
   const { question } = location.state;
   // const { userInfo } = useUserInfoStore(state => state);
-  const [answers] = useState(dummyAnswers.data);
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    const fetchAnswers = async () => {
+      try {
+        const response = await axios.get(
+          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${question.questionId}`,
+        );
+        setAnswers(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAnswers();
+  }, []);
 
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
