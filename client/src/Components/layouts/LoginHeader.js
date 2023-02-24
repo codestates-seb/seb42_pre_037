@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import { GoInbox } from 'react-icons/go';
 import { MdHelp } from 'react-icons/md';
@@ -10,8 +12,42 @@ import { RiLogoutBoxRLine } from 'react-icons/ri';
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
+// import login, userInfo store
+import { useIsLoginStore, useLoginInfoStore } from '../../Stores/loginStore';
+import { useUserInfoStore } from '../../Stores/userInfoStore';
+
 function LoginHeader() {
   const [toggle, setToggle] = useState(false);
+
+  // LogOut handler
+  const { setIsLogin } = useIsLoginStore(state => state);
+  const { setUserInfo } = useUserInfoStore(state => state);
+  const { setLoginInfo } = useLoginInfoStore(state => state);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    axios
+      .get(
+        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/logout',
+      )
+      .then(res => {
+        setIsLogin(false);
+        localStorage.removeItem('token');
+        setUserInfo({});
+        setLoginInfo({});
+        console.log(res.data);
+        navigate('/');
+      })
+      .catch(err => {
+        if (err.response.status === 401) {
+          setErrorMessage('로그아웃에 실패했습니다.');
+          console.log(errorMessage);
+        }
+      });
+  };
+
   return (
     <div className="py-7 ">
       <nav className="bg-slate-50 dark:bg-gray-800 shadow p-2 border-t-4 border-solid border-orange-400 fixed z-40 top-30 left-0 right-0">
@@ -56,7 +92,10 @@ function LoginHeader() {
                   <MdHelp />
                 </div>
                 <div className="text-3xl text-slate-600 ml-4 cursor-pointer hover:bg-slate-300">
-                  <RiLogoutBoxRLine className="" />
+                  <RiLogoutBoxRLine
+                    className=""
+                    onClick={() => logoutHandler()}
+                  />
                 </div>
               </div>
             </div>
