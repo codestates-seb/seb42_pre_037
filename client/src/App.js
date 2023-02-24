@@ -5,6 +5,7 @@ import axios from 'axios';
 import Questions from './Pages/Questions';
 import Question from './Pages/Question';
 import QuestionForm from './Pages/QuestionForm';
+import QuestionEdit from './Pages/QuestionEdit';
 
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
@@ -59,6 +60,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Questions />} />
         <Route path="question/:questionId" element={<Question />} />
+        <Route path="question/:questionId/edit" element={<QuestionEdit />} />
         <Route path="questionForm" element={<QuestionForm />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />

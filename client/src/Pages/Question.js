@@ -78,6 +78,10 @@ function Question() {
     }
   };
 
+  const handlerClickEdit = () => {
+    navigate('/question/:questionId/edit');
+  };
+
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
       <div className="flex mx-auto my-0 w-10/12">
@@ -105,7 +109,9 @@ function Question() {
           <div className="mt-5 flex justify-between border-b">
             <div className="flex jus space-x-3 text-gray-500 ">
               <p>Share</p>
-              {verifyLoginAndPostAuthorship(<p>edit</p>)}
+              {verifyLoginAndPostAuthorship(
+                <PTagButton onClick={handlerClickEdit}>edit</PTagButton>,
+              )}
               {verifyLoginAndPostAuthorship(
                 <PTagButton onClick={handlerClickDelete}>delete</PTagButton>,
               )}
