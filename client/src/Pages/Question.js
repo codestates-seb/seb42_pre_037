@@ -34,7 +34,7 @@ function Question() {
       }
     };
     fetchAnswers();
-  }, []);
+  }, [<Answers />, <AnswersForm />]);
 
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
@@ -116,7 +116,7 @@ function Question() {
           </div>
           <div>
             {/* 답변 목록 */}
-            <Answers answers={answers} />
+            <Answers answers={answers} isLogin={isLogin} />
             <AnswersForm questionId={question.questionId} />
           </div>
         </div>
