@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://database-2.claqadurzooy.ap-northeast-2.rds.amazonaws.com:3306/test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: admin
-    password: ${DB_PASSWORD}
+    password: jtyu0807
   jpa:
     hibernate:
       ddl-auto: create  # (1) 스키마 자동 생성
@@ -28,6 +28,6 @@ server:
       force-response: true
 
 jwt:
-  key: ${JWT_SECRET_KEY}
+  key: dq2k1@((1e9101k-d01k-132019dj9j29@)@@@201kd1-01-0dmwoidnwdbwdbawdiawnd26816
   access-token-expiration-minutes: 8000
   refresh-token-expiration-minutes: 8000
