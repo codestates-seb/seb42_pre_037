@@ -51,6 +51,7 @@ const Login = () => {
         // 로그인 성공시 홈페이지 이동
         axios.defaults.headers.common.Authorization = `Bearer ${res.data.jwt}`;
         navigate('/');
+        window.location.reload();
       })
       .catch(err => {
         if (err.response.status === 401) {
