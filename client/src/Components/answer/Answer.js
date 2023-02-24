@@ -44,7 +44,7 @@ function Answer({ answer }) {
   };
 
   return (
-    <li key={answer.answerId} className="py-6 border-b">
+    <li className="py-6 border-b">
       <p
         className="mb-5"
         dangerouslySetInnerHTML={{ __html: answer.content }}

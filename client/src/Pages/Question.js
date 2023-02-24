@@ -16,8 +16,8 @@ import PTagButton from '../Components/Ui/PTagButton';
 function Question() {
   const navigate = useNavigate();
   const location = useLocation();
-  const purify = DOMPurify(window);
   const { question } = location.state;
+  const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
@@ -34,9 +34,12 @@ function Question() {
         console.error(error);
       }
     };
-    fetchAnswers();
-  }, [<Answers />, <AnswersForm />]);
 
+    fetchAnswers(answers);
+  }, [question.questionId]);
+
+  console.log(answers);
+  // <Answers />, <AnswersForm />
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
@@ -79,7 +82,7 @@ function Question() {
   };
 
   const handlerClickEdit = () => {
-    navigate('/question/:questionId/edit');
+    navigate('/question/:questionId/edit', { state: { question } });
   };
 
   return (
