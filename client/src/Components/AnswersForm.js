@@ -25,6 +25,12 @@ function AnswersForm({ questionId }) {
       .post(
         `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${questionId}`,
         pathData,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            withCredentials: true,
+          },
+        },
       )
       .catch(error => {
         console.error(error);
