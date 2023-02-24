@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import axios from 'axios';
 
 import Button from '../Components/Ui/Button';
 import { getTimeDiffString } from '../utils';
@@ -35,6 +36,32 @@ function Question() {
     return '';
   };
 
+  const deletePost = async () => {
+    const response = await axios
+      .delete(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            withCredentials: true,
+          },
+        },
+      )
+      .catch(error => {
+        console.error(error);
+      });
+    if (response && response.data) {
+      console.log(response);
+    }
+  };
+
+  const handlerClick = () => {
+    if (window.confirm('Delete this post?')) {
+      deletePost();
+      navigate('/');
+    }
+  };
+
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
       <div className="flex mx-auto my-0 w-10/12">
@@ -59,7 +86,11 @@ function Question() {
             <div className="flex jus space-x-3 text-gray-500 ">
               <p>Share</p>
               {verifyLoginAndPostAuthorship(<p>edit</p>)}
-              {verifyLoginAndPostAuthorship(<p>delete</p>)}
+              {verifyLoginAndPostAuthorship(
+                <p role="presentation" onClick={handlerClick}>
+                  delete
+                </p>,
+              )}
               <p>Follow</p>
             </div>
             <div className="p-2 w-48 rounded clear-blue mb-10">
