@@ -1,6 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import DOMPurify from 'dompurify';
 
 import avatar from '../Components/icons/avatar.png';
 import Button from '../Components/Ui/Button';
@@ -15,7 +16,7 @@ import PTagButton from '../Components/Ui/PTagButton';
 function Question() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const purify = DOMPurify(window);
   const { question } = location.state;
   // const { userInfo } = useUserInfoStore(state => state);
   const timeDiff = getTimeDiffString(question.createdAt);
@@ -94,7 +95,11 @@ function Question() {
           </div>
 
           {/* Question content */}
-          <div dangerouslySetInnerHTML={{ __html: question.content }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: purify.sanitize(question.content),
+            }}
+          />
 
           {/* Question footer */}
           <div className="mt-5 flex justify-between border-b">
