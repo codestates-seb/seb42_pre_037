@@ -14,14 +14,15 @@ import PTagButton from '../Components/Ui/PTagButton';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
+  const purify = DOMPurify(window);
   const navigate = useNavigate();
   const location = useLocation();
   const { question } = location.state;
-  const purify = DOMPurify(window);
-  // const { userInfo } = useUserInfoStore(state => state);
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
+  // const { userInfo } = useUserInfoStore(state => state);
   const [answers, setAnswers] = useState([]);
+
   console.log(location);
   useEffect(() => {
     const fetchAnswers = async () => {
@@ -36,10 +37,8 @@ function Question() {
     };
 
     fetchAnswers();
-  }, [question.questionId, location]);
+  }, []);
 
-  console.log(answers);
-  // <Answers />, <AnswersForm />
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
