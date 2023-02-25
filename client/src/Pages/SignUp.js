@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 // import react-icons
 import { HiChevronUpDown } from 'react-icons/hi2';
@@ -19,6 +20,13 @@ function SignUp() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
+
+  const [recaptchaState, setRecaptchaState] = useState({ isVerified: false });
+
+  const recaptchaOnChange = value => {
+    console.log('Captcha value: ', value);
+    setRecaptchaState({ isVerified: true });
+  };
 
   // 유효성 검사 함수
   const isValidPassword = str => {
@@ -127,10 +135,16 @@ function SignUp() {
               type="password"
               onChange={e => setPassword(e.target.value)}
             />
+
             <p className=" mb-4 font-medium text-xs">
               Passwords must contain at least eight characters, including at
               least 1 letter and 1 number.
             </p>
+            <ReCAPTCHA
+              className=" scale-90 mr-80 mb-4"
+              sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+              onChange={() => recaptchaOnChange()}
+            />
             {errorMessage ? (
               <p className=" mb-4 font-medium text-xs text-red-600">
                 {errorMessage}
@@ -140,6 +154,7 @@ function SignUp() {
               color="blue"
               size="medium"
               type="button"
+              disabled={!recaptchaState.isVerified}
               onClick={() => register()}
             >
               Sign up

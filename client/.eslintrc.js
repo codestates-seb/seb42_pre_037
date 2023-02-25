@@ -64,6 +64,8 @@ module.exports = {
       'zustand',
       'axios',
       'tailwind-styled-components',
+      'dompurify',
+      'react-google-recaptcha',
     ], // import 오류나는 패키지를 여기에 추가해줘야함
   },
 };
