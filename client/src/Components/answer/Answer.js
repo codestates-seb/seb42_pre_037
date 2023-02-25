@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import PTagButton from '../Ui/PTagButton';
 import avatar from '../icons/avatar.png';
@@ -8,7 +9,8 @@ import useIsUpdateStore from '../../Stores/useIsUpdateStore';
 function Answer({ answer }) {
   const { isLogin } = useIsLoginStore(state => state);
   const { setIsUpdate } = useIsUpdateStore(state => state);
-
+  const navigate = useNavigate();
+  const { answerId } = answer;
   const verifyLoginAndPostAuthorship = tag => {
     // if (isLogin && question.displayName === userInfo.displayName) {
     //   return tag;
@@ -20,10 +22,10 @@ function Answer({ answer }) {
     return '';
   };
 
-  const deletePost = async () => {
+  const deletePost = async id => {
     const response = await axios
       .delete(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${answer.answerId}`,
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -39,9 +41,15 @@ function Answer({ answer }) {
     }
   };
 
+  const handlerClickEdit = () => {
+    navigate('/question/:questionId/:answerId/edit', {
+      state: { answer },
+    });
+  };
+
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
-      deletePost();
+      deletePost(answerId);
       setIsUpdate(true);
     }
   };
@@ -55,7 +63,9 @@ function Answer({ answer }) {
       <div className="flex justify-between">
         <div className="flex jus space-x-3 text-gray-500 ">
           <p>Share</p>
-          {verifyLoginAndPostAuthorship(<p>edit</p>)}
+          {verifyLoginAndPostAuthorship(
+            <PTagButton onClick={handlerClickEdit}>edit</PTagButton>,
+          )}
           {verifyLoginAndPostAuthorship(
             <PTagButton onClick={handlerClickDelete}>delete</PTagButton>,
           )}
