@@ -1,10 +1,10 @@
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import PTagButton from '../Ui/PTagButton';
 import avatar from '../icons/avatar.png';
 import { useIsLoginStore } from '../../Stores/loginStore';
 import { useIsUpdateAnswerStore } from '../../Stores/useIsUpdateStore';
+import { deleteAnswer } from '../../api';
 
 function Answer({ answer }) {
   const { isLogin } = useIsLoginStore(state => state);
@@ -22,23 +22,28 @@ function Answer({ answer }) {
     return '';
   };
 
-  const deletePost = async id => {
-    const response = await axios
-      .delete(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            withCredentials: true,
-          },
-        },
-      )
-      .catch(error => {
-        console.error(error);
-      });
-    if (response && response.data) {
-      console.log(response);
-    }
+  // const deletePost = async id => {
+  //   const response = await axios
+  //     .delete(
+  //       `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${id}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //           withCredentials: true,
+  //         },
+  //       },
+  //     )
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  //   if (response && response.data) {
+  //     console.log(response);
+  //   }
+  // };
+
+  const handlerDeleteAnswer = async id => {
+    const response = await deleteAnswer(id);
+    console.log(response);
   };
 
   const handlerClickEdit = () => {
@@ -49,7 +54,7 @@ function Answer({ answer }) {
 
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
-      deletePost(answerId);
+      handlerDeleteAnswer(answerId);
       setIsUpdate(true);
     }
   };

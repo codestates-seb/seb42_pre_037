@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useUserInfoStore } from '../Stores/userInfoStore';
 import { useIsLoginStore } from '../Stores/loginStore';
-
+import { postQuestion } from '../api';
 import AnswersImg from '../Components/icons/AnswersImg.png';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
@@ -28,24 +28,9 @@ function QuestionForm() {
     setTitle(e.target.value);
   };
 
-  const pathQuestionData = async () => {
-    const response = await axios
-      .post(
-        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions',
-        pathData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            withCredentials: true,
-          },
-        },
-      )
-      .catch(error => {
-        console.error(error);
-      });
-    if (response && response.data) {
-      console.log(response);
-    }
+  const handlerPostQuestion = async data => {
+    const response = await postQuestion(data);
+    console.log(response);
   };
 
   const handlerSubmit = e => {
@@ -58,7 +43,7 @@ function QuestionForm() {
       pathData.memberId = userInfo.memberId;
       pathData.createdAt = currentTime.toString();
 
-      pathQuestionData();
+      handlerPostQuestion(pathData);
       // setIsUpdate(true);
       navigate('/');
     } else {
