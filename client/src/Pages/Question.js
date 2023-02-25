@@ -11,7 +11,7 @@ import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import PTagButton from '../Components/Ui/PTagButton';
-
+import useIsUpdateStore from '../Stores/useIsUpdateStore';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
@@ -19,9 +19,10 @@ function Question() {
   const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
   const { isLogin } = useIsLoginStore(state => state);
+  const { isUpdate, setIsUpdate } = useIsUpdateStore(state => state);
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState('');
-  const [isUpdate, setIsUpdate] = useState(true);
+
   const timeDiff = getTimeDiffString(question.createdAt);
   const location = useLocation();
   const questionId = location.pathname.split('/')[2];
