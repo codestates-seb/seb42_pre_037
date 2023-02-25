@@ -12,6 +12,7 @@ import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import PTagButton from '../Components/Ui/PTagButton';
 import { useIsUpdateAnswerStore } from '../Stores/useIsUpdateStore';
+import { fetchQuestion, deleteQuestion } from '../api';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
@@ -27,15 +28,9 @@ function Question() {
   const location = useLocation();
   const questionId = location.pathname.split('/')[2];
 
-  const fetchQuestion = async id => {
-    try {
-      const response = await axios.get(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
-      );
-      setQuestion(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const getQuestion = async id => {
+    const response = await fetchQuestion(id);
+    setQuestion(response.data);
   };
 
   const fetchAnswers = async id => {
@@ -49,23 +44,26 @@ function Question() {
     }
   };
 
-  const deletePost = async id => {
-    const response = await axios
-      .delete(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            withCredentials: true,
-          },
-        },
-      )
-      .catch(error => {
-        console.error(error);
-      });
-    if (response && response.data) {
-      console.log(response);
-    }
+  // const deletePost = async id => {
+  //   const response = await axios
+  //     .delete(
+  //       `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem('token')}`,
+  //           withCredentials: true,
+  //         },
+  //       },
+  //     )
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  //   if (response && response.data) {
+  //     console.log(response);
+  //   }
+  // };
+  const handlerDeleteQuestion = id => {
+    deleteQuestion(id);
   };
 
   const handlerChangeQuestion = () => {
@@ -85,7 +83,7 @@ function Question() {
 
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
-      deletePost(questionId);
+      handlerDeleteQuestion(questionId);
       navigate('/');
     }
   };
@@ -98,7 +96,7 @@ function Question() {
 
   useEffect(() => {
     setTimeout(() => {
-      fetchQuestion(questionId);
+      getQuestion(questionId);
       fetchAnswers(questionId);
       setIsUpdate(false);
     }, 100);
