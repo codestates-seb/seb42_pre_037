@@ -11,54 +11,46 @@ import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import PTagButton from '../Components/Ui/PTagButton';
+
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { question } = location.state;
   const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
-  const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
   const [answers, setAnswers] = useState([]);
-  console.log(location);
-  useEffect(() => {
-    const fetchAnswers = async () => {
-      try {
-        const response = await axios.get(
-          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${question.questionId}`,
-        );
-        setAnswers(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const [question, setQuestion] = useState('');
+  const timeDiff = getTimeDiffString(question.createdAt);
+  const location = useLocation();
+  const questionId = location.pathname.split('/')[2];
 
-    fetchAnswers();
-  }, [question.questionId, location]);
-
-  console.log(answers);
-  // <Answers />, <AnswersForm />
-  const handlerChangeQuestion = () => {
-    navigate('/question/ask');
-  };
-
-  const verifyLoginAndPostAuthorship = tag => {
-    // if (isLogin && question.displayName === userInfo.displayName) {
-    //   return tag;
-    // }
-    // return '';
-    if (isLogin) {
-      return tag;
+  const fetchQuestion = async id => {
+    try {
+      const response = await axios.get(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
+      );
+      setQuestion(response.data.data);
+    } catch (error) {
+      console.error(error);
     }
-    return '';
   };
 
-  const deletePost = async () => {
+  const fetchAnswers = async id => {
+    try {
+      const response = await axios.get(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${id}`,
+      );
+      setAnswers(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deletePost = async id => {
     const response = await axios
       .delete(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -74,16 +66,40 @@ function Question() {
     }
   };
 
+  const handlerChangeQuestion = () => {
+    navigate('/question/ask');
+  };
+
+  const verifyLoginAndPostAuthorship = tag => {
+    // if (isLogin && question.displayName === userInfo.displayName) {
+    //   return tag;
+    // }
+    // return '';
+    if (isLogin) {
+      return tag;
+    }
+    return '';
+  };
+
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
-      deletePost();
+      deletePost(questionId);
       navigate('/');
     }
   };
 
   const handlerClickEdit = () => {
-    navigate('/question/:questionId/edit', { state: { question } });
+    navigate('/question/:questionId/edit', {
+      state: { question },
+    });
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchQuestion(questionId);
+      fetchAnswers(questionId);
+    }, 100);
+  }, []);
 
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">

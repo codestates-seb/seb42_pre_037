@@ -21,20 +21,21 @@ function Questions() {
   const pageCount = Math.ceil(totalQuestion / PER_PAGE);
   const navigate = useNavigate();
 
+  const fetchQuestions = async () => {
+    try {
+      const response = await axios.get(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions?page=${currentPage}&size=${PER_PAGE}`,
+      );
+      setQuestions(response.data.data);
+      setTotalElements(response.data.pageInfo.totalElements);
+    } catch (error) {
+      console.error(error);
+      setQuestions(dummyQuestions.data);
+      setTotalElements(10);
+    }
+  };
+
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await axios.get(
-          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions?page=${currentPage}&size=${PER_PAGE}`,
-        );
-        setQuestions(response.data.data);
-        setTotalElements(response.data.pageInfo.totalElements);
-      } catch (error) {
-        console.error(error);
-        setQuestions(dummyQuestions.data);
-        setTotalElements(10);
-      }
-    };
     fetchQuestions();
   }, [currentPage]);
   // 5. currentPage가 변경될 때 마다 API호출을 한다.
