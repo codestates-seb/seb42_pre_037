@@ -11,7 +11,7 @@ import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import PTagButton from '../Components/Ui/PTagButton';
-import { useQuestionIsUpdate } from '../Stores/isUpdate';
+
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
@@ -24,7 +24,6 @@ function Question() {
   const timeDiff = getTimeDiffString(question.createdAt);
   const location = useLocation();
   const questionId = location.pathname.split('/')[2];
-  const { isUpdate, setIsUpdate } = useQuestionIsUpdate(state => state);
 
   const fetchQuestion = async id => {
     try {
@@ -100,9 +99,7 @@ function Question() {
       fetchQuestion(questionId);
       fetchAnswers(questionId);
     }, 100);
-    setIsUpdate(false);
-    console.log(isUpdate);
-  }, [isUpdate]);
+  }, []);
 
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">

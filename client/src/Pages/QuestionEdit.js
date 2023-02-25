@@ -5,14 +5,12 @@ import axios from 'axios';
 import Input from '../Components/Ui/Input';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
-import { useQuestionIsUpdate } from '../Stores/isUpdate';
 
 function QuestionEdit() {
   const location = useLocation();
   const { question } = location.state;
   const currentTime = new Date().toString();
   const navigate = useNavigate();
-  const { setIsUpdate } = useQuestionIsUpdate(state => state);
 
   const pathData = {
     content: '',
@@ -51,7 +49,7 @@ function QuestionEdit() {
     pathData.content = body;
     pathData.modifiedAt = currentTime;
     pathQuestionData();
-    setIsUpdate(true);
+
     navigate(-1);
   };
 
