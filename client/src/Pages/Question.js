@@ -15,13 +15,14 @@ import PTagButton from '../Components/Ui/PTagButton';
 
 function Question() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { question } = location.state;
   const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
-  const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
   const [answers, setAnswers] = useState([]);
+  const [question, setQuestion] = useState('');
+  const timeDiff = getTimeDiffString(question.createdAt);
+  const location = useLocation();
+  const questionId = location.pathname.split('/')[2];
 
   const fetchAnswers = async () => {
     try {
@@ -34,8 +35,6 @@ function Question() {
     }
   };
 
-  console.log(answers);
-  // <Answers />, <AnswersForm />
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
@@ -70,6 +69,17 @@ function Question() {
     }
   };
 
+  const fetchQuestion = async id => {
+    try {
+      const response = await axios.get(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
+      );
+      setQuestion(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
       deletePost();
@@ -82,8 +92,9 @@ function Question() {
   };
 
   useEffect(() => {
+    fetchQuestion(questionId);
     fetchAnswers();
-  }, []);
+  });
 
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">

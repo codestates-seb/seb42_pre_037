@@ -4,13 +4,14 @@ import { getTimeDiffString } from '../../utils';
 
 function QuestionsItem({ question }) {
   const purify = DOMPurify(window);
+  const { questionId } = question;
 
   return (
     <li className=" border-b-2 p-5">
       <div>{question.count_answer} answer</div>
 
       <div className="mb-1">
-        <Link to={`/question/${question.questionId}`} state={{ question }}>
+        <Link to={`/question/${questionId}`}>
           <h3 className="h3-blue hover: cursor-pointer">{question.title}</h3>
         </Link>
         <p

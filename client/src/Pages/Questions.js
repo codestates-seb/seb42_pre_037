@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import QuestionsItem from '../Components/question/QuestionsItem';
 import Button from '../Components/Ui/Button';
 import { dummyQuestions } from '../dummyData';
+import { useQuestionIsUpdate } from '../Stores/isUpdate';
 
 import Nav from '../Components/layouts/Navbar';
 
@@ -20,23 +21,26 @@ function Questions() {
   // 2. page 갯수 계산
   const pageCount = Math.ceil(totalQuestion / PER_PAGE);
   const navigate = useNavigate();
+  const { isUpdate, setIsUpdate } = useQuestionIsUpdate(state => state);
+
+  const fetchQuestions = async () => {
+    try {
+      const response = await axios.get(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions?page=${currentPage}&size=${PER_PAGE}`,
+      );
+      setQuestions(response.data.data);
+      setTotalElements(response.data.pageInfo.totalElements);
+    } catch (error) {
+      console.error(error);
+      setQuestions(dummyQuestions.data);
+      setTotalElements(10);
+    }
+  };
 
   useEffect(() => {
-    const fetchQuestions = async () => {
-      try {
-        const response = await axios.get(
-          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions?page=${currentPage}&size=${PER_PAGE}`,
-        );
-        setQuestions(response.data.data);
-        setTotalElements(response.data.pageInfo.totalElements);
-      } catch (error) {
-        console.error(error);
-        setQuestions(dummyQuestions.data);
-        setTotalElements(10);
-      }
-    };
     fetchQuestions();
-  }, [currentPage]);
+    setIsUpdate(false);
+  }, [currentPage, isUpdate]);
   // 5. currentPage가 변경될 때 마다 API호출을 한다.
 
   // 4. 밑의 함수가 호출되면 setCurrentPage에 의해 CurrentPage 값을 변경
