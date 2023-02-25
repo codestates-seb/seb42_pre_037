@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import PTagButton from '../Ui/PTagButton';
 import avatar from '../icons/avatar.png';
 import { useIsLoginStore } from '../../Stores/loginStore';
-import useIsUpdateStore from '../../Stores/useIsUpdateStore';
+import { useIsUpdateAnswerStore } from '../../Stores/useIsUpdateStore';
 
 function Answer({ answer }) {
   const { isLogin } = useIsLoginStore(state => state);
-  const { setIsUpdate } = useIsUpdateStore(state => state);
+  const { setIsUpdate } = useIsUpdateAnswerStore(state => state);
   const navigate = useNavigate();
   const { answerId } = answer;
   const verifyLoginAndPostAuthorship = tag => {

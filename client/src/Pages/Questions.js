@@ -6,15 +6,15 @@ import { useNavigate } from 'react-router-dom';
 
 import QuestionsItem from '../Components/question/QuestionsItem';
 import Button from '../Components/Ui/Button';
-import { dummyQuestions } from '../dummyData';
-
 import Nav from '../Components/layouts/Navbar';
+import { useIsUpdateQuestionStore } from '../Stores/useIsUpdateStore';
 
 function Questions() {
   const [questions, setQuestions] = useState([]);
   const [totalQuestion, setTotalElements] = useState([]);
   // 1. currentPage 초기값은 0으로 설정
   const [currentPage, setCurrentPage] = useState(0);
+  const { isUpdate, setIsUpdate } = useIsUpdateQuestionStore(state => state);
 
   const PER_PAGE = 10;
   // 2. page 갯수 계산
@@ -30,15 +30,10 @@ function Questions() {
       setTotalElements(response.data.pageInfo.totalElements);
     } catch (error) {
       console.error(error);
-      setQuestions(dummyQuestions.data);
+
       setTotalElements(10);
     }
   };
-
-  useEffect(() => {
-    fetchQuestions();
-  }, [currentPage]);
-  // 5. currentPage가 변경될 때 마다 API호출을 한다.
 
   // 4. 밑의 함수가 호출되면 setCurrentPage에 의해 CurrentPage 값을 변경
   const handlerPageClick = ({ selected }) => {
@@ -46,8 +41,15 @@ function Questions() {
   };
 
   const handlerChangeQuestion = () => {
-    navigate('/question/ask');
+    navigate('/question/ask', { state: setIsUpdate });
   };
+
+  useEffect(() => {
+    fetchQuestions();
+    setIsUpdate(false);
+  }, [currentPage, isUpdate]);
+  // 5. currentPage가 변경될 때 마다 API호출을 한다.
+
   return (
     <div className=" flex justify-center">
       <div className="flex xl:w-10/12 w-full">

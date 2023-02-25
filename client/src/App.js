@@ -62,7 +62,6 @@ function App() {
         <Route path="/" element={<Questions />} />
         <Route path="question/:questionId" element={<Question />} />
         <Route path="question/:questionId/edit" element={<QuestionEdit />} />
-        <Route path="questionForm" element={<QuestionForm />} />
         <Route path="question/ask" element={<QuestionForm />} />
         <Route
           path="question/:questionId/:answerId/edit"

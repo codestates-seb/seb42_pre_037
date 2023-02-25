@@ -59,6 +59,7 @@ function QuestionForm() {
       pathData.createdAt = currentTime.toString();
 
       pathQuestionData();
+      // setIsUpdate(true);
       navigate('/');
     } else {
       alert('You need to Login.');
