@@ -22,10 +22,6 @@ function QuestionEdit() {
   const [title, setTitle] = useState(question.title);
   const [body, setBody] = useState(question.content);
 
-  const handlerChangeTitle = e => {
-    setTitle(e.target.value);
-  };
-
   const pathQuestionData = async () => {
     const response = await axios
       .patch(
@@ -45,7 +41,11 @@ function QuestionEdit() {
       console.log(response);
     }
   };
-  console.log(body);
+
+  const handlerChangeTitle = e => {
+    setTitle(e.target.value);
+  };
+
   const handlerSubmit = e => {
     e.preventDefault();
     pathData.content = body;
