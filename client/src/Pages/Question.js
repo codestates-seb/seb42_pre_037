@@ -84,6 +84,7 @@ function Question() {
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
       handlerDeleteQuestion(questionId);
+      setIsUpdate(true);
       navigate('/');
     }
   };

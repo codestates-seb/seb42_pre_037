@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 import Input from '../Components/Ui/Input';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
+import { patchQuestion } from '../api';
 
 function QuestionEdit() {
   const location = useLocation();
   const { question } = location.state;
   const currentTime = new Date().toString();
   const navigate = useNavigate();
+  const { questionId } = question;
 
   const pathData = {
     content: '',
@@ -20,24 +21,9 @@ function QuestionEdit() {
   const [title, setTitle] = useState(question.title);
   const [body, setBody] = useState(question.content);
 
-  const pathQuestionData = async () => {
-    const response = await axios
-      .patch(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${question.questionId}`,
-        pathData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            withCredentials: true,
-          },
-        },
-      )
-      .catch(error => {
-        console.error(error);
-      });
-    if (response && response.data) {
-      console.log(response);
-    }
+  const handlerPatchQuestion = async (id, data) => {
+    const response = await patchQuestion(id, data);
+    console.log(response);
   };
 
   const handlerChangeTitle = e => {
@@ -48,8 +34,7 @@ function QuestionEdit() {
     e.preventDefault();
     pathData.content = body;
     pathData.modifiedAt = currentTime;
-    pathQuestionData();
-
+    handlerPatchQuestion(questionId, pathData);
     navigate(-1);
   };
 

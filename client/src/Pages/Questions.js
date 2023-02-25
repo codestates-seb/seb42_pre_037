@@ -37,8 +37,10 @@ function Questions() {
   };
 
   useEffect(() => {
-    getQuestions();
-    setIsUpdate(false);
+    setTimeout(() => {
+      getQuestions();
+      setIsUpdate(false);
+    }, 100);
   }, [currentPage, isUpdate]);
   // 5. currentPage가 변경될 때 마다 API호출을 한다.
 

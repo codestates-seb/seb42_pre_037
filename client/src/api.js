@@ -30,6 +30,25 @@ export const fetchQuestion = async id => {
   }
 };
 
+// question PATCH 요청
+export const patchQuestion = async (id, pathData) => {
+  try {
+    const response = await axios.patch(
+      `${process.env.REACT_APP_API_URL}/questions/${id}`,
+      pathData,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          withCredentials: true,
+        },
+      },
+    );
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 // question DELETE 요청
 export const deleteQuestion = async id => {
   try {
