@@ -21,6 +21,7 @@ function Question() {
   const { isLogin } = useIsLoginStore(state => state);
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState('');
+  const [isUpdate, setIsUpdate] = useState(true);
   const timeDiff = getTimeDiffString(question.createdAt);
   const location = useLocation();
   const questionId = location.pathname.split('/')[2];
@@ -98,8 +99,9 @@ function Question() {
     setTimeout(() => {
       fetchQuestion(questionId);
       fetchAnswers(questionId);
+      setIsUpdate(false);
     }, 100);
-  }, []);
+  }, [isUpdate]);
 
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
@@ -147,7 +149,10 @@ function Question() {
           <div>
             {/* 답변 목록 */}
             <Answers answers={answers} isLogin={isLogin} />
-            <AnswersForm questionId={question.questionId} />
+            <AnswersForm
+              questionId={question.questionId}
+              setIsUpdate={setIsUpdate}
+            />
           </div>
         </div>
       </div>
