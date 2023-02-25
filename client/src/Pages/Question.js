@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import DOMPurify from 'dompurify';
 
@@ -11,7 +10,8 @@ import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import PTagButton from '../Components/Ui/PTagButton';
-import useIsUpdateStore from '../Stores/useIsUpdateStore';
+import { useIsUpdateAnswerStore } from '../Stores/useIsUpdateStore';
+import { fetchQuestion, deleteQuestion, fetchAnswers } from '../api';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
@@ -19,7 +19,7 @@ function Question() {
   const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
   const { isLogin } = useIsLoginStore(state => state);
-  const { isUpdate, setIsUpdate } = useIsUpdateStore(state => state);
+  const { isUpdate, setIsUpdate } = useIsUpdateAnswerStore(state => state);
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState('');
 
@@ -27,45 +27,18 @@ function Question() {
   const location = useLocation();
   const questionId = location.pathname.split('/')[2];
 
-  const fetchQuestion = async id => {
-    try {
-      const response = await axios.get(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
-      );
-      setQuestion(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const getQuestion = async id => {
+    const response = await fetchQuestion(id);
+    setQuestion(response.data);
   };
 
-  const fetchAnswers = async id => {
-    try {
-      const response = await axios.get(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${id}`,
-      );
-      setAnswers(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const getAnswers = async id => {
+    const response = await fetchAnswers(id);
+    setAnswers(response.data);
   };
 
-  const deletePost = async id => {
-    const response = await axios
-      .delete(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/questions/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            withCredentials: true,
-          },
-        },
-      )
-      .catch(error => {
-        console.error(error);
-      });
-    if (response && response.data) {
-      console.log(response);
-    }
+  const handlerDeleteQuestion = id => {
+    deleteQuestion(id);
   };
 
   const handlerChangeQuestion = () => {
@@ -85,7 +58,8 @@ function Question() {
 
   const handlerClickDelete = () => {
     if (window.confirm('Delete this post?')) {
-      deletePost(questionId);
+      handlerDeleteQuestion(questionId);
+      setIsUpdate(true);
       navigate('/');
     }
   };
@@ -98,8 +72,8 @@ function Question() {
 
   useEffect(() => {
     setTimeout(() => {
-      fetchQuestion(questionId);
-      fetchAnswers(questionId);
+      getQuestion(questionId);
+      getAnswers(questionId);
       setIsUpdate(false);
     }, 100);
   }, [isUpdate]);

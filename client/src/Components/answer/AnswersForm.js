@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 import TextEditor from '../Ui/TextEditor';
 import Button from '../Ui/Button';
+import { postAnswerData } from '../../api';
 
 import { useUserInfoStore } from '../../Stores/userInfoStore';
 import { useIsLoginStore } from '../../Stores/loginStore';
@@ -21,24 +21,9 @@ function AnswersForm({ questionId, setIsUpdate }) {
     createdAt: '',
   };
 
-  const pathQuestionData = async () => {
-    const response = await axios
-      .post(
-        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${questionId}`,
-        pathData,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            withCredentials: true,
-          },
-        },
-      )
-      .catch(error => {
-        console.error(error);
-      });
-    if (response && response.data) {
-      console.log(response);
-    }
+  const handlerPostAnswer = async (id, data) => {
+    const response = await postAnswerData(id, data);
+    console.log(response);
   };
 
   const handlerSubmit = e => {
@@ -48,7 +33,7 @@ function AnswersForm({ questionId, setIsUpdate }) {
       pathData.content = content.replaceAll('"', "'");
       pathData.memberId = userInfo.memberId;
       pathData.createdAt = currentTime.toString();
-      pathQuestionData();
+      handlerPostAnswer(questionId);
       setContent('');
       setIsUpdate(true);
     } else {

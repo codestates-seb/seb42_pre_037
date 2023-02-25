@@ -1,8 +1,11 @@
 import { create } from 'zustand';
 
-const useIsUpdateStore = create(set => ({
+export const useIsUpdateQuestionStore = create(set => ({
   isUpdate: true,
   setIsUpdate: state => set(() => ({ isUpdate: state })),
 }));
 
-export default useIsUpdateStore;
+export const useIsUpdateAnswerStore = create(set => ({
+  isUpdate: true,
+  setIsUpdate: state => set(() => ({ isUpdate: state })),
+}));
