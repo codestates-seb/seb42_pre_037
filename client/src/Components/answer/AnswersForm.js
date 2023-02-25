@@ -8,18 +8,19 @@ import Button from '../Ui/Button';
 import { useUserInfoStore } from '../../Stores/userInfoStore';
 import { useIsLoginStore } from '../../Stores/loginStore';
 
-function AnswersForm({ questionId }) {
+function AnswersForm({ questionId, setIsUpdate }) {
+  const [content, setContent] = useState();
+  const { userInfo } = useUserInfoStore(state => state);
+  const { isLogin } = useIsLoginStore(state => state);
+  const navigate = useNavigate();
+  const currentTime = new Date();
+
   const pathData = {
     content: '',
     memberId: null,
     createdAt: '',
   };
 
-  const [content, setContent] = useState();
-  const { userInfo } = useUserInfoStore(state => state);
-  const { isLogin } = useIsLoginStore(state => state);
-  const navigate = useNavigate();
-  // 'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/
   const pathQuestionData = async () => {
     const response = await axios
       .post(
@@ -46,10 +47,10 @@ function AnswersForm({ questionId }) {
       e.preventDefault();
       pathData.content = content.replaceAll('"', "'");
       pathData.memberId = userInfo.memberId;
-      const currentTime = new Date();
       pathData.createdAt = currentTime.toString();
       pathQuestionData();
       setContent('');
+      setIsUpdate(true);
     } else {
       alert('You need to Login.');
       navigate('/login');

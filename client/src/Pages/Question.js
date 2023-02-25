@@ -11,7 +11,7 @@ import Answers from '../Components/answer/Answers';
 import AnswersForm from '../Components/answer/AnswersForm';
 import { useIsLoginStore } from '../Stores/loginStore';
 import PTagButton from '../Components/Ui/PTagButton';
-
+import useIsUpdateStore from '../Stores/useIsUpdateStore';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
@@ -19,8 +19,10 @@ function Question() {
   const purify = DOMPurify(window);
   // const { userInfo } = useUserInfoStore(state => state);
   const { isLogin } = useIsLoginStore(state => state);
+  const { isUpdate, setIsUpdate } = useIsUpdateStore(state => state);
   const [answers, setAnswers] = useState([]);
   const [question, setQuestion] = useState('');
+
   const timeDiff = getTimeDiffString(question.createdAt);
   const location = useLocation();
   const questionId = location.pathname.split('/')[2];
@@ -98,8 +100,9 @@ function Question() {
     setTimeout(() => {
       fetchQuestion(questionId);
       fetchAnswers(questionId);
+      setIsUpdate(false);
     }, 100);
-  }, []);
+  }, [isUpdate]);
 
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
@@ -147,7 +150,10 @@ function Question() {
           <div>
             {/* 답변 목록 */}
             <Answers answers={answers} isLogin={isLogin} />
-            <AnswersForm questionId={question.questionId} />
+            <AnswersForm
+              questionId={question.questionId}
+              setIsUpdate={setIsUpdate}
+            />
           </div>
         </div>
       </div>

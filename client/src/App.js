@@ -6,6 +6,7 @@ import Questions from './Pages/Questions';
 import Question from './Pages/Question';
 import QuestionForm from './Pages/QuestionForm';
 import QuestionEdit from './Pages/QuestionEdit';
+import AnswerEdit from './Pages/AnswerEdit';
 
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
@@ -62,11 +63,15 @@ function App() {
         <Route path="question/:questionId" element={<Question />} />
         <Route path="question/:questionId/edit" element={<QuestionEdit />} />
         <Route path="questionForm" element={<QuestionForm />} />
+        <Route path="question/ask" element={<QuestionForm />} />
+        <Route
+          path="question/:questionId/:answerId/edit"
+          element={<AnswerEdit />}
+        />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="logout" element={<Logout />} />
         <Route path="test" element={<Test />} />
-        <Route path="question/ask" element={<QuestionForm />} />
         <Route path="404" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
