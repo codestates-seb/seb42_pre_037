@@ -14,31 +14,28 @@ import PTagButton from '../Components/Ui/PTagButton';
 // import { useUserInfoStore } from '../Stores/userInfoStore';
 
 function Question() {
-  const purify = DOMPurify(window);
   const navigate = useNavigate();
   const location = useLocation();
   const { question } = location.state;
+  const purify = DOMPurify(window);
+  // const { userInfo } = useUserInfoStore(state => state);
   const timeDiff = getTimeDiffString(question.createdAt);
   const { isLogin } = useIsLoginStore(state => state);
-  // const { userInfo } = useUserInfoStore(state => state);
   const [answers, setAnswers] = useState([]);
 
-  console.log(location);
-  useEffect(() => {
-    const fetchAnswers = async () => {
-      try {
-        const response = await axios.get(
-          `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${question.questionId}`,
-        );
-        setAnswers(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const fetchAnswers = async () => {
+    try {
+      const response = await axios.get(
+        `http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/answers/${question.questionId}`,
+      );
+      setAnswers(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    fetchAnswers();
-  }, []);
-
+  console.log(answers);
+  // <Answers />, <AnswersForm />
   const handlerChangeQuestion = () => {
     navigate('/question/ask');
   };
@@ -83,6 +80,10 @@ function Question() {
   const handlerClickEdit = () => {
     navigate('/question/:questionId/edit', { state: { question } });
   };
+
+  useEffect(() => {
+    fetchAnswers();
+  }, []);
 
   return (
     <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
