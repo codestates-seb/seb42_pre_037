@@ -5,6 +5,7 @@ import Input from '../Components/Ui/Input';
 import TextEditor from '../Components/Ui/TextEditor';
 import Button from '../Components/Ui/Button';
 import { patchQuestion } from '../api';
+import Nav from '../Components/layouts/Navbar';
 
 function QuestionEdit() {
   const location = useLocation();
@@ -39,8 +40,9 @@ function QuestionEdit() {
   };
 
   return (
-    <div>
-      <form>
+    <div className="flex xl:w-10/12 w-full">
+      <Nav />
+      <form className="p-5">
         <Input
           disabled
           label="Title"
@@ -50,9 +52,9 @@ function QuestionEdit() {
         />
         <h3>Body</h3>
         <TextEditor content={body} setContent={setBody} />
-        <Button className="mt-20" onClick={handlerSubmit}>
-          Save edits
-        </Button>
+        <div className="mt-5">
+          <Button onClick={handlerSubmit}>Save edits</Button>
+        </div>
       </form>
     </div>
   );

@@ -21,9 +21,8 @@ function TextEditor({ content, setContent }) {
   };
 
   return (
-    <div className="h-52">
+    <div>
       <ReactQuill
-        className="h-40"
         onChange={handleChange}
         value={content}
         theme="snow"
