@@ -33,7 +33,7 @@ function AnswersForm({ questionId, setIsUpdate }) {
       pathData.content = content.replaceAll('"', "'");
       pathData.memberId = userInfo.memberId;
       pathData.createdAt = currentTime.toString();
-      handlerPostAnswer(questionId);
+      handlerPostAnswer(questionId, pathData);
       setContent('');
       setIsUpdate(true);
     } else {
