@@ -79,12 +79,12 @@ function Question() {
   }, [isUpdate]);
 
   return (
-    <div className="flex flex-row flex-auto flex-nowrap w-[100vw]">
-      <div className="flex mx-auto my-0 w-10/12">
+    <div className="flex justify-center">
+      <div className="flex xl:w-10/12 w-full">
         <Nav />
-        <div className="p-5 mt-16 mr-[10rem]">
+        <div className="p-5">
           <div className="flex items-start justify-between ">
-            <h1 className="text-3xl w-4/5">{question.title}</h1>
+            <h1 className=" text-3xl w-3/4">{question.title}</h1>
             <Button onClick={handlerChangeQuestion} size="large">
               Ask Question
             </Button>
