@@ -44,7 +44,7 @@ function AnswersForm({ questionId, setIsUpdate }) {
 
   return (
     <form>
-      <h1 className="text-3xl w-4/5 my-7">Your Answer</h1>
+      <h1 className="text-3xl my-7">Your Answer</h1>
       <div className="mb-10">
         <TextEditor content={content} setContent={setContent} />
       </div>

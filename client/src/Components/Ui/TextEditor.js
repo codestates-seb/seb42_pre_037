@@ -21,13 +21,15 @@ function TextEditor({ content, setContent }) {
   };
 
   return (
-    <ReactQuill
-      onChange={handleChange}
-      value={content}
-      theme="snow"
-      modules={modules}
-      className="h-52"
-    />
+    <div className="h-60">
+      <ReactQuill
+        className="h-40"
+        onChange={handleChange}
+        value={content}
+        theme="snow"
+        modules={modules}
+      />
+    </div>
   );
 }
 
