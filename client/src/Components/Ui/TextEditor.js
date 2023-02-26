@@ -21,7 +21,7 @@ function TextEditor({ content, setContent }) {
   };
 
   return (
-    <div className="h-60">
+    <div className="h-52">
       <ReactQuill
         className="h-40"
         onChange={handleChange}
