@@ -7,7 +7,7 @@ function Navbar() {
   const path = location.pathname.split('/')[1];
 
   return (
-    <div className="sticky max-h-[calc(100vh-180px)] top-[60px] w-[164px] flex-grow-0 flex-shrink-0 basis-[164px] border-r border-solid border-gray-300 bg-white  ">
+    <div className="sticky max-h-[calc(100vh-180px)] top-[60px] border-r border-solid border-gray-300 bg-white  ">
       <ul className="relative ">
         <li className="relative">
           <Link
