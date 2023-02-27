@@ -40,7 +40,7 @@
 |                            이서연                            |                            이치윤                            |                            김나영                            |                            이채욱                            |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | <img src="https://i.ibb.co/hd73F6f/2023-02-27-2-22-35.png" alt="2023-02-27-2-22-35" width = "200px"/> | <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYe-zIT7cyG-M6Vlla38oVJ6twus0auSO7tQ&usqp=CAU" alt="img" width = "200px" /> | <img src="https://t1.daumcdn.net/cfile/tistory/99FDB24D5C73932B01" alt="img" width = "200px" /> | <img src="https://i0.wp.com/dailypetcare.net/wp-content/uploads/2021/09/image-1.jpeg?resize=453%2C605&ssl=1" alt="img" width="200px" /> |
-|                     - Answer 페이지 구현                     |                    - login, sign-up 구현                     |                        - layout 구현                         |                    - Question 페이지 구현                    |
+|                     - Answer 페이지 구현                     |                    - login, sign-up 구현                     |                        - layout 구현                         |                    - Question 페이지 구현<br/>- 공통 UI 컴포넌트                    |
 
 
 
