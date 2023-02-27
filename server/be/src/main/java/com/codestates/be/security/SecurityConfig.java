@@ -100,7 +100,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "http://localhost:8080")); //어디서 오는 요청을 허용할 것인지.
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "http://37-stack-over-fe.s3-website.ap-northeast-2.amazonaws.com")); //어디서 오는 요청을 허용할 것인지.
         configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE", "OPTIONS")); //어떤 HTTP 메서드를 허용할 것인지.
 
         configuration.setExposedHeaders(Arrays.asList("*")); // 어떤 헤더값을 우리가 응답에 넣어서 보내줄지.
