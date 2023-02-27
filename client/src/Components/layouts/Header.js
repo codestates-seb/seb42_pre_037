@@ -9,7 +9,7 @@ function Header() {
   const [toggle, setToggle] = useState(false);
   return (
     <div className="py-7">
-      <nav className="bg-slate-50 dark:bg-gray-800 shadow p-2 border-t-4 border-solid border-orange-400 fixed z-40 top-0 left-0 right-0">
+      <nav className="bg-slate-50  shadow p-2 border-t-4 border-solid border-orange-400 fixed z-40 top-0 left-0 right-0">
         <div className="px-44 items-center ">
           <div className="flex items-center h-10 ">
             <div className=" flex items-center">
@@ -19,19 +19,19 @@ function Header() {
 
               <div className="flex items-baseline  space-x-4">
                 <a
-                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
+                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 px-2 py-1 rounded-3xl text-sm font-medium"
                   href="/#"
                 >
                   About
                 </a>
                 <a
-                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
+                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 px-2 py-1 rounded-3xl text-sm font-medium"
                   href="/#"
                 >
                   Products
                 </a>
                 <a
-                  className="text-gray-500  hover:bg-gray-200 hover:text-gray-800 dark:hover:text-white px-2 py-1 rounded-3xl text-sm font-medium"
+                  className="text-gray-500  hover:bg-gray-200 hover:text-gray-800 px-2 py-1 rounded-3xl text-sm font-medium"
                   href="/#"
                 >
                   For Teams
@@ -65,7 +65,7 @@ function Header() {
       </nav>
       {toggle && (
         <div className="w-3/4 z-40 top-16  absolute ">
-          <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-2 absolute left-1/2 w-1/2 ">
+          <div className="bg-white shadow-lg rounded-lg p-2 absolute left-1/2 w-1/2 ">
             <div className="flex ">
               <div>
                 <div className="mb-2">

@@ -4,6 +4,7 @@ function Button({
   size = 'medium',
   icon,
   iconClassName,
+  disabled,
   ...rest
 }) {
   let backgroundColorClass;
@@ -35,7 +36,7 @@ function Button({
       break;
     default:
       backgroundColorClass =
-        'bg-blue-500 hover:bg-blue-600 focus:ring-blue-400';
+        'bg-[#4495FF] hover:bg-[#3474CC] focus:ring-blue-400';
       textColorClass = 'text-white';
   }
 
@@ -61,7 +62,7 @@ function Button({
   const className = `inline-flex items-center justify-center font-semibold focus:outline-none focus:ring-2 focus:ring-opacity-50 disabled:opacity-50 disabled:pointer-events-none rounded ${backgroundColorClass} ${textColorClass} ${fontSizeClass} ${paddingClass} ${borderRadiusClass}`;
 
   return (
-    <button className={className} {...rest}>
+    <button className={className} disabled={disabled} {...rest}>
       {icon && <span className={`mr-1 ${iconClassName}`}>{icon}</span>}
       {children}
     </button>

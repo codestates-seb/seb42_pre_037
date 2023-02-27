@@ -1,8 +1,8 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
-const useUserInfoStore = create ((set) => ({
-    userInfo: {},
-    setUserInfo: (state) => set(()=>({userInfo: state})),
-}))
+const useUserInfoStore = create(set => ({
+  userInfo: {},
+  setUserInfo: state => set(() => ({ userInfo: state })),
+}));
 
-export {useUserInfoStore};
+export { useUserInfoStore };
