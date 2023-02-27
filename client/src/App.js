@@ -29,7 +29,7 @@ function App() {
   const authHandler = () => {
     axios
       .post(
-        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/userInfo',
+        `${process.env.REACT_APP_API_URL}/members/userInfo`,
         {},
         {
           headers: {
@@ -41,11 +41,10 @@ function App() {
       .then(res => {
         setIsLogin(true);
         setUserInfo(res.data.data);
-        console.log('success: ', res.data.data);
       })
       .catch(err => {
         if (err.response) {
-          console.log(err.response.data);
+          window.alert('error');
         }
       });
   };
