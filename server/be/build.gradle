@@ -35,6 +35,9 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly	'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+	//Aws ParameterStore를 위한 dependency
+	implementation 'com.coveo:spring-boot-parameter-store-integration:1.1.2'
 }
 
 tasks.named('test') {

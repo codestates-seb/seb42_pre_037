@@ -1,9 +1,12 @@
 spring:
   datasource:
-    url: jdbc:mysql://database-2.claqadurzooy.ap-northeast-2.rds.amazonaws.com:3306/test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+#    url: jdbc:mysql://database-2.claqadurzooy.ap-northeast-2.rds.amazonaws.com:3306/test?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: ${/stack-over-flow/full-37-team/spring.datasource.url}
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: admin
-    password: jtyu0807
+    username: ${/stack-over-flow/full-37-team/spring.datasource.username}
+    password: ${/stack-over-flow/full-37-team/spring.datasource.password}
+#    username: admin
+#    password: jtyu0807
   jpa:
     hibernate:
       ddl-auto: none # (1) 스키마 자동 생성
@@ -28,6 +31,10 @@ server:
       force-response: true
 
 jwt:
-  key: dq2k1@((1e9101k-d01k-132019dj9j29@)@@@201kd1-01-0dmwoidnwdbwdbawdiawnd26816
+#  key: dq2k1@((1e9101k-d01k-132019dj9j29@)@@@201kd1-01-0dmwoidnwdbwdbawdiawnd26816
+  key: ${/stack-over-flow/full-37-team/jwt.key}
   access-token-expiration-minutes: 8000
   refresh-token-expiration-minutes: 8000
+
+awsParameterStorePropertySource:
+  enabled: true
