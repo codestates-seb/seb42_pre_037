@@ -40,19 +40,19 @@ function Navbar() {
         </li>
         <li className="relative">
           <p className="flex items-center text-sm  h-10 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap transition duration-300 ease-in-out">
-            <svg className="w-4 h-3 mr-8"></svg>
+            <svg className="w-4 h-3 mr-8" />
             <span>Tags</span>
           </p>
         </li>
         <li className="relative">
           <p className="flex items-center text-sm  h-10 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap transition duration-300 ease-in-out">
-            <svg className="w-4 h-3 mr-8"></svg>
+            <svg className="w-4 h-3 mr-8" />
             <span>Users</span>
           </p>
         </li>
         <li className="relative">
           <p className="flex items-center text-sm  h-10 overflow-hidden text-gray-700 text-ellipsis whitespace-nowrap transition duration-300 ease-in-out">
-            <svg className="w-4 h-3 mr-8"></svg>
+            <svg className="w-4 h-3 mr-8" />
             <span>Companies</span>
           </p>
         </li>

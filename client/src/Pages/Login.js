@@ -27,8 +27,6 @@ const Login = () => {
       return;
     }
 
-    setErrorMessage('');
-
     axios
       .post(`${process.env.REACT_APP_API_URL}/auth/login`, loginInfo, {
         withCredentials: true,
@@ -42,6 +40,7 @@ const Login = () => {
         // 로그인 성공시 홈페이지 이동
         axios.defaults.headers.common.Authorization = `Bearer ${res.data.jwt}`;
         navigate('/');
+        setErrorMessage('');
         window.location.reload();
       })
       .catch(err => {
