@@ -7,6 +7,7 @@ import com.codestates.be.answer.mapper.AnswerMapper;
 import com.codestates.be.answer.service.AnswerService;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.service.MemberService;
+import com.codestates.be.question.service.QuestionService;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +26,16 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
     private final MemberService memberService;
+    private final QuestionService questionService;
 
     // mapper DI
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper, MemberService memberService) {
+
+    public AnswerController(AnswerService answerService, AnswerMapper mapper, MemberService memberService, QuestionService questionService) {
         this.answerService = answerService;
         this.mapper = mapper;
         this.memberService = memberService;
+        this.questionService = questionService;
     }
 
     // 답변 등록
@@ -48,7 +52,7 @@ public class AnswerController {
 
         result.setDisplayName(member.getDisplayName());
 
-        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.CREATED);
+        return ResponseEntity.ok().build();
     }
 
     // 답변 수정
@@ -58,17 +62,19 @@ public class AnswerController {
         answerDto.setAnswerId(answerId);
 
         Answer answer = mapper.answerPatchDtoToAnswer(answerDto);
-        
+
         Answer response = answerService.updateAnswer(answer);
 
         AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
 
-        return new ResponseEntity<>(new SingleResponseEntity<>(result), HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 
     // 답변 전체 조회
     @GetMapping("/{question-id}")
     public ResponseEntity getAnswers(@PathVariable("question-id") @Positive long questionId){
+        questionService.findVerifiedExistQuestion(questionId);
+
         List<Answer> answers = answerService.findAnswers(questionId);
 
         List<AnswerDto.Response> response = mapper.answersToAnswerResponseDtos(answers);
@@ -76,13 +82,12 @@ public class AnswerController {
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
 
-
     // 답변 삭제
     @DeleteMapping("/{answer-id}")
     public ResponseEntity deleteAnswer(@PathVariable("answer-id") @Positive long answerId){
 
         answerService.deleteAnswer(answerId);
 
-        return new ResponseEntity(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 }
