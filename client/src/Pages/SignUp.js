@@ -45,12 +45,10 @@ function SignUp() {
   const register = () => {
     if (!username || !email || !password) {
       setErrorMessage('아이디와 비밀번호를 입력하세요');
-      console.log(errorMessage);
       return;
     }
     if (!isValidEmail(email)) {
       setErrorMessage('Email 형식에 맞게 입력해주세요');
-      console.log(errorMessage);
       return;
     }
     if (!isValidPassword(password)) {
@@ -65,15 +63,12 @@ function SignUp() {
     console.log(createdAt);
 
     axios
-      .post(
-        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/signup',
-        {
-          displayName: username,
-          email,
-          password,
-          createdAt,
-        },
-      )
+      .post(`${process.env.REACT_APP_API_URL}/members/signup`, {
+        displayName: username,
+        email,
+        password,
+        createdAt,
+      })
       .then(res => {
         // Handle success.
         console.log('Well done!');

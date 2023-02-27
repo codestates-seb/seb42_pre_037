@@ -29,9 +29,7 @@ function LoginHeader() {
 
   const logoutHandler = () => {
     axios
-      .get(
-        'http://ec2-3-39-230-41.ap-northeast-2.compute.amazonaws.com:8080/members/logout',
-      )
+      .get(`${process.env.REACT_APP_API_URL}/members/logout`)
       .then(res => {
         setIsLogin(false);
         localStorage.removeItem('token');
