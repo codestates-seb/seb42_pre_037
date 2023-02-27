@@ -12,13 +12,10 @@ import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Test from './Pages/Test';
 
-// import Mainlayout from './Components/layouts/Mainlayout';
 import Header from './Components/layouts/Header';
-// import Navbar from './Components/layouts/Navbar';
 
 import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
-import Logout from './Pages/Logout';
 import ErrorPage from './Pages/ErrorPage';
 import LoginHeader from './Components/layouts/LoginHeader';
 
@@ -44,7 +41,7 @@ function App() {
       })
       .catch(err => {
         if (err.response) {
-          window.alert('error');
+          console.log(err.response);
         }
       });
   };
@@ -68,7 +65,6 @@ function App() {
         />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
-        <Route path="logout" element={<Logout />} />
         <Route path="test" element={<Test />} />
         <Route path="404" element={<ErrorPage />} />
       </Routes>
