@@ -5,11 +5,8 @@ import Button from '../Ui/Button';
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
-// import LoginHeader from '../layouts/LoginHeader'
-
 function Header() {
   const [toggle, setToggle] = useState(false);
-  // const [header,loginHeader] = useState(LoginHeader)
   return (
     <div className="py-7">
       <nav className="bg-slate-50  shadow p-2 border-t-4 border-solid border-orange-400 fixed z-40 top-0 left-0 right-0">

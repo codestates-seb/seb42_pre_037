@@ -8,18 +8,15 @@ import { CgBoy } from 'react-icons/cg';
 import { ImTrophy } from 'react-icons/im';
 import { RiLogoutBoxRLine } from 'react-icons/ri';
 
-// import Button from '../Ui/Button';
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
-// import login, userInfo store
 import { useIsLoginStore, useLoginInfoStore } from '../../Stores/loginStore';
 import { useUserInfoStore } from '../../Stores/userInfoStore';
 
 function LoginHeader() {
   const [toggle, setToggle] = useState(false);
 
-  // LogOut handler
   const { setIsLogin } = useIsLoginStore(state => state);
   const { setUserInfo } = useUserInfoStore(state => state);
   const { setLoginInfo } = useLoginInfoStore(state => state);
