@@ -62,7 +62,7 @@ public class AnswerController {
         answerDto.setAnswerId(answerId);
 
         Answer answer = mapper.answerPatchDtoToAnswer(answerDto);
-        
+
         Answer response = answerService.updateAnswer(answer);
 
         AnswerDto.Response result = mapper.answerToAnswerResponseDto(response);
@@ -81,7 +81,6 @@ public class AnswerController {
 
         return new ResponseEntity<>(new SingleResponseEntity<>(response), HttpStatus.OK);
     }
-
 
     // 답변 삭제
     @DeleteMapping("/{answer-id}")
