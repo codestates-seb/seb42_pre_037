@@ -5,37 +5,43 @@ import axios from 'axios';
 import Questions from './Pages/Questions';
 import Question from './Pages/Question';
 import QuestionForm from './Pages/QuestionForm';
+import QuestionEdit from './Pages/QuestionEdit';
+import AnswerEdit from './Pages/AnswerEdit';
 
 import Login from './Pages/Login';
 import SignUp from './Pages/SignUp';
 import Test from './Pages/Test';
 
-import Mainlayout from './Components/layouts/Mainlayout';
+import Header from './Components/layouts/Header';
 
 import { useIsLoginStore } from './Stores/loginStore';
 import { useUserInfoStore } from './Stores/userInfoStore';
+import ErrorPage from './Pages/ErrorPage';
+import LoginHeader from './Components/layouts/LoginHeader';
 
 function App() {
-  const { setIsLogin } = useIsLoginStore(state => state);
-  const { userInfo, setUserInfo } = useUserInfoStore(state => state);
+  const { isLogin, setIsLogin } = useIsLoginStore(state => state);
+  const { setUserInfo } = useUserInfoStore(state => state);
 
   const authHandler = () => {
-    console.log(localStorage.getItem('token'));
     axios
-      .get('https://73f1-14-6-64-237.jp.ngrok.io/members/userInfo', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+      .post(
+        `${process.env.REACT_APP_API_URL}/members/userInfo`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            withCredentials: true,
+          },
         },
-      })
+      )
       .then(res => {
         setIsLogin(true);
-        setUserInfo(res.data);
-        console.log('success: ', res.data);
-        console.log(userInfo);
+        setUserInfo(res.data.data);
       })
       .catch(err => {
         if (err.response) {
-          console.log(err.response.data);
+          console.log(err.response);
         }
       });
   };
@@ -46,15 +52,21 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Mainlayout />
+      {/* <Mainlayout /> */}
+      {isLogin ? <LoginHeader /> : <Header />}
       <Routes>
         <Route path="/" element={<Questions />} />
-        <Route path="question" element={<Question />} />
-        <Route path="questionForm" element={<QuestionForm />} />
+        <Route path="question/:questionId" element={<Question />} />
+        <Route path="question/:questionId/edit" element={<QuestionEdit />} />
+        <Route path="question/ask" element={<QuestionForm />} />
+        <Route
+          path="question/:questionId/:answerId/edit"
+          element={<AnswerEdit />}
+        />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="test" element={<Test />} />
-        <Route path="questions/ask" element={<QuestionForm />} />
+        <Route path="404" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );

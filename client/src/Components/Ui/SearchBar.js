@@ -8,7 +8,7 @@ function SearchBar({ placeholder, ...rest }) {
       <AiOutlineSearch className="mr-2 text-3xl" />
       <input
         type="text"
-        className="items-center justify-center focus:outline-none bg-white disabled:opacity-50 text-lg placeholder-gray-300"
+        className="items-center justify-center focus:outline-none bg-inherit disabled:opacity-50 text-lg placeholder-gray-300"
         placeholder={placeholder}
         {...rest}
       />
