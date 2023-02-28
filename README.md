@@ -61,9 +61,9 @@
 |  <img height="65" width="65" src="https://cdn.simpleicons.org/react/#61DAFB" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/reactrouter" /> |  <img height="65" width="65" src="https://camo.githubusercontent.com/48d099290b4cb2d7937bcd96e8497cf1845b54a810a6432c70cf944b60b40c77/68747470733a2f2f7261776769742e636f6d2f676f72616e67616a69632f72656163742d69636f6e732f6d61737465722f72656163742d69636f6e732e737667" />  |  <img height="65" width="65" src="https://cdn.simpleicons.org/styledComponents" /> | <img height="65" width="65" src="https://cdn.discordapp.com/attachments/1074553703329173596/1079638795395268689/bear.png" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/tailwindcss" /> |
 
 ### 🧰 Back-end
-| Spring Boot | Spring Security | Gradle | mySQL | Jenkins |
-| :---: | :---: | :---: | :---: | :---: |
-|  <img height="65" width="65" src="https://cdn.simpleicons.org/springboot/#6DB33F" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/springsecurity" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/gradle" />  |  <img height="65" width="65" src="https://cdn.simpleicons.org/mysql" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/Jenkins" /> |
+| Java| Spring Boot | Spring Security | Gradle | mySQL | Jenkins |
+| :---: | :---: | :---: | :---: | :---: | :---: |
+|  <img height="65" width="65" src="https://user-images.githubusercontent.com/97998938/221740290-7f2b2f08-8ca2-46e3-88ff-30897cfe6d22.png" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/springboot/#6DB33F" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/springsecurity" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/gradle" />  |  <img height="65" width="65" src="https://cdn.simpleicons.org/mysql" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/Jenkins" /> |
 
 ### 🔧 Deploy
 | GitPage | AWS EC2 | AWS S3 | AWS RDS |
