@@ -1,8 +1,6 @@
 package com.codestates.be.member.controller;
 
 
-import com.codestates.be.advice.BuissnessLogicException;
-import com.codestates.be.advice.ExceptionCode;
 import com.codestates.be.member.dto.MemberDto;
 import com.codestates.be.member.entity.Member;
 import com.codestates.be.member.mapper.MemberMapper;
@@ -12,8 +10,7 @@ import com.codestates.be.responseDto.PageInfo;
 import com.codestates.be.responseDto.SingleResponseEntity;
 import com.codestates.be.security.dto.ClaimsToUser;
 import com.codestates.be.security.jwt.JwtTokenizer;
-import com.codestates.be.security.util.JwtToResponseUtils;
-import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import com.codestates.be.security.util.JwtToUserInfoUtils;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -23,13 +20,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/members")
@@ -39,9 +33,9 @@ public class MemberController {
     private final MemberMapper mapper;
     private final MemberService memberService;
     private final JwtTokenizer tokenizer;
-    private final JwtToResponseUtils jwtToResponseUtils;
+    private final JwtToUserInfoUtils jwtToResponseUtils;
 
-    public MemberController(MemberMapper mapper, MemberService memberService, JwtTokenizer tokenizer, JwtToResponseUtils jwtToResponseUtils) {
+    public MemberController(MemberMapper mapper, MemberService memberService, JwtTokenizer tokenizer, JwtToUserInfoUtils jwtToResponseUtils) {
         this.mapper = mapper;
         this.memberService = memberService;
         this.tokenizer = tokenizer;
@@ -59,10 +53,20 @@ public class MemberController {
 
     @PatchMapping("/{member-id}") //uu
     public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
-                                      @RequestBody @Valid MemberDto.Patch patchMember) throws Exception {
+                                      @RequestBody @Valid MemberDto.Patch patchMember,
+                                      @RequestHeader HttpHeaders headers) throws Exception {
+        String token;
+        try{
+            token = headers.get("authorization").get(0);
+        }catch (NullPointerException exception){
+            throw new MalformedJwtException("");
+        }
+        jwtToResponseUtils.parseClaimsToUserInfo(token, memberId);
+
+
+
         Member member = mapper.MemberPatchDtoToMember(patchMember);
         member.setMemberId(memberId);
-
         Member result = memberService.updateMember(member);
 
         return ResponseEntity.accepted().build();
@@ -71,7 +75,6 @@ public class MemberController {
     @PostMapping("/userInfo")// 토큰 없을 경우 에러 핸들링 추가
     public ResponseEntity messageForHeader(@RequestHeader HttpHeaders headers) {
 
-        HttpServletRequest request;
         String token;
 
         try{
@@ -80,7 +83,7 @@ public class MemberController {
             throw new MalformedJwtException("");
         }
 
-        ClaimsToUser userInfo = jwtToResponseUtils.getClaimsToUser(token);
+        ClaimsToUser userInfo = jwtToResponseUtils.parseClaimsToUserInfo(token);
 
         return new ResponseEntity<>(new SingleResponseEntity<>(userInfo), HttpStatus.OK);
     }
@@ -108,7 +111,17 @@ public class MemberController {
     }
 
     @DeleteMapping("/{member-id}") //a, uu
-    public ResponseEntity deleteMember(@PathVariable @Positive long memberId){
+    public ResponseEntity deleteMember(@PathVariable @Positive long memberId,
+                                       @RequestHeader HttpHeaders headers){
+
+        String token;
+        try{
+            token = headers.get("authorization").get(0);
+        }catch (NullPointerException exception){
+            throw new MalformedJwtException("");
+        }
+        jwtToResponseUtils.parseClaimsToUserInfo(token, memberId);
+
         memberService.deleteMember(memberId);
 
         return ResponseEntity.noContent().build();

@@ -66,24 +66,24 @@ public class SecurityConfig {
                 })
                 .authorizeHttpRequests(auth->{
                     auth
-//                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
-//                            .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-//                            .antMatchers(HttpMethod.GET,"/members/logout").hasRole("USER")
-//                            .antMatchers(HttpMethod.PATCH, "/members/{member-id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
-//                            .antMatchers(HttpMethod.DELETE, "/members/{member-id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
-//
-//                            .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
-//                            .antMatchers(HttpMethod.PATCH, "/questions/{question-id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.GET, "/questions/{question-id}").permitAll()
-//                            .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
-//                            .antMatchers(HttpMethod.DELETE, "/questions/{question-id}").hasRole("USER")
-//
-//                            .antMatchers(HttpMethod.POST, "/answers/{question-id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.PATCH, "/answers/{answer-id}").hasRole("USER")
-//                            .antMatchers(HttpMethod.GET, "/answers/{question-id}").permitAll()
-//                            .antMatchers(HttpMethod.DELETE, "/answers/{answer-id}").hasRole("USER")
+                            .antMatchers(HttpMethod.POST, "/members/signup").permitAll()
+                            .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                            .antMatchers(HttpMethod.GET,"/members/logout").permitAll()
+                            .antMatchers(HttpMethod.PATCH, "/members/{member-id}").hasRole("USER")
+                            .antMatchers(HttpMethod.POST, "/members/userInfo").hasRole("USER")
+                            .antMatchers(HttpMethod.DELETE, "/members/{member-id}").hasRole("USER")
+                            .antMatchers(HttpMethod.GET, "/members/**").permitAll()
+
+                            .antMatchers(HttpMethod.POST, "/questions").hasRole("USER")
+                            .antMatchers(HttpMethod.PATCH, "/questions/{question-id}").hasRole("USER")
+                            .antMatchers(HttpMethod.GET, "/questions/{question-id}").permitAll()
+                            .antMatchers(HttpMethod.GET, "/questions/**").permitAll()
+                            .antMatchers(HttpMethod.DELETE, "/questions/{question-id}").hasRole("USER")
+
+                            .antMatchers(HttpMethod.POST, "/answers/{question-id}").hasRole("USER")
+                            .antMatchers(HttpMethod.PATCH, "/answers/{answer-id}").hasRole("USER")
+                            .antMatchers(HttpMethod.GET, "/answers/{question-id}").permitAll()
+                            .antMatchers(HttpMethod.DELETE, "/answers/{answer-id}").hasRole("USER")
 
                             .antMatchers("/", "/**").permitAll();
                 });
@@ -100,11 +100,12 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000")); //어디서 오는 요청을 허용할 것인지.
-
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "http://37-stack-over-fe.s3-website.ap-northeast-2.amazonaws.com")); //어디서 오는 요청을 허용할 것인지.
         configuration.setAllowedMethods(Arrays.asList("POST","PATCH","GET","DELETE", "OPTIONS")); //어떤 HTTP 메서드를 허용할 것인지.
+
         configuration.setExposedHeaders(Arrays.asList("*")); // 어떤 헤더값을 우리가 응답에 넣어서 보내줄지.
         configuration.setAllowedHeaders(Arrays.asList("*")); // 어떤 헤더값을 받아들이는데 성공할지.
+
         configuration.setAllowCredentials(true);
         //만일 AllowCredentials -> 클라이언트가 true인 요청을 주면 이것도 true
         //만일 Credential이 true라면 Allow-Origin은 와일드 카드를 쓰면 안된다.

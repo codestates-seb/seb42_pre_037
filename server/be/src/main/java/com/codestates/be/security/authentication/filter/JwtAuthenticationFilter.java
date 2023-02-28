@@ -90,5 +90,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Gson gson = new Gson();
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().write(gson.toJson(new JwtSerilizer(jwt), JwtSerilizer.class));
+
+        //d
     }
 }

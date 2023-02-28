@@ -27,7 +27,8 @@ public interface AnswerMapper {
         answer.setCreatedAt(answerPostDto.getCreatedAt());
 
         return answer;
-    };
+    }
+
     // DTO -> Entity
     Answer answerPatchDtoToAnswer(AnswerDto.Patch answerPatchDto);
     // Entity -> DTO
