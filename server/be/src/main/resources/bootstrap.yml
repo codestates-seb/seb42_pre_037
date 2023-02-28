@@ -1,0 +1,8 @@
+# AWS RDS 연결 관련 설정
+
+aws:
+  paramstore:
+    enabled: true
+    prefix: /spring-boot-aws
+    name: 37StackOver
+    profileSeparator: _

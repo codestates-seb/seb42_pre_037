@@ -1,0 +1,37 @@
+spring:
+  datasource:
+    url: ${/stack-over-flow/full-37-team/spring.datasource.url}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${/stack-over-flow/full-37-team/spring.datasource.username}
+    password: ${/stack-over-flow/full-37-team/spring.datasource.password}
+
+  jpa:
+    hibernate:
+      ddl-auto: none # (1) 스키마 자동 생성
+    show-sql: true      # (2) SQL 쿼리 출력
+    properties:
+      hibernate:
+        format_sql: true  # (3) SQL pretty print
+    defer-datasource-initialization: true
+
+  sql:
+    init:
+      data-locations: classpath:data.sql
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
+server:
+  servlet:
+    encoding:
+      force-response: true
+
+jwt:
+  key: ${/stack-over-flow/full-37-team/jwt.key}
+  access-token-expiration-minutes: 8000
+  refresh-token-expiration-minutes: 8000
+
+awsParameterStorePropertySource:
+  enabled: true
