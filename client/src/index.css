@@ -6,7 +6,28 @@
   .h3-blue {
     @apply text-xl text-[#177BCF] hover:text-[#289BFE];
   }
+  .clear-blue {
+    @apply bg-[#E1ECF4];
+  }
+  .h-blue {
+    @apply text-[#177BCF] hover:text-[#289BFE];
+  }
   .tag {
     @apply bg-[#E1ECF4] text-[#39739C] px-2 py-1 rounded;
+  }
+  .user-tag {
+    @apply bg-[#E1ECF4] px-2 py-1 rounded;
+  }
+  .orange {
+    @apply bg-[#F48224];
+  }
+  .paginate-btn {
+    @apply p-2 border rounded;
+  }
+  .stack-gray {
+    @apply bg-[hsl(210,8%,95%)];
+  }
+  .question-header {
+    @apply flex items-end justify-between p-5;
   }
 }

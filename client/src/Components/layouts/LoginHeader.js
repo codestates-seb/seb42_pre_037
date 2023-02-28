@@ -1,14 +1,50 @@
-import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import Button from '../Ui/Button';
+import { GoInbox } from 'react-icons/go';
+import { MdHelp } from 'react-icons/md';
+import { CgBoy } from 'react-icons/cg';
+import { ImTrophy } from 'react-icons/im';
+import { RiLogoutBoxRLine } from 'react-icons/ri';
+
 import HeaderLogo from '../icons/HeaderLogo.png';
 import SearchBar from '../Ui/SearchBar';
 
-function Header() {
+import { useIsLoginStore, useLoginInfoStore } from '../../Stores/loginStore';
+import { useUserInfoStore } from '../../Stores/userInfoStore';
+
+function LoginHeader() {
   const [toggle, setToggle] = useState(false);
+
+  const { setIsLogin } = useIsLoginStore(state => state);
+  const { setUserInfo } = useUserInfoStore(state => state);
+  const { setLoginInfo } = useLoginInfoStore(state => state);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/members/logout`)
+      .then(res => {
+        setIsLogin(false);
+        localStorage.removeItem('token');
+        setUserInfo({});
+        setLoginInfo({});
+        console.log(res.data);
+        navigate('/');
+      })
+      .catch(err => {
+        if (err.response.status === 401) {
+          setErrorMessage('로그아웃에 실패했습니다.');
+          console.log(errorMessage);
+        }
+      });
+  };
+
   return (
-    <div className="py-7">
+    <div className="py-7 ">
       <nav className="bg-slate-50  shadow p-2 border-t-4 border-solid border-orange-400 fixed z-40 top-0 left-0 right-0">
         <div className="px-44 items-center ">
           <div className="flex items-center h-10 ">
@@ -16,25 +52,12 @@ function Header() {
               <a className="" href="/">
                 <img className="w-56 h-10" alt="" src={HeaderLogo} />
               </a>
-
               <div className="flex items-baseline  space-x-4">
                 <a
                   className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 px-2 py-1 rounded-3xl text-sm font-medium"
                   href="/#"
                 >
-                  About
-                </a>
-                <a
-                  className="text-gray-500  hover:bg-gray-200  hover:text-gray-800 px-2 py-1 rounded-3xl text-sm font-medium"
-                  href="/#"
-                >
                   Products
-                </a>
-                <a
-                  className="text-gray-500  hover:bg-gray-200 hover:text-gray-800 px-2 py-1 rounded-3xl text-sm font-medium"
-                  href="/#"
-                >
-                  For Teams
                 </a>
               </div>
             </div>
@@ -48,15 +71,26 @@ function Header() {
             </button>
             <div className="">
               <div className="flex items-center ml-4  ">
-                <Link to="/login">
-                  <Button color="clear-blue">Log in</Button>
-                </Link>
-                <div className="relative ml-3">
-                  <div className="relative inline-block text-left">
-                    <Link to="/signup">
-                      <Button>Sign up</Button>
-                    </Link>
+                <div className="mx-2 flex items-center">
+                  <div className="text-3xl text-slate-600">
+                    <CgBoy className="" />
                   </div>
+                  <div>1</div>
+                </div>
+                <div className="text-3xl text-slate-600 ml-6 ">
+                  <GoInbox />
+                </div>
+                <div className="text-3xl text-slate-600 ml-4">
+                  <ImTrophy />
+                </div>
+                <div className="relative text-3xl text-slate-600 ml-4">
+                  <MdHelp />
+                </div>
+                <div className="text-3xl text-slate-600 ml-4 cursor-pointer hover:bg-slate-300">
+                  <RiLogoutBoxRLine
+                    className=""
+                    onClick={() => logoutHandler()}
+                  />
                 </div>
               </div>
             </div>
@@ -65,7 +99,7 @@ function Header() {
       </nav>
       {toggle && (
         <div className="w-3/4 z-40 top-16  absolute ">
-          <div className="bg-white shadow-lg rounded-lg p-2 absolute left-1/2 w-1/2 ">
+          <div className="bg-white  shadow-lg rounded-lg p-2 absolute left-1/2 w-1/2 ">
             <div className="flex ">
               <div>
                 <div className="mb-2">
@@ -123,4 +157,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default LoginHeader;

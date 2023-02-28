@@ -2,6 +2,7 @@ import Button from '../Components/Ui/Button';
 import SearchBar from '../Components/Ui/SearchBar';
 import Card from '../Components/Ui/Card';
 import Input from '../Components/Ui/Input';
+import Loginheader from '../Components/layouts/LoginHeader';
 
 function Test() {
   return (
@@ -26,6 +27,7 @@ function Test() {
         <Input label="Email" placeholder="Email" disabled />
         <Input label="Password" placeholder="Password" />
       </Card>
+      <Loginheader />
     </div>
   );
 }
