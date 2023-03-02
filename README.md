@@ -13,7 +13,7 @@
 ## 프로젝트 기간
 ***23.2.15 ~ 23.3.2***
 
-# 서비스 스크린샷(https://www.notion.so/codestates/c2d3745b24914d98b71a7c7dbaa1d01a)
+### [서비스 스크린샷](https://www.notion.so/codestates/c2d3745b24914d98b71a7c7dbaa1d01a)
 
 
 * 회원 가입
