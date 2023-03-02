@@ -1,5 +1,9 @@
 # seb42_pre_037
 <br/>
+<img src="https://user-images.githubusercontent.com/56662119/222317389-48ac2d6c-d698-4901-ac24-1a69c46584f6.png" alt="img" width="700px" />
+<br/>
+
+
 
 ## 주요 참고 문서
 * [사용자 요구사항 명세서](https://docs.google.com/spreadsheets/d/1W6gs6SVlXXQ3jqEcAF2doiMAQQFcrZjtNNPBmP6bwHQ/edit#gid=0)
