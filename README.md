@@ -71,7 +71,7 @@
 ### 🔧 Deploy
 | GitPage | AWS EC2 | AWS S3 | AWS RDS |
 | :---: | :---: | :---: | :---: |
-|  <img height="65" width="65" src="https://cdn.simpleicons.org/java" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/amazonec2" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/amazons3" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/amazonrds" />
+|  <img height="65" width="65" src="https://cdn.simpleicons.org/github" /> |  <img height="65" width="65" src="https://cdn.simpleicons.org/amazonec2" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/amazons3" /> | <img height="65" width="65" src="https://cdn.simpleicons.org/amazonrds" />
 
 ---
 
